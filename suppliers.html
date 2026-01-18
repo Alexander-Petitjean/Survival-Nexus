@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Directory of vetted outdoor survival suppliers: EMT/trauma, fire & shelter, treasure tools, and vagabonding travel gear." />
+  <title>Suppliers | Survival Nexus</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "name":"Survival Nexus Supplier Directory",
+    "itemListOrder":"https://schema.org/ItemListOrderDescending",
+    "numberOfItems": 0
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="logo">Survival Nexus</div>
+      <ul id="primary-navigation" class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="guides.html">Guides</a></li>
+  <li><a href="suppliers.html">Suppliers</a></li>
+  <li><a href="reviews.html">Reviews</a></li>
+  <li><a href="scenarios.html">Scenarios</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+</ul>
+
+
+    </nav>
+    <div class="hero small-hero">
+      <h1>Supplier Directory</h1>
+      <p>Certified vendors for EMT kits, firecraft, treasure tools, and minimalist travel gear.</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Affiliate disclosure (site-wide policy) -->
+    <aside class="disclosure" role="note">
+      <strong>Heads up:</strong> Some links are affiliate links. If you buy through them, we may earn a small commission at no cost to you. We only list suppliers with vetted quality and transparent policies.
+    </aside>
+
+    <!-- Filters -->
+    <section class="filters" aria-label="Supplier filters">
+      <form id="supplier-filters" class="filter-grid" autocomplete="off">
+        <label>
+          <span>Search</span>
+          <input type="search" id="q" name="q" placeholder="Search by name, tags, notes…" />
+        </label>
+        <label>
+          <span>Category</span>
+          <select id="category" name="category">
+            <option value="">All</option>
+            <option value="emt">EMT & Trauma</option>
+            <option value="fire">Fire & Shelter</option>
+            <option value="treasure">Treasure & Tools</option>
+            <option value="travel">Vagabonding & Travel</option>
+          </select>
+        </label>
+        <label>
+          <span>Certifications</span>
+          <select id="certs" name="certs">
+            <option value="">Any</option>
+            <option value="fda">FDA</option>
+            <option value="ce">CE</option>
+            <option value="iso">ISO</option>
+          </select>
+        </label>
+        <label>
+          <span>Ships To</span>
+          <select id="region" name="region">
+            <option value="">Anywhere</option>
+            <option value="US">US</option>
+            <option value="CA">Canada</option>
+            <option value="EU">EU</option>
+            <option value="Worldwide">Worldwide</option>
+          </select>
+        </label>
+        <label>
+          <span>Max Lead Time (days)</span>
+          <input type="number" id="lead" name="lead" min="0" step="1" placeholder="Any" />
+        </label>
+        <label>
+          <span>Min Rating</span>
+          <input type="number" id="rating" name="rating" min="0" max="5" step="0.5" placeholder="0–5" />
+        </label>
+        <div class="filter-actions">
+          <button type="submit" class="cta-button">Apply</button>
+          <button type="reset" class="secondary-button" id="resetFilters">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Results summary -->
+    <section class="results-meta" aria-live="polite">
+      <p id="resultsCount">Showing 0 suppliers</p>
+    </section>
+
+    <!-- Supplier Grid -->
+    <section id="supplierGrid" class="card-grid" aria-label="Supplier results">
+      <!-- JS will render supplier cards here -->
+    </section>
+
+    <!-- Seed data: easily editable JSON the JS will parse -->
+    <script id="supplier-data" type="application/json">{
+      "suppliers": [
+        {
+          "name": "MedRidge Trauma Co.",
+          "categories": ["emt"],
+          "certs": ["fda", "iso"],
+          "ships_to": ["US", "CA"],
+          "lead_time_days": 3,
+          "rating_avg": 4.6,
+          "affiliate_url": "#",
+          "tags": ["IFAK", "CAT tourniquet", "gauze"],
+          "notes": "Compact EMT bundles, vacuum-sealed kits."
+        },
+        {
+          "name": " EmberPeak Outfitters ",
+          "categories": ["fire", "shelter"],
+          "certs": ["ce"],
+          "ships_to": ["Worldwide"],
+          "lead_time_days": 7,
+          "rating_avg": 4.4,
+          "affiliate_url": "#",
+          "tags": ["ferro rod", "stove", "tarp"],
+          "notes": "Reliable ignition kits and ultralight tarps."
+        },
+        {
+          "name": "Northstar Detect & Recover",
+          "categories": ["treasure"],
+          "certs": [],
+          "ships_to": ["US", "EU"],
+          "lead_time_days": 5,
+          "rating_avg": 4.2,
+          "affiliate_url": "#",
+          "tags": ["metal detector", "pinpointer"],
+          "notes": "Beginner to pro detector packages; solid warranties."
+        },
+        {
+          "name": "RoamLite Travel Works",
+          "categories": ["travel"],
+          "certs": ["iso"],
+          "ships_to": ["Worldwide"],
+          "lead_time_days": 10,
+          "rating_avg": 4.0,
+          "affiliate_url": "#",
+          "tags": ["ultralight", "packing cubes", "purifier"],
+          "notes": "Minimalist packs and water purification solutions."
+        }
+      ]
+    }
+    </script>
+
+    <!-- Card template (for JS cloning) -->
+    <template id="supplier-card-tpl">
+      <article class="supplier-card">
+        <header>
+          <h3 class="supplier-name"></h3>
+          <div class="rating" aria-label="Average rating"></div>
+        </header>
+        <ul class="meta">
+          <li><strong>Categories:</strong> <span class="categories"></span></li>
+          <li><strong>Certs:</strong> <span class="certs"></span></li>
+          <li><strong>Ships to:</strong> <span class="ships"></span></li>
+          <li><strong>Lead time:</strong> <span class="lead"></span> days</li>
+        </ul>
+        <p class="notes"></p>
+        <div class="tags"></div>
+        <a class="cta-button sm" target="_blank" rel="nofollow noopener" aria-label="Visit supplier (affiliate)" href="#">Visit Supplier</a>
+      </article>
+    </template>
+
+    <section class="cta-section">
+      <h2>Want to be listed?</h2>
+      <p>We vet suppliers for quality, warranty, and customer service. If you’re a brand or distributor, reach out.</p>
+      <a href="contact.html" class="cta-button">Contact Us</a>
+    </section>
+	<section id="supplierGrid" class="card-grid">
+  <!-- EMT & Trauma -->
+  <article class="supplier-card">
+    <h3 class="supplier-name">MyMedic</h3>
+    <p class="categories">EMT / First Aid</p>
+    <p class="certs">FDA Registered</p>
+    <p class="ships">USA / Canada</p>
+    <p class="lead">Ships in 2–5 days</p>
+    <a class="cta-button" target="_blank" rel="nofollow noopener"
+      href="https://www.avantlink.com/click.php?tt=cl&mi=XXXXX&pw=YYYYY&url=https%3A%2F%2Fmymedic.com%2Fcollections%2Ffirst-aid-kits">
+      Shop MyMedic →
+    </a>
+  </article>
+
+  <!-- Firecraft -->
+  <article class="supplier-card">
+    <h3 class="supplier-name">Solo Stove</h3>
+    <p class="categories">Firecraft / Cooking</p>
+    <p class="certs">ISO 9001 Certified</p>
+    <p class="ships">Worldwide</p>
+    <p class="lead">Ships in 3–7 days</p>
+    <a class="cta-button" target="_blank" rel="nofollow noopener"
+      href="https://www.avantlink.com/click.php?tt=cl&mi=XXXXX&pw=YYYYY&url=https%3A%2F%2Fsolostove.com%2Fcollections%2Fcamp-stoves">
+      Shop Solo Stove →
+    </a>
+  </article>
+
+  <!-- Travel & Lightweight Gear -->
+  <article class="supplier-card">
+    <h3 class="supplier-name">Klymit</h3>
+    <p class="categories">Travel / Sleep Systems</p>
+    <p class="certs">Outdoor Industry Association Member</p>
+    <p class="ships">US / EU</p>
+    <p class="lead">Ships in 3–5 days</p>
+    <a class="cta-button" target="_blank" rel="nofollow noopener"
+      href="https://www.avantlink.com/click.php?tt=cl&mi=XXXXX&pw=YYYYY&url=https%3A%2F%2Fklymit.com%2Fcollections%2Fbackpacking-gear">
+      Shop Klymit →
+    </a>
+  </article>
+
+  <!-- Treasure / Tools -->
+  <article class="supplier-card">
+    <h3 class="supplier-name">Garrett Metal Detectors</h3>
+    <p class="categories">Treasure / Tools</p>
+    <p class="certs">ISO 9001 Certified</p>
+    <p class="ships">Global</p>
+    <p class="lead">Ships in 4–8 days</p>
+    <a class="cta-button" target="_blank" rel="nofollow noopener"
+      href="https://www.avantlink.com/click.php?tt=cl&mi=XXXXX&pw=YYYYY&url=https%3A%2F%2Fgarrett.com%2Fproducts">
+      Shop Garrett →
+    </a>
+  </article>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Survival Nexus. All rights reserved.</p>
+    <p><a href="disclaimer.html">Disclaimer</a> | <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    // Minimal inline bootstrapping: read JSON and render cards using assets/app.js helpers if present
+    (function(){
+      const dataEl = document.getElementById('supplier-data');
+      if(!dataEl) return;
+      try {
+        const data = JSON.parse(dataEl.textContent);
+        window.__SUPPLIERS__ = data.suppliers || [];
+      } catch(e) { console.error('Supplier JSON parse error', e); }
+    })();
+  </script>
+</body>
+</html>

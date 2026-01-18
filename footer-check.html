@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Footer Check | Survival Nexus</title>
+<style>
+  body { font-family: Arial, sans-serif; background:#111; color:#eee; padding:20px; }
+  table { border-collapse: collapse; width:100%; }
+  th, td { border:1px solid #333; padding:8px; }
+  th { background:#222; }
+  tr.ok td { background:#132; color:#8f8; }
+  tr.missing td { background:#321; color:#f88; }
+</style>
+</head>
+<body>
+<h1>🔍 Footer Audit — Survival Nexus</h1>
+<p>This tool checks whether each page has a footer placeholder (<code>#siteFooter</code>) and loaded <code>app.js</code> correctly.</p>
+
+<table id="results">
+<thead><tr><th>Page</th><th>Status</th><th>Details</th></tr></thead>
+<tbody></tbody>
+</table>
+
+<script>
+const pages = [
+  "index.html",
+  "guides.html",
+  "suppliers.html",
+  "reviews.html",
+  "about.html",
+  "contact.html",
+  "guides/fire-readiness.html",
+  "guides/emt-kit-basics.html",
+  "guides/vagabond-travel.html",
+  "guides/treasure-tools.html"
+];
+
+const tbody = document.querySelector('#results tbody');
+
+async function checkPage(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(res.statusText);
+    const text = await res.text();
+    const hasFooter = text.includes('id="siteFooter"');
+    const hasScript = text.includes('app.js');
+    let status, details;
+    if (hasFooter && hasScript) {
+      status = '✅ OK';
+      details = 'Footer and script present';
+    } else {
+      status = '⚠️ Missing';
+      details = !hasFooter ? 'No footer placeholder' :
+                !hasScript ? 'No script reference' : 'Check paths';
+    }
+    const row = document.createElement('tr');
+    row.className = hasFooter && hasScript ? 'ok' : 'missing';
+    row.innerHTML = `<td><a href="${url}" target="_blank">${url}</a></td><td>${status}</td><td>${details}</td>`;
+    tbody.appendChild(row);
+  } catch (err) {
+    const row = document.createElement('tr');
+    row.className = 'missing';
+    row.innerHTML = `<td>${url}</td><td>❌ Error</td><td>${err.message}</td>`;
+    tbody.appendChild(row);
+  }
+}
+
+pages.forEach(checkPage);
+</script>
+</body>
+</html>

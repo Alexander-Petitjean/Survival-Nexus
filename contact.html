@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Survival Nexus for reviews, supplier listings, and collaboration." />
+  <title>Contact | Survival Nexus</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ContactPage",
+    "name":"Contact Survival Nexus",
+    "url":"https://example.com/contact.html",
+    "about":"Reviews, supplier directory submissions, collaboration requests",
+    "publisher":{
+      "@type":"Organization",
+      "name":"Survival Nexus"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="logo">Survival Nexus</div>
+      <ul id="primary-navigation" class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="guides.html">Guides</a></li>
+  <li><a href="suppliers.html">Suppliers</a></li>
+  <li><a href="reviews.html">Reviews</a></li>
+  <li><a href="scenarios.html">Scenarios</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+</ul>
+
+    </nav>
+    <div class="hero small-hero">
+      <h1>Contact</h1>
+      <p>Questions, submissions, or collaboration ideas? Drop us a line.</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="maxw">
+      <h2>Get in Touch</h2>
+      <p class="text-dim">We aim to reply within 2–3 business days. For urgent safety corrections, mark your message as <em>Errata</em>.</p>
+
+      <!-- No backend yet: form can POST to a service later. For now, use mailto fallback. -->
+      <form id="contactForm" class="guide-preview" method="post" action="#" novalidate>
+        <article>
+          <h3>Your Info</h3>
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="Your name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+          </label>
+          <label>
+            <span>Topic</span>
+            <select name="topic" required>
+              <option value="">Select…</option>
+              <option>Review request</option>
+              <option>Supplier listing</option>
+              <option>Errata / correction</option>
+              <option>Collaboration</option>
+              <option>Other</option>
+            </select>
+          </label>
+        </article>
+
+        <article>
+          <h3>Message</h3>
+          <label>
+            <span>Subject</span>
+            <input type="text" name="subject" required placeholder="Short summary" />
+          </label>
+          <label>
+            <span>Details</span>
+            <textarea name="message" rows="8" required placeholder="How can we help?"></textarea>
+          </label>
+          <label>
+            <span>Attachments (URLs)</span>
+            <input type="url" name="links" placeholder="Link to docs, specs, or photos" />
+          </label>
+          <div class="tags">
+            <label><input type="checkbox" name="consent" required /> I agree to the <a href="privacy.html">Privacy Policy</a>.</label>
+          </div>
+          <div aria-hidden="true" class="hidden">
+            <label>Leave this field blank
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+          <div class="filter-actions">
+            <button type="submit" class="cta-button">Send</button>
+            <button type="reset" class="secondary-button">Reset</button>
+          </div>
+          <p id="formStatus" role="status" class="text-dim"></p>
+        </article>
+      </form>
+    </section>
+
+    <section class="maxw">
+      <h2>Other Channels</h2>
+      <ul>
+        <li>Email: <a href="mailto:hello@example.com">hello@example.com</a></li>
+        <li>Instagram: <a href="#" target="_blank" rel="noopener">@survivalnexus</a></li>
+        <li>YouTube: <a href="#" target="_blank" rel="noopener">Survival Nexus</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span class="js-year">2025</span> Survival Nexus. All rights reserved.</p>
+    <p><a href="disclaimer.html">Disclaimer</a> | <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    // Minimal client-side validation + mailto fallback for now
+    (function(){
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('formStatus');
+      if(!form) return;
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        status.textContent = '';
+
+        // honeypot
+        if(form.website && form.website.value){
+          status.textContent = 'Submission blocked (spam detected).';
+          return;
+        }
+
+        if(!form.checkValidity()){
+          status.textContent = 'Please complete the required fields.';
+          form.reportValidity && form.reportValidity();
+          return;
+        }
+
+        const data = new FormData(form);
+        const name = data.get('name');
+        const email = data.get('email');
+        const topic = data.get('topic');
+        const subject = data.get('subject');
+        const message = data.get('message');
+        const links = data.get('links');
+
+        const body = encodeURIComponent(
+          `Topic: ${topic}\nName: ${name}\nEmail: ${email}\nLinks: ${links || '—'}\n\n${message}`
+        );
+
+        // Mailto fallback (replace with your real email)
+        const mailto = `mailto:hello@example.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+        window.location.href = mailto;
+        status.textContent = 'Opening your email client…';
+      });
+    })();
+  </script>
+</body>
+</html>
