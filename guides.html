@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <meta name="description" content="Survival Nexus guides: firecraft, water disinfection, EMT skills, hypothermia, adaptive load balance, travel systems, and treasure tools." />
+  <meta name="description" content="Survival guides that blend field-manual precision with plain-language coaching: firecraft, water, EMT, travel, and treasure." />
   <title>Guides | Survival Nexus</title>
   <link rel="stylesheet" href="assets/styles.css" />
-
-  <!-- Collection schema (relative URLs for GitHub Pages) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -16,8 +14,8 @@
     "breadcrumb":{
       "@type":"BreadcrumbList",
       "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"Home","item":"index.html"},
-        {"@type":"ListItem","position":2,"name":"Guides","item":"guides.html"}
+        {"@type":"ListItem","position":1,"name":"Home","item":"/index.html"},
+        {"@type":"ListItem","position":2,"name":"Guides","item":"/guides.html"}
       ]
     }
   }
@@ -26,222 +24,88 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header" role="banner">
-    <nav class="navbar" aria-label="Primary">
-      <div class="logo">
-        <a href="index.html" aria-label="Survival Nexus Home">Survival Nexus</a>
-      </div>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation">
-        <span class="sr-only">Menu</span>
-      </button>
-		<ul id="primary-navigation" class="nav-links">
-		  <li><a href="index.html">Home</a></li>
-		  <li><a href="guides.html">Guides</a></li>
-		  <li><a href="suppliers.html">Suppliers</a></li>
-		  <li><a href="reviews.html">Reviews</a></li>
-		  <li><a href="scenarios.html">Scenarios</a></li>
-		  <li><a href="about.html">About</a></li>
-		  <li><a href="contact.html">Contact</a></li>
-		</ul>
-
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="logo">Survival Nexus</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guides.html" class="active">Guides</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
-
     <div class="hero small-hero">
-      <h1>Guides &amp; Field Knowledge</h1>
-      <p>Practical skills with the biology and physics underneath — each guide includes a field exercise.</p>
+      <h1>Guides & Field Knowledge</h1>
+      <p>Practical, testable skills with the biology and physics underneath. Each guide includes a field exercise.</p>
     </div>
   </header>
 
-  <main id="main" class="maxw">
-    <!-- Two-column layout: main content + affiliate sidebar -->
-    <div class="layout-two-column">
-      <section class="page-body">
-        <section class="intro">
-          <p>Start with fire and water, then move through physiology, trauma care, mobility, and exploration. Build a dependable system one step at a time.</p>
-        </section>
+  <main id="main">
+    <section class="maxw intro">
+      <p>Start with fire and water, then move through trauma care, mobility, and exploration. These pieces build a dependable outdoor system.</p>
+    </section>
 
-        <!-- ======== Guides Grid (three-up with images) ======== -->
-        <section class="guide-grid">
+    <section class="guide-grid">
+      <!-- Firecraft (NEW) -->
+      <article class="guide-card fade-in">
+        <h3><a href="guides/cold-firecraft.html">Cold-Weather Firecraft &amp; Fatwood Chemistry</a></h3>
+        <p>Ignition physics in freezing, wet conditions. Fatwood resin science, fire lays in snow, and a timed boil test drill.</p>
+        <a class="card-link" href="guides/cold-firecraft.html">Read Guide →</a>
+      </article>
 
-          <!-- Firecraft -->
-          <div id="fire"></div>
-          <article class="guide-card fade-in">
-            <figure class="card-media">
-              <img src="assets/img/guides/cold-firecraft.jpg"
-                   alt="Fatwood curls igniting on a snow platform in cold weather"
-                   loading="lazy" decoding="async" />
-            </figure>
-            <h3><a href="guides/cold-firecraft.html">Cold-Weather Firecraft &amp; Fatwood Chemistry</a></h3>
-            <p>Ignition physics in freezing, wet conditions. Fatwood resin science, snow platforms, and a timed boil-test drill.</p>
-            <a class="card-link" href="guides/cold-firecraft.html">Read Guide →</a>
-          </article>
+      <!-- Water -->
+      <article class="guide-card fade-in">
+        <h3><a href="guides/water-disinfection.html">Emergency Water Disinfection 101</a></h3>
+        <p>Filters, chemical treatments, and UV—explained by biological mechanism. Includes a clarity vs. contact-time exercise.</p>
+        <a class="card-link" href="guides/water-disinfection.html">Read Guide →</a>
+      </article>
 
-          <!-- Water -->
-          <article class="guide-card fade-in">
-            <figure class="card-media">
-              <img src="assets/img/guides/water-disinfection.jpg"
-                   alt="Compact filter and chemical tablets set up beside a clear stream"
-                   loading="lazy" decoding="async" />
-            </figure>
-            <h3><a href="guides/water-disinfection.html">Emergency Water Disinfection 101</a></h3>
-            <p>Filters, chemicals, and UV — explained by biological mechanism. Includes a clarity vs. contact-time exercise.</p>
-            <a class="card-link" href="guides/water-disinfection.html">Read Guide →</a>
-          </article>
+      <!-- EMT: Shock -->
+      <article class="guide-card fade-in">
+        <h3><a href="guides/shock-recognition.html">Shock Recognition &amp; Field Management</a></h3>
+        <p>Recognize compensation before collapse. Hemorrhage control, heat preservation, and evacuation timing.</p>
+        <a class="card-link" href="guides/shock-recognition.html">Read Guide →</a>
+      </article>
 
-          <!-- Physiology / Medical -->
-          <article class="guide-card fade-in">
-            <figure class="card-media">
-              <img src="assets/img/guides/hypothermia.jpg"
-                   alt="Insulation layers and emergency bivy laid out on snow"
-                   loading="lazy" decoding="async" />
-            </figure>
-            <h3><a href="guides/hypothermia.html">Hypothermia &amp; Heat Retention 101</a></h3>
-            <p>Cooling physiology, safe rewarming, and field drills that quantify insulation effectiveness.</p>
-            <a class="card-link" href="guides/hypothermia.html">Read Guide →</a>
-          </article>
+      <!-- EMT Kit -->
+      <article class="guide-card fade-in">
+        <h3><a href="guides/emt-kit-basics.html">Building the Ultimate EMT Kit</a></h3>
+        <p>Tourniquets, hemostatics, packing layout, and practice drills—with biology-backed rationale for each component.</p>
+        <a class="card-link" href="guides/emt-kit-basics.html">Read Guide →</a>
+      </article>
 
-          <article class="guide-card fade-in">
-            <figure class="card-media">
-              <img src="assets/img/guides/shock-recognition.jpg"
-                   alt="Trauma kit with tourniquet and hemostatic gauze staged on a rock"
-                   loading="lazy" decoding="async" />
-            </figure>
-            <h3><a href="guides/shock-recognition.html">Shock Recognition &amp; Field Management</a></h3>
-            <p>Spot compensation early, control bleeding, preserve heat, and plan evacuation with EMT logic.</p>
-            <a class="card-link" href="guides/shock-recognition.html">Read Guide →</a>
-          </article>
+      <!-- Travel -->
+      <article class="guide-card fade-in">
+        <h3><a href="guides/vagabond-travel.html">Travel Light: Vagabonding Essentials</a></h3>
+        <p>Shelter, water, heat, and comms—modular systems for open-ended routes. Includes a 48-hour load test.</p>
+        <a class="card-link" href="guides/vagabond-travel.html">Read Guide →</a>
+      </article>
 
-          <!-- EMT Kit -->
-          <article class="guide-card fade-in">
-            <figure class="card-media">
-              <img src="assets/img/guides/emt-kit-basics.jpg"
-                   alt="Organized first-aid kit items arranged for quick access"
-                   loading="lazy" decoding="async" />
-            </figure>
-            <h3><a href="guides/emt-kit-basics.html">Building the Ultimate EMT Kit</a></h3>
-            <p>Tourniquets, hemostatics, and packing layout — with biology-backed rationale for each component.</p>
-            <a class="card-link" href="guides/emt-kit-basics.html">Read Guide →</a>
-          </article>
+      <!-- Treasure -->
+      <article class="guide-card fade-in">
+        <h3><a href="guides/treasure-tools.html">Treasure Tools &amp; Recovery Basics</a></h3>
+        <p>VLF vs. PI, signal interpretation, and ethical recovery. Practice a 1×1 m sweep grid for precision.</p>
+        <a class="card-link" href="guides/treasure-tools.html">Read Guide →</a>
+      </article>
 
-          <!-- Mobility / Travel -->
-          <div id="travel"></div>
-          <article class="guide-card fade-in">
-            <figure class="card-media">
-              <img src="assets/img/guides/pack-load-amputee.jpg"
-                   alt="Backpack load map showing weight near the spine for balance"
-                   loading="lazy" decoding="async" />
-            </figure>
-            <h3><a href="guides/pack-load-amputee.html">72-Hour Pack Load Balance (Amputee Adaptation)</a></h3>
-            <p>Ergonomics, CoG control, and compression tactics to reduce socket shear and fatigue over 72 hours.</p>
-            <a class="card-link" href="guides/pack-load-amputee.html">Read Guide →</a>
-          </article>
+      <!-- Legacy Fire Basics -->
+      <article class="guide-card fade-in">
+        <h3><a href="guides/fire-readiness.html">Wilderness Fire Readiness 101</a></h3>
+        <p>Core ignition methods, tinder prep, and safe fire lays that scale from solo to basecamp.</p>
+        <a class="card-link" href="guides/fire-readiness.html">Read Guide →</a>
+      </article>
+    </section>
 
-          <article class="guide-card fade-in">
-            <figure class="card-media">
-              <img src="assets/img/guides/vagabond-travel.jpg"
-                   alt="Minimalist travel kit laid out on a wooden table"
-                   loading="lazy" decoding="async" />
-            </figure>
-            <h3><a href="guides/vagabond-travel.html">Travel Light: Vagabonding Essentials</a></h3>
-            <p>Modular systems for shelter, water, heat, and comms — plus a 48-hour pack test.</p>
-            <a class="card-link" href="guides/vagabond-travel.html">Read Guide →</a>
-          </article>
-
-          <!-- Treasure / Exploration -->
-          <article class="guide-card fade-in">
-            <figure class="card-media">
-              <img src="assets/img/guides/treasure-tools.jpg"
-                   alt="Metal detector sweeping a sandy beach with a recovery pouch"
-                   loading="lazy" decoding="async" />
-            </figure>
-            <h3><a href="guides/treasure-tools.html">Treasure Tools &amp; Recovery Basics</a></h3>
-            <p>VLF vs PI, signal interpretation, and ethical recovery with a 1×1 m grid exercise.</p>
-            <a class="card-link" href="guides/treasure-tools.html">Read Guide →</a>
-          </article>
-
-          <!-- Legacy Fire Basics -->
-          <article class="guide-card fade-in">
-            <figure class="card-media">
-              <img src="assets/img/guides/fire-readiness.jpg"
-                   alt="Tinder bundle, ferro rod, and prepared kindling on forest ground"
-                   loading="lazy" decoding="async" />
-            </figure>
-            <h3><a href="guides/fire-readiness.html">Wilderness Fire Readiness 101</a></h3>
-            <p>Core ignition methods, wet-tinder prep, and safe fire lays that scale from solo to basecamp.</p>
-            <a class="card-link" href="guides/fire-readiness.html">Read Guide →</a>
-          </article>
-        </section>
-
-        <section class="cta-section">
-          <h2>Request a Guide</h2>
-          <p>What should we write next — splinting, stove fuel safety, route planning, or beach detecting?</p>
-          <a class="cta-button" href="contact.html">Tell Us →</a>
-        </section>
-      </section>
-
-      <!-- ========== Affiliate Gear Sidebar ========== -->
-      <aside class="affiliate-sidebar fade-in" aria-labelledby="gear-heading">
-        <h2 id="gear-heading">Recommended Field Gear</h2>
-
-        <ul class="affiliate-list">
-          <li class="affiliate-item">
-            <a href="https://www.amazon.com/dp/EXAMPLE1?tag=your-affiliate-id" target="_blank" rel="noopener sponsored">
-              <img src="assets/img/gear/ferro-rod.jpg" alt="Ferrocerium rod fire starter" loading="lazy" decoding="async">
-              <div>
-                <strong>Ferro Rod Fire Starter</strong>
-                <p>Reliable sparks in any weather — a must for cold-weather firecraft.</p>
-                <span class="price">Amazon Placeholder →</span>
-              </div>
-            </a>
-          </li>
-
-          <li class="affiliate-item">
-            <a href="https://www.amazon.com/dp/EXAMPLE2?tag=your-affiliate-id" target="_blank" rel="noopener sponsored">
-              <img src="assets/img/gear/tourniquet.jpg" alt="CAT-style tourniquet for trauma kits" loading="lazy" decoding="async">
-              <div>
-                <strong>CAT-Style Tourniquet</strong>
-                <p>Compact, one-handed application. Trusted in field trauma care.</p>
-                <span class="price">Amazon Placeholder →</span>
-              </div>
-            </a>
-          </li>
-
-          <li class="affiliate-item">
-            <a href="https://www.amazon.com/dp/EXAMPLE3?tag=your-affiliate-id" target="_blank" rel="noopener sponsored">
-              <img src="assets/img/gear/ultralight-pack.jpg" alt="Ultralight 72-hour backpack" loading="lazy" decoding="async">
-              <div>
-                <strong>Ultralight 72-Hour Pack</strong>
-                <p>Smart weight distribution and hydration-bladder compatible.</p>
-                <span class="price">Amazon Placeholder →</span>
-              </div>
-            </a>
-          </li>
-        </ul>
-
-        <p class="affiliate-note">
-          As an Amazon Associate I earn from qualifying purchases at no extra cost to you.
-        </p>
-      </aside>
-    </div>
+    <section class="cta-section">
+      <h2>Request a Guide</h2>
+      <p>What should we write next—splinting, stove fuel safety, route planning, or beach detecting?</p>
+      <a class="cta-button" href="contact.html">Tell Us →</a>
+    </section>
   </main>
 
-  <!-- Unified footer gets injected by assets/app.js -->
   <footer class="site-footer" id="siteFooter"></footer>
-
-  <!-- Small helper for mobile menu (CSS handles .is-open) -->
-  <script>
-    (function () {
-      var toggle = document.querySelector('.nav-toggle');
-      var nav = document.getElementById('primary-navigation');
-      if (toggle && nav) {
-        toggle.addEventListener('click', function () {
-          var expanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', String(!expanded));
-          nav.classList.toggle('is-open');
-        });
-      }
-    }());
-  </script>
   <script src="assets/app.js"></script>
 </body>
 </html>
