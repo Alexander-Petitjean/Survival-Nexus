@@ -853,6 +853,19 @@ summary::-webkit-details-marker{display:none}
 @media (max-width:720px){
   .comparison-table-wrap::after{content:"Swipe table horizontally →";display:block;padding:.55rem .85rem;color:var(--text-dim);font-size:.8rem}
 }
+
+/* ============== Ten Essentials ============== */
+.essentials-quick-check{padding:1.25rem !important;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+.compact-check-grid{counter-reset:essentials;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem 1rem;margin:1rem 0;padding:0;list-style:none}
+.compact-check-grid li{counter-increment:essentials;display:flex;align-items:center;gap:.65rem;min-height:2.5rem;padding:.35rem .5rem;border-bottom:1px solid var(--line)}
+.compact-check-grid li::before{content:counter(essentials);display:grid;flex:0 0 1.8rem;height:1.8rem;place-items:center;border-radius:50%;background:var(--accent);color:#fff;font-weight:800}
+.essentials-grid{counter-reset:essential-card;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1rem 0;padding:0;list-style:none}
+.essential-card{counter-increment:essential-card;padding:1rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.essential-card>div{display:grid;grid-template-columns:auto 1fr;column-gap:.75rem;align-items:start}
+.essential-card>div::before{content:counter(essential-card);grid-row:1/3;display:grid;width:2.2rem;height:2.2rem;place-items:center;border-radius:10px;background:rgba(var(--accent-rgb),.15);border:1px solid rgba(var(--accent-rgb),.5);font-weight:900}
+.essential-card h3{margin:0}.essential-card p{margin:.55rem 0 0}.essential-purpose{color:var(--text-dim)}
+.adaptive-essentials{margin:1rem 0;padding:1.25rem !important;border:1px solid rgba(var(--accent-rgb),.4);border-radius:var(--radius);background:rgba(var(--accent-rgb),.07)}
+@media (max-width:720px){.compact-check-grid,.essentials-grid{grid-template-columns:1fr}}
 /* denser card grid option */
 .card-grid{--cols:1;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:1rem}
 @media (min-width:820px){.card-grid{--cols:2}}
