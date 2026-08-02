@@ -49,6 +49,24 @@ for (const file of htmlFiles) {
   }
 }
 
+const searchIndexPath = resolve(root, 'search-index.json');
+if (!existsSync(searchIndexPath)) {
+  report(errors, 'search-index.json', 'missing search index');
+} else {
+  try {
+    const searchIndex = JSON.parse(readFileSync(searchIndexPath, 'utf8'));
+    if (!Array.isArray(searchIndex)) throw new Error('top-level value must be an array');
+    for (const [position, item] of searchIndex.entries()) {
+      if (!item.title || !item.url || !item.description || !item.type) {
+        report(errors, 'search-index.json', `entry ${position + 1} is missing a required field`);
+      } else if (!existsSync(resolve(root, item.url.split('#')[0]))) {
+        report(errors, 'search-index.json', `entry ${position + 1} references missing page "${item.url}"`);
+      }
+    }
+  } catch (error) {
+    report(errors, 'search-index.json', `invalid JSON (${error.message})`);
+  }
+}
 for (const warning of warnings) console.warn(`WARN ${warning}`);
 for (const error of errors) console.error(`ERROR ${error}`);
 
