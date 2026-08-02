@@ -274,6 +274,7 @@ function highlightActiveNav() {
     '72-hour-emergency-kit.html',
     '72-hour-checklist.html'
   ]);
+  const reviewPages = new Set(['72-hour-gear-comparisons.html']);
 
   links.forEach(link => {
     link.classList.remove('active');
@@ -282,8 +283,8 @@ function highlightActiveNav() {
 
   const currentLink = Array.from(links).find(link => link.getAttribute('href') === current);
   const activeLink = currentLink || (
-    guidePages.has(current)
-      ? Array.from(links).find(link => link.getAttribute('href') === 'guides.html')
+    guidePages.has(current) || reviewPages.has(current)
+      ? Array.from(links).find(link => link.getAttribute('href') === (reviewPages.has(current) ? 'Reviews.html' : 'guides.html'))
       : null
   );
   if (activeLink) {
@@ -470,6 +471,7 @@ function injectRelatedContent() {
     '72-hour-packloadbalance.html': ['72-hour-emergency-kit.html', 'vagabond-travel.html', 'scenarios.html#hiking'],
     '72-hour-emergency-kit.html': ['72-hour-checklist.html', '72-hour-packloadbalance.html', 'water-disinfection.html'],
     '72-hour-checklist.html': ['72-hour-emergency-kit.html', '72-hour-packloadbalance.html', 'resources.html'],
+    '72-hour-gear-comparisons.html': ['72-hour-emergency-kit.html', '72-hour-checklist.html', 'resources.html'],
     'treasure-tools.html': ['scenarios.html#treasure', 'Reviews.html', 'suppliers.html#treasure']
   }[current];
   const main = document.querySelector('main');
@@ -486,6 +488,7 @@ function injectRelatedContent() {
     '72-hour-packloadbalance.html': '72-Hour Pack Load Balance',
     '72-hour-emergency-kit.html': '72-Hour Emergency Kit Guide',
     '72-hour-checklist.html': 'Printable 72-Hour Checklist',
+    '72-hour-gear-comparisons.html': '72-Hour Gear Comparisons',
     'Reviews.html': 'Gear Reviews',
     'resources.html': 'Training & Resources',
     'suppliers.html#treasure': 'Treasure Suppliers',

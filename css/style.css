@@ -828,6 +828,31 @@ summary::-webkit-details-marker{display:none}
 .pros-cons li:first-child{font-weight:700;color:var(--text);margin-bottom:.3rem}
 .pros-cons li+li{color:var(--text)}
 @media (min-width:720px){.pros-cons{grid-template-columns:1fr 1fr}}
+
+/* ============== Product comparisons ============== */
+.comparison-article>section{scroll-margin-top:1rem}
+.comparison-method{padding-top:0}
+.comparison-table-wrap{
+  max-width:100%;margin:1rem 0;overflow-x:auto;border:1px solid var(--line);
+  border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)
+}
+.comparison-table{width:100%;min-width:54rem;border-collapse:collapse;font-size:.94rem}
+.comparison-table th,.comparison-table td{padding:.85rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.comparison-table thead th{background:var(--muted);font-size:.82rem;letter-spacing:.04em;text-transform:uppercase}
+.comparison-table tbody th{width:11rem;color:var(--text)}
+.comparison-table tbody tr:last-child>*{border-bottom:0}
+.comparison-table tbody tr:hover{background:rgba(var(--accent-rgb),.06)}
+.comparison-verdict{
+  margin:1rem 0;padding:1rem;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;
+  background:rgba(var(--accent-rgb),.08)
+}
+.comparison-verdict h3{margin:0 0 .35rem}.comparison-verdict p{margin:0}
+.comparison-sources{font-size:.9rem;color:var(--text-dim)}
+.comparison-sources a{text-decoration:underline;text-underline-offset:.2em}
+.comparison-review-note{border-top:1px solid var(--line)}
+@media (max-width:720px){
+  .comparison-table-wrap::after{content:"Swipe table horizontally →";display:block;padding:.55rem .85rem;color:var(--text-dim);font-size:.8rem}
+}
 /* denser card grid option */
 .card-grid{--cols:1;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:1rem}
 @media (min-width:820px){.card-grid{--cols:2}}
