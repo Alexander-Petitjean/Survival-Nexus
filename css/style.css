@@ -758,6 +758,10 @@ summary::-webkit-details-marker{display:none}
   color: var(--text-dim);
 }
 .site-footer a{color:var(--text-dim)}
+.footer-button{
+  min-height:44px;padding:.4rem;border:0;border-radius:8px;background:transparent;color:var(--text-dim);cursor:pointer
+}
+.footer-button:hover{color:var(--text);background:var(--muted)}
 /* reset bullets in footer navs */
 .site-footer ul,.site-footer ol{list-style:none;margin:0;padding:0}
 .site-footer .footer-links{display:grid;gap:.35rem}
@@ -784,6 +788,21 @@ summary::-webkit-details-marker{display:none}
 .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
 .center{text-align:center}
 .hidden{display:none !important}
+
+/* ============== Analytics choice ============== */
+.analytics-consent{
+  position:fixed;z-index:100;right:1rem;bottom:1rem;left:1rem;display:flex;align-items:center;
+  justify-content:space-between;gap:1rem;max-width:58rem;margin-inline:auto;padding:1rem;
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:0 18px 50px rgba(0,0,0,.55)
+}
+.analytics-consent p{margin:.25rem 0 0;color:var(--text-dim)}
+.analytics-consent p a{text-decoration:underline;text-underline-offset:.2em}
+.analytics-consent-actions{display:flex;flex:0 0 auto;gap:.5rem}
+@media (max-width:680px){
+  .analytics-consent{align-items:stretch;flex-direction:column}
+  .analytics-consent-actions{display:grid;grid-template-columns:1fr 1fr}
+}
+@media print{.analytics-consent{display:none !important}}
 
 /* ============== Animations ============== */
 @media (prefers-reduced-motion:no-preference){

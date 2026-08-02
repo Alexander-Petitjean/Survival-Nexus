@@ -4,6 +4,8 @@
 ============================ */
 
 const THEME_STORAGE_KEY = 'survival-nexus-theme';
+const ANALYTICS_CONSENT_KEY = 'survival-nexus-analytics-consent';
+const GA_MEASUREMENT_ID = 'G-K6FEKZZ86S';
 
 function getPreferredTheme() {
   try {
@@ -28,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initNavToggle();
   injectFooter();
+  initAnalyticsConsent();
   setCurrentYear();
   highlightActiveNav();
   initSupplierFilters();
@@ -62,6 +65,57 @@ function initThemeToggle() {
   });
 
   syncToggle();
+}
+
+/* ----- OPTIONAL ANALYTICS ----- */
+function loadAnalytics() {
+  if (document.querySelector('script[data-survival-nexus-analytics]')) return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.dataset.survivalNexusAnalytics = 'true';
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
+  document.head.append(script);
+}
+
+function initAnalyticsConsent() {
+  let savedChoice = null;
+  try { savedChoice = localStorage.getItem(ANALYTICS_CONSENT_KEY); } catch { /* Storage is optional. */ }
+  if (savedChoice === 'accepted') loadAnalytics();
+  if (savedChoice === 'accepted' || savedChoice === 'declined') return;
+
+  const banner = document.createElement('section');
+  banner.className = 'analytics-consent';
+  banner.setAttribute('aria-label', 'Analytics preference');
+  banner.innerHTML = `
+    <div>
+      <strong>Help improve Survival Nexus?</strong>
+      <p>With your permission, Google Analytics will measure visits and which guides are useful. It stays off unless you accept. <a href="privacy.html#analytics">Privacy details</a></p>
+    </div>
+    <div class="analytics-consent-actions">
+      <button class="secondary-button" type="button" data-analytics-choice="declined">No thanks</button>
+      <button class="cta-button" type="button" data-analytics-choice="accepted">Allow analytics</button>
+    </div>
+  `;
+  document.body.append(banner);
+
+  banner.addEventListener('click', event => {
+    const choice = event.target.closest('[data-analytics-choice]')?.dataset.analyticsChoice;
+    if (!choice) return;
+    try { localStorage.setItem(ANALYTICS_CONSENT_KEY, choice); } catch { /* Apply for this page only. */ }
+    if (choice === 'accepted') loadAnalytics();
+    banner.remove();
+  });
+}
+
+function resetAnalyticsPreference() {
+  try { localStorage.removeItem(ANALYTICS_CONSENT_KEY); } catch { /* Storage is optional. */ }
+  location.reload();
 }
 
 function ensureSkipLink() {
@@ -185,6 +239,7 @@ function injectFooter() {
           <li><a href="contact.html">Contact</a></li>
           <li><a href="disclosure.html">Affiliate Disclosure</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><button class="footer-button" id="analyticsPreferences" type="button">Analytics choices</button></li>
         </ul>
       </nav>
       <section class="footer-legal">
@@ -193,6 +248,7 @@ function injectFooter() {
       </section>
     </div>
   `;
+  footer.querySelector('#analyticsPreferences')?.addEventListener('click', resetAnalyticsPreference);
 }
 
 /* ----- YEAR AUTO-UPDATE ----- */
@@ -276,7 +332,12 @@ function initEmergencyChecklist() {
     try { localStorage.removeItem(storageKey); } catch { /* Storage is optional. */ }
     updateProgress();
   });
-  print.addEventListener('click', () => window.print());
+  print.addEventListener('click', () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'print_checklist', { content_name: '72-Hour Emergency Checklist' });
+    }
+    window.print();
+  });
   updateProgress();
 }
 
