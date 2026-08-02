@@ -67,7 +67,6 @@ if (!existsSync(searchIndexPath)) {
     report(errors, 'search-index.json', `invalid JSON (${error.message})`);
   }
 }
-
 for (const warning of warnings) console.warn(`WARN ${warning}`);
 for (const error of errors) console.error(`ERROR ${error}`);
 
