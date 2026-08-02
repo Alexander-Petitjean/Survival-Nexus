@@ -165,6 +165,7 @@ main,header,footer,section{width:100%}
   margin-left:0;
   text-shadow:0 2px 12px rgba(0,0,0,.95);
 }
+.article-hero .hero-inner p{margin-left:0;margin-right:auto}
 .hero-guide-cold-firecraft{
   background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.4) 64%),linear-gradient(0deg,rgba(4,7,9,.92),transparent 70%),url('../images/guide-cold-firecraft-noir.webp');
 }
@@ -185,6 +186,12 @@ main,header,footer,section{width:100%}
 }
 .hero-guide-fire{
   background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.32) 64%),linear-gradient(0deg,rgba(4,7,9,.92),transparent 70%),url('../images/guide-fire-readiness-noir.webp');
+}
+.hero-guide-72-hour{
+  background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.28) 68%),linear-gradient(0deg,rgba(4,7,9,.92),transparent 72%),url('../images/guide-72-hour-kit-noir.webp');
+}
+.hero-guide-ten-essentials{
+  background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.26) 68%),linear-gradient(0deg,rgba(4,7,9,.92),transparent 72%),url('../images/guide-ten-essentials-noir.webp');
 }
 .hero-scenarios{
   background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.3) 68%),linear-gradient(0deg,rgba(4,7,9,.94),transparent 72%),url('../images/scenarios-field-response-noir.webp');
