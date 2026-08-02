@@ -3,34 +3,171 @@
    Modular Frontend Script
 ============================ */
 
+const THEME_STORAGE_KEY = 'survival-nexus-theme';
+
+function getPreferredTheme() {
+  try {
+    const saved = localStorage.getItem(THEME_STORAGE_KEY);
+    if (saved === 'light' || saved === 'dark') return saved;
+  } catch {
+    // Storage can be unavailable in privacy-restricted browsing contexts.
+  }
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
+}
+
+applyTheme(getPreferredTheme());
+
 document.addEventListener("DOMContentLoaded", () => {
+  ensureSkipLink();
+  injectHeader();
+  initThemeToggle();
   initNavToggle();
   injectFooter();
   setCurrentYear();
   highlightActiveNav();
-  guideMetaBootstrap(); // new
+  initSupplierFilters();
 });
+
+function initThemeToggle() {
+  const toggle = document.querySelector('.theme-toggle');
+  if (!toggle) return;
+
+  const syncToggle = () => {
+    const theme = document.documentElement.dataset.theme || getPreferredTheme();
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    toggle.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
+    toggle.setAttribute('title', `Switch to ${nextTheme} theme`);
+    toggle.setAttribute('aria-pressed', String(theme === 'light'));
+    toggle.querySelector('[data-theme-icon]').textContent = theme === 'dark' ? '☀' : '☾';
+    toggle.querySelector('[data-theme-label]').textContent = theme === 'dark' ? 'Light' : 'Dark';
+  };
+
+  toggle.addEventListener('click', () => {
+    const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(theme);
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+      // The selected theme still applies for the current page.
+    }
+    syncToggle();
+  });
+
+  syncToggle();
+}
+
+function ensureSkipLink() {
+  const main = document.querySelector('main');
+  if (!main) return;
+  if (!main.id) main.id = 'main';
+  if (document.querySelector('.skip-link')) return;
+  const link = document.createElement('a');
+  link.className = 'skip-link';
+  link.href = `#${main.id}`;
+  link.textContent = 'Skip to content';
+  document.body.prepend(link);
+}
 
 /* ----- NAV TOGGLE ----- */
 function initNavToggle() {
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.getElementById('primary-navigation');
   if (!toggle || !nav) return;
+  const mobile = window.matchMedia('(max-width: 820px)');
+
+  if (!toggle.hasAttribute('type')) toggle.type = 'button';
+
+  const setOpen = (open, returnFocus = false) => {
+    const shouldOpen = mobile.matches && open;
+    toggle.setAttribute('aria-expanded', String(shouldOpen));
+    nav.classList.toggle('is-open', shouldOpen);
+    nav.toggleAttribute('inert', mobile.matches && !shouldOpen);
+    if (returnFocus) toggle.focus();
+  };
+
+  const syncViewport = () => {
+    if (mobile.matches) {
+      setOpen(false);
+    } else {
+      toggle.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('is-open');
+      nav.removeAttribute('inert');
+    }
+  };
+
   toggle.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    nav.classList.toggle('is-open');
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
   });
+
+  nav.addEventListener('click', event => {
+    if (event.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setOpen(false, true);
+    }
+  });
+
+  document.addEventListener('click', event => {
+    if (
+      toggle.getAttribute('aria-expanded') === 'true' &&
+      !nav.contains(event.target) &&
+      !toggle.contains(event.target)
+    ) setOpen(false);
+  });
+
+  mobile.addEventListener?.('change', syncViewport);
+  syncViewport();
+}
+
+/* ----- SHARED HEADER ----- */
+function injectHeader() {
+  const header = document.getElementById('siteHeader') || document.querySelector('header.site-header');
+  if (!header) return;
+  header.classList.add('site-header');
+  const existingNav = header.querySelector('.navbar');
+  const markup = `
+    <nav class="navbar" aria-label="Primary">
+      <div class="logo"><a href="index.html" aria-label="Survival Nexus home">Survival Nexus</a></div>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false">
+          <span data-theme-icon aria-hidden="true">☀</span>
+          <span data-theme-label>Light</span>
+        </button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+          <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
+        </button>
+      </div>
+      <ul id="primary-navigation" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guides.html">Guides</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="Reviews.html">Reviews</a></li>
+        <li><a href="scenarios.html">Scenarios</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  `;
+  if (existingNav) existingNav.outerHTML = markup;
+  else header.insertAdjacentHTML('afterbegin', markup);
 }
 
 /* ----- FOOTER INJECTION ----- */
 function injectFooter() {
   const footer = document.getElementById('siteFooter');
   if (!footer) return;
+  footer.classList.add('site-footer');
   footer.innerHTML = `
     <div class="footer-grid">
       <section class="footer-brand">
-        <p><strong>Survival Nexus</strong> — Gear, guides, and field-tested know-how for EMTs, explorers, and vagabonds.</p>
+        <p><strong>Survival Nexus</strong> — Practical preparedness research, adaptive design, guides, and gear notes.</p>
 		<p class="ai-note"> Some images on this site are AI-generated for illustrative purposes only and do not depict real people or events.</p>
       </section>
       <nav class="footer-nav" aria-label="Footer">
@@ -38,7 +175,7 @@ function injectFooter() {
           <li><a href="index.html">Home</a></li>
           <li><a href="guides.html">Guides</a></li>
           <li><a href="suppliers.html">Suppliers</a></li>
-          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="Reviews.html">Reviews</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="disclosure.html">Affiliate Disclosure</a></li>
@@ -47,6 +184,7 @@ function injectFooter() {
       </nav>
       <section class="footer-legal">
         <p>© <span id="year"></span> Survival Nexus. All rights reserved.</p>
+        <p class="affiliate-note">As an Amazon Associate I earn from qualifying purchases.</p>
       </section>
     </div>
   `;
@@ -62,184 +200,77 @@ function setCurrentYear() {
 function highlightActiveNav() {
   const links = document.querySelectorAll('.nav-links a');
   const current = location.pathname.split('/').pop() || 'index.html';
+  const guidePages = new Set([
+    'cold-firecraft.html',
+    'water-disinfection.html',
+    'shock-recognition.html',
+    'emt-kit-basics.html',
+    'vagabond-travel.html',
+    'treasure-tools.html',
+    'fire-readiness.html',
+    'hypothermia.html',
+    '72-hour-packloadbalance.html'
+  ]);
+
   links.forEach(link => {
-    if (link.getAttribute('href') === current) {
-      link.classList.add('active');
-      link.setAttribute('aria-current', 'page');
-    }
+    link.classList.remove('active');
+    link.removeAttribute('aria-current');
   });
-}
 
-/* =========================================
-   Guide metadata + JSON-LD injector (NEW)
-========================================= */
-function guideMetaBootstrap() {
-  if (!/\/guides\//.test(location.pathname)) return; // only on guide pages
-
-  fetch('../assets/data/guides-meta.json', { cache: 'no-store' })
-    .then(r => r.json())
-    .then(data => applyGuideMeta(data))
-    .catch(() => {/* fail silently if file missing */});
-}
-
-function applyGuideMeta(data) {
-  const filename = location.pathname.split('/').pop();
-  const site = data.site || {};
-  const guide = (data.guides || []).find(g => g.slug === filename);
-  if (!guide) return;
-
-  // Title
-  const brand = site.brand || 'Survival Nexus';
-  const pageTitle = `${guide.title} | ${brand}`;
-  document.title = pageTitle;
-
-  // Meta description
-  upsertMeta('description', guide.description || '');
-
-  // Canonical
-  const base = (site.baseUrl || '').replace(/\/+$/, ''); // strip trailing slash
-  const canonicalHref = base ? `${base}/guides/${guide.slug}` : null;
-  if (canonicalHref) upsertLink('canonical', canonicalHref);
-
-  // Open Graph / Twitter (nice to have)
-  upsertMeta('og:title', pageTitle, 'property');
-  upsertMeta('og:description', guide.description || '', 'property');
-  if (guide.image && base) upsertMeta('og:image', `${base}${guide.image}`, 'property');
-  upsertMeta('og:type', 'article', 'property');
-
-  upsertMeta('twitter:card', 'summary_large_image', 'name');
-  upsertMeta('twitter:title', pageTitle, 'name');
-  upsertMeta('twitter:description', guide.description || '', 'name');
-  if (guide.image && base) upsertMeta('twitter:image', `${base}${guide.image}`, 'name');
-
-  // JSON-LD (HowTo default)
-  const schema = buildHowToSchema(guide, brand, base);
-  upsertJsonLd('guide-howto', schema);
-}
-
-/* Helpers: meta/link/ld upsert */
-function upsertMeta(name, content, attr = 'name') {
-  if (!content) return;
-  let el = document.head.querySelector(`meta[${attr}="${cssEscape(name)}"]`);
-  if (!el) {
-    el = document.createElement('meta');
-    el.setAttribute(attr, name);
-    document.head.appendChild(el);
+  const currentLink = Array.from(links).find(link => link.getAttribute('href') === current);
+  const activeLink = currentLink || (
+    guidePages.has(current)
+      ? Array.from(links).find(link => link.getAttribute('href') === 'guides.html')
+      : null
+  );
+  if (activeLink) {
+    activeLink.classList.add('active');
+    if (currentLink) activeLink.setAttribute('aria-current', 'page');
   }
-  el.setAttribute('content', content);
 }
 
-function upsertLink(rel, href) {
-  if (!href) return;
-  let el = document.head.querySelector(`link[rel="${cssEscape(rel)}"]`);
-  if (!el) {
-    el = document.createElement('link');
-    el.setAttribute('rel', rel);
-    document.head.appendChild(el);
-  }
-  el.setAttribute('href', href);
-}
+/* ----- SUPPLIER FILTERS ----- */
+function initSupplierFilters() {
+  const form = document.getElementById('supplier-filters');
+  const grid = document.getElementById('supplierGrid');
+  const count = document.getElementById('resultsCount');
+  if (!form || !grid || !count) return;
 
-function upsertJsonLd(id, obj) {
-  if (!obj) return;
-  let el = document.getElementById(id);
-  if (!el) {
-    el = document.createElement('script');
-    el.type = 'application/ld+json';
-    el.id = id;
-    document.head.appendChild(el);
-  }
-  el.textContent = JSON.stringify(obj);
-}
+  const cards = Array.from(grid.querySelectorAll(':scope > .supplier-card'));
+  const values = () => new FormData(form);
+  const numbers = text => (text.match(/\d+(?:\.\d+)?/g) || []).map(Number);
 
-/* Build a HowTo schema from meta JSON */
-function buildHowToSchema(guide, brand, base) {
-  const imageAbs = (base && guide.image) ? `${base}${guide.image}` : undefined;
-  const supplies = (guide.supply || []).map(s => ({ "@type": "HowToSupply", "name": s }));
-  const tools = (guide.tool || []).map(t => ({ "@type": "HowToTool", "name": t }));
-  const steps = (guide.steps || []).map(st => ({
-    "@type": "HowToStep",
-    "name": st.name || "",
-    "text": st.text || ""
-  }));
+  const apply = () => {
+    const data = values();
+    const query = String(data.get('q') || '').trim().toLowerCase();
+    const category = String(data.get('category') || '');
+    const cert = String(data.get('certs') || '').toLowerCase();
+    const region = String(data.get('region') || '').toLowerCase();
+    const maxLead = Number(data.get('lead')) || Infinity;
+    let visible = 0;
 
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": guide.type === 'HowTo' ? "HowTo" : "Article",
-    "name": guide.title,
-    "description": guide.description || "",
-    "image": imageAbs,
-    "publisher": { "@type": "Organization", "name": brand }
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const leadValues = numbers(card.querySelector('.lead')?.textContent || '');
+      const cardMaxLead = leadValues.length ? Math.max(...leadValues) : Infinity;
+      const matches =
+        (!query || text.includes(query)) &&
+        (!category || card.id === category) &&
+        (!cert || text.includes(cert)) &&
+        (!region || text.includes(region) || text.includes('worldwide') || text.includes('global')) &&
+        cardMaxLead <= maxLead;
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    });
+
+    count.textContent = `Showing ${visible} ${visible === 1 ? 'supplier' : 'suppliers'}`;
   };
 
-  if (schema["@type"] === "HowTo") {
-    if (guide.totalTimeISO) schema.totalTime = guide.totalTimeISO; // e.g., PT20M
-    if (guide.estimatedCostUSD) {
-      schema.estimatedCost = {
-        "@type": "MonetaryAmount",
-        "currency": "USD",
-        "value": guide.estimatedCostUSD
-      };
-    }
-    if (supplies.length) schema.supply = supplies;
-    if (tools.length) schema.tool = tools;
-    if (steps.length) schema.step = steps;
-  }
-
-  return schema;
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    apply();
+  });
+  form.addEventListener('input', apply);
+  form.addEventListener('reset', () => requestAnimationFrame(apply));
+  apply();
 }
-
-/* Small util: escape for attribute selectors */
-function cssEscape(s) {
-  return (s || '').replace(/["\\]/g, '\\$&');
-}
-/* =========================================
-   Guide metadata (offline embedded)
-========================================= */
-const guidesMeta = {
-  site: {
-    brand: "Survival Nexus",
-    baseUrl: "file:///C:/path/to/your/project-root"
-  },
-  guides: [
-    {
-      slug: "cold-firecraft.html",
-      type: "HowTo",
-      title: "Cold-Weather Firecraft & Fatwood Chemistry",
-      description: "Master ignition in freezing, wet conditions with fatwood resin science, snow platforms, and a timed boil-test drill.",
-      image: "/assets/img/guides/cold-firecraft.jpg"
-    },
-    {
-      slug: "water-disinfection.html",
-      type: "HowTo",
-      title: "Emergency Water Disinfection 101",
-      description: "Filters, chemicals, and UV—explained by biological mechanism.",
-      image: "/assets/img/guides/water-disinfection.jpg"
-    }
-    // …and so on
-  ]
-};
-// Auto-highlight current nav link (and footer link) by URL
-(function () {
-  var current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-
-  function markActive(rootSelector) {
-    var root = document.querySelector(rootSelector);
-    if (!root) return;
-    root.querySelectorAll('a[href]').forEach(function (a) {
-      var href = a.getAttribute('href');
-      if (!href) return;
-      var file = href.split('/').pop().toLowerCase();
-      if (file === current) {
-        a.classList.add('active');
-        a.setAttribute('aria-current', 'page');
-      } else {
-        a.classList.remove('active');
-        a.removeAttribute('aria-current');
-      }
-    });
-  }
-
-  markActive('#primary-navigation');     // header
-  markActive('.footer-links');           // footer (if present)
-})();

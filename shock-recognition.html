@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Field guide to recognizing and managing shock: physiology, types, red flags, and immediate actions for outdoor emergencies."/>
   <title>Shock Recognition & Field Management | Survival Nexus</title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -23,16 +23,19 @@
   <header class="site-header">
     <nav class="navbar">
       <div class="logo">Survival Nexus</div>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../guides.html" class="active">Guides</a></li>
-        <li><a href="../suppliers.html">Suppliers</a></li>
-        <li><a href="../reviews.html">Reviews</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
+      </button>
+      <ul id="primary-navigation" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guides.html" class="active">Guides</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="Reviews.html">Reviews</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <div class="hero small-hero">
+    <div class="hero small-hero article-hero hero-guide-shock">
       <h1>Shock Recognition & Field Management</h1>
       <p>Spot it early. Act fast. Keep perfusion and heat while you buy time for definitive care.</p>
     </div>
@@ -69,6 +72,10 @@
       <li><strong>E:</strong> Exposure/Environment — prevent heat loss; use blanket/insulation. Hypothermia worsens coagulopathy.</li>
     </ol>
     <p><em>Positioning:</em> If no trauma to spine/hips, lay supine and consider elevating legs ~20–30 cm. If breathing is difficult or chest injury suspected, keep semi-upright. For vomiting/low consciousness, use recovery position if airway not protected.</p>
+    <figure class="field-diagram">
+      <img src="images/diagram-shock-response.svg" alt="Shock response flow from recognizing red flags through emergency activation, ABCDE actions, insulation, and repeated reassessment" width="960" height="600" loading="lazy" decoding="async" />
+      <figcaption>Shock can deteriorate quickly. Control life threats, prevent heat loss, arrange evacuation, and reassess continuously.</figcaption>
+    </figure>
 
     <h2>5) Biological Rationale for Key Interventions</h2>
     <ul>
@@ -96,16 +103,16 @@
     <section class="affiliate-callout">
       <h3>Recommended Gear</h3>
       <ul>
-        <li><a href="../suppliers.html#emt">Tourniquets & hemostatic gauze</a> — MyMedic / North American Rescue via AvantLink partners</li>
-        <li><a href="../suppliers.html#travel">Thermal blankets & insulation layers</a></li>
+        <li><a href="suppliers.html#emt">Tourniquets & hemostatic gauze</a> — MyMedic / North American Rescue via AvantLink partners</li>
+        <li><a href="suppliers.html#travel">Thermal blankets & insulation layers</a></li>
       </ul>
       <p class="text-dim">Educational content only; seek certified first-aid/EMT training for clinical competence.</p>
     </section>
 
-    <p><a class="secondary-button" href="../guides.html">← Back to Guides</a></p>
+    <p><a class="secondary-button" href="guides.html">← Back to Guides</a></p>
   </main>
 
   <footer class="site-footer" id="siteFooter"></footer>
-  <script src="../assets/app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

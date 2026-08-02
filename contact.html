@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Contact Survival Nexus for reviews, supplier listings, and collaboration." />
   <title>Contact | Survival Nexus</title>
-  <link rel="icon" href="assets/favicon.ico" />
-  <link rel="stylesheet" href="/css/style.css" /> 
+  <link rel="stylesheet" href="css/style.css" /> 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"ContactPage",
     "name":"Contact Survival Nexus",
-    "url":"https://example.com/contact.html",
+    "url":"contact.html",
     "about":"Reviews, supplier directory submissions, collaboration requests",
     "publisher":{
       "@type":"Organization",
@@ -27,11 +26,14 @@
   <header class="site-header">
     <nav class="navbar">
       <div class="logo">Survival Nexus</div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
+      </button>
       <ul id="primary-navigation" class="nav-links">
   <li><a href="index.html">Home</a></li>
   <li><a href="guides.html">Guides</a></li>
   <li><a href="suppliers.html">Suppliers</a></li>
-  <li><a href="reviews.html">Reviews</a></li>
+  <li><a href="Reviews.html">Reviews</a></li>
   <li><a href="scenarios.html">Scenarios</a></li>
   <li><a href="about.html">About</a></li>
   <li><a href="contact.html">Contact</a></li>
@@ -108,19 +110,19 @@
     <section class="maxw">
       <h2>Other Channels</h2>
       <ul>
-        <li>Email: <a href="mailto:hello@example.com">hello@example.com</a></li>
-        <li>Instagram: <a href="#" target="_blank" rel="noopener">@survivalnexus</a></li>
-        <li>YouTube: <a href="#" target="_blank" rel="noopener">Survival Nexus</a></li>
+        <li>Email: <a href="mailto:alexanderpetitjean@gmx.us">alexanderpetitjean@gmx.us</a></li>
+        <li>Instagram: <span class="text-dim">coming soon</span></li>
+        <li>YouTube: <span class="text-dim">coming soon</span></li>
       </ul>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="siteFooter">
     <p>&copy; <span class="js-year">2025</span> Survival Nexus. All rights reserved.</p>
     <p><a href="disclaimer.html">Disclaimer</a> | <a href="privacy.html">Privacy Policy</a></p>
   </footer>
 
-  <script src="assets/app.js"></script>
+  <script src="app.js"></script>
   <script>
     // Minimal client-side validation + mailto fallback for now
     (function(){
@@ -156,8 +158,8 @@
           `Topic: ${topic}\nName: ${name}\nEmail: ${email}\nLinks: ${links || '—'}\n\n${message}`
         );
 
-        // Mailto fallback (replace with your real email)
-        const mailto = `mailto:hello@example.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+        // Mailto fallback for this static site
+        const mailto = `mailto:alexanderpetitjean@gmx.us?subject=${encodeURIComponent(subject)}&body=${body}`;
         window.location.href = mailto;
         status.textContent = 'Opening your email client…';
       });

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Emergency water treatment decision chart</title>
+  <desc id="desc">A flow chart that begins with source selection and clarifying cloudy water, then chooses boiling, filtration plus disinfection, or chemical or UV treatment.</desc>
+  <defs><style>
+    .bg{fill:#0c0e11}.box{fill:#171b1f;stroke:#3d474e;stroke-width:2}.good{fill:#193b2c;stroke:#4b9a6b;stroke-width:2}.warn{fill:#432d1b;stroke:#bd7b39;stroke-width:2}.bad{fill:#421f24;stroke:#a44953;stroke-width:2}.t{fill:#f1f3f4;font:700 19px system-ui,sans-serif}.s{fill:#c5ccd0;font:15px system-ui,sans-serif}.a{fill:none;stroke:#8b979f;stroke-width:3}
+  </style><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L9 3L0 6Z" fill="#8b979f"/></marker></defs>
+  <rect class="bg" width="960" height="600" rx="22"/>
+  <text class="t" x="40" y="45">EMERGENCY WATER TREATMENT</text>
+  <rect class="box" x="330" y="70" width="300" height="68" rx="14"/><text class="t" x="382" y="100">CHOOSE THE BEST SOURCE</text><text class="s" x="385" y="123">Avoid chemical contamination</text>
+  <path class="a" marker-end="url(#m)" d="M480 138V178"/>
+  <rect class="warn" x="330" y="180" width="300" height="72" rx="14"/><text class="t" x="394" y="210">CLOUDY OR SILTY?</text><text class="s" x="365" y="235">Settle, then prefilter through cloth</text>
+  <path class="a" marker-end="url(#m)" d="M480 252V292"/>
+  <rect class="box" x="330" y="294" width="300" height="68" rx="14"/><text class="t" x="383" y="324">CAN YOU BOIL SAFELY?</text><text class="s" x="389" y="347">Most reliable broad treatment</text>
+  <path class="a" marker-end="url(#m)" d="M330 328H203V401"/><text class="s" x="236" y="317">YES</text>
+  <path class="a" marker-end="url(#m)" d="M630 328H757V401"/><text class="s" x="666" y="317">NO</text>
+  <rect class="good" x="58" y="405" width="290" height="105" rx="14"/><text class="t" x="115" y="438">BOIL: ROLLING BOIL</text><text class="s" x="91" y="466">1 minute; 3 minutes above 2,000 m</text><text class="s" x="114" y="490">Cool in a covered container</text>
+  <rect class="box" x="612" y="405" width="290" height="105" rx="14"/><text class="t" x="650" y="437">FILTER AVAILABLE?</text><text class="s" x="643" y="466">Use ≤0.2 μm for protozoa</text><text class="s" x="654" y="490">and most bacteria</text>
+  <path class="a" marker-end="url(#m)" d="M757 510V548H480"/><path class="a" marker-end="url(#m)" d="M203 510V548H480"/>
+  <rect class="bad" x="320" y="532" width="320" height="52" rx="14"/><text class="t" x="346" y="564">WHEN VIRUSES MAY OCCUR:</text><text class="s" x="520" y="564">add chemical or UV</text>
+</svg>

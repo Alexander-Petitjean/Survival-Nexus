@@ -5,23 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Travel light with a minimalist, safe, and resilient setup for long trips and open-ended routes.">
   <title>Travel Light: Vagabonding Essentials | Survival Nexus</title>
-<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <nav class="navbar">
       <div class="logo">Survival Nexus</div>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../guides.html" class="active">Guides</a></li>
-        <li><a href="../suppliers.html">Suppliers</a></li>
-        <li><a href="../reviews.html">Reviews</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
+      </button>
+      <ul id="primary-navigation" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guides.html" class="active">Guides</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="Reviews.html">Reviews</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <div class="hero small-hero">
+    <div class="hero small-hero article-hero hero-guide-travel">
       <h1>Travel Light: Vagabonding Essentials</h1>
       <p>Systems, not stuff. Build a modular kit that covers shelter, water, heat, and comms.</p>
     </div>
@@ -60,21 +63,57 @@
       <h2>Field Exercise</h2>
       <p>Pack for a 48‑hour route. Walk 5 km with the load, then remove 10% by weight without cutting safety layers. Log what you didn’t use.</p>
 
-      <section class="affiliate-callout">
-        <h3>Recommended Suppliers</h3>
-        <ul>
-          <li><a href="../suppliers.html#travel">RoamLite Travel Works</a> — Minimalist packs & purifiers</li>
+      <section class="affiliate-callout" aria-labelledby="travel-gear-heading">
+        <h3 id="travel-gear-heading">Researched Travel-System Picks</h3>
+        <p class="affiliate-disclosure" role="note"><strong>Paid-link disclosure:</strong> If you purchase through an Amazon link below, I may earn a commission at no added cost to you.</p>
+        <ul class="affiliate-product-list">
+          <li>
+            <div>
+              <strong>Suunto MC-2 NH USGS Compass</strong>
+              <p>A mirror compass with adjustable declination for map-and-compass navigation. Confirm that the selected variation says Northern Hemisphere and USGS UTM, then practice with it before relying on it.</p>
+            </div>
+            <a class="cta-button sm" href="https://amzn.to/4yQNPu2" target="_blank" rel="sponsored nofollow noopener" aria-label="View the Suunto MC-2 Northern Hemisphere USGS compass on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+          </li>
+          <li>
+            <div>
+              <strong>AquaQuest Guide Tarp, 10 × 7 ft</strong>
+              <p>A lightweight 40D ripstop rain fly for a minimalist shelter system. It is not a complete tent; carry suitable cordage and anchors, and rehearse several pitches before a trip.</p>
+            </div>
+            <a class="cta-button sm" href="https://amzn.to/4g2UsSC" target="_blank" rel="sponsored nofollow noopener" aria-label="View the AquaQuest Guide 10-by-7-foot tarp on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+          </li>
+          <li>
+            <div>
+              <strong>Nitecore NB10000 Gen II Power Bank</strong>
+              <p>A lightweight 10,000mAh USB-C and USB-A backup battery for a phone, headlamp, or other compatible electronics. Keep it dry, inspect it for damage, and do not treat it as your only navigation plan.</p>
+            </div>
+            <a class="cta-button sm" href="https://amzn.to/4fxX3ny" target="_blank" rel="sponsored nofollow noopener" aria-label="View the Nitecore NB10000 Gen II power bank on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+          </li>
+          <li>
+            <div>
+              <strong>Midland ER310 Weather Radio</strong>
+              <p>A one-way NOAA weather-alert and AM/FM receiver for a home, vehicle, or base-camp kit. Its crank and solar panel are backup maintenance methods, not substitutes for charging it before departure.</p>
+            </div>
+            <a class="cta-button sm" href="https://amzn.to/4pPGDu8" target="_blank" rel="sponsored nofollow noopener" aria-label="View the Midland ER310 weather radio on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+          </li>
+          <li>
+            <div>
+              <strong>Garmin inReach Mini 3 Plus</strong>
+              <p>A compact satellite communicator for two-way messages, tracking, weather, and interactive SOS outside cellular coverage. Those communication features require an active inReach subscription; activate the plan and test the device outdoors before departure.</p>
+            </div>
+            <a class="cta-button sm" href="https://amzn.to/4hGNJyX" target="_blank" rel="sponsored nofollow noopener" aria-label="View the Garmin inReach Mini 3 Plus satellite communicator on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+          </li>
         </ul>
+        <p class="text-dim">A weather receiver cannot call for help, and satellite SOS does not guarantee immediate rescue. Keep the communicator charged, maintain a clear view of the sky when using satellite features, share a route plan, and carry non-electronic navigation backups.</p>
       </section>
     </article>
 
-    <a href="../guides.html" class="secondary-button">← Back to Guides</a>
+    <a href="guides.html" class="secondary-button">← Back to Guides</a>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="siteFooter">
     <p>&copy; <span class="js-year">2025</span> Survival Nexus. All rights reserved.</p>
   </footer>
 
-  <script src="../assets/app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

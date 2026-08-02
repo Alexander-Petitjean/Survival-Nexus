@@ -6,7 +6,6 @@
   <meta name="description" content="Outdoor survival gear and supplier network for EMTs, firefighters, treasure hunters, and vagabonds." />
   <title>Survival Nexus | Gear, Guides & Suppliers</title>
 <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" href="assets/favicon.ico" />
 </head>
 
 <body>
@@ -21,14 +20,14 @@
 
       <!-- Mobile menu toggle (icon-only, label hidden via .sr-only in CSS) -->
       <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation">
-        <span class="sr-only">Menu</span>
+        <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
       </button>
 
       <ul id="primary-navigation" class="nav-links">
         <li><a href="index.html" class="active" aria-current="page">Home</a></li>
         <li><a href="guides.html">Guides</a></li>
 		<li><a href="suppliers.html">Suppliers</a></li>
-        <li><a href="reviews.html">Reviews</a></li>	
+        <li><a href="Reviews.html">Reviews</a></li>
 		<li><a href="scenarios.html">Scenarios</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -36,7 +35,7 @@
       </ul>
     </nav>
 
-    <div class="hero">
+    <div class="hero hero-home">
       <h1>Forge Your Path. Survive the Wild.</h1>
       <p>Gear, knowledge, and suppliers trusted by EMTs, firefighters, and explorers.</p>
       <a href="guides.html" class="cta-button">Start Learning</a>
@@ -53,24 +52,36 @@
       <h2>Explore by Category</h2>
       <div class="category-grid">
         <article class="category-card">
+          <figure class="category-media">
+            <img src="images/category-emt-noir.webp" alt="Organized wilderness trauma kit with bandages, shears, gloves, and medical pouches" width="960" height="600" loading="lazy" decoding="async" />
+          </figure>
           <h3>EMT &amp; Trauma</h3>
           <p>Top-rated first-aid, rescue, and field triage kits for wilderness medics and responders.</p>
           <a href="suppliers.html#emt" class="card-link">View Suppliers →</a>
         </article>
 
         <article class="category-card">
+          <figure class="category-media">
+            <img src="images/category-fire-shelter-noir.webp" alt="Controlled campfire beside a compact tarp shelter in a rain-dark forest" width="960" height="600" loading="lazy" decoding="async" />
+          </figure>
           <h3>Fire &amp; Shelter</h3>
           <p>Reliable fire-starting gear and lightweight shelters for all climates and conditions.</p>
           <a href="guides.html#fire" class="card-link">Learn More →</a>
         </article>
 
         <article class="category-card">
+          <figure class="category-media">
+            <img src="images/category-treasure-tools-noir.webp" alt="Metal detector and recovery tools arranged on a forest floor beside a recovered coin" width="960" height="600" loading="lazy" decoding="async" />
+          </figure>
           <h3>Treasure &amp; Tools</h3>
           <p>Metal detectors, mapping tech, and recovery gear for modern-day adventurers.</p>
-          <a href="reviews.html#tools" class="card-link">See Reviews →</a>
+          <a href="Reviews.html" class="card-link">See Reviews →</a>
         </article>
 
         <article class="category-card">
+          <figure class="category-media">
+            <img src="images/category-travel-noir.webp" alt="Lightweight backpack and boots resting beside a misty forest road" width="960" height="600" loading="lazy" decoding="async" />
+          </figure>
           <h3>Vagabonding &amp; Travel</h3>
           <p>Pack light, live free. Discover ultralight gear and minimalist setups for the open road.</p>
           <a href="guides.html#travel" class="card-link">Explore Tips →</a>
@@ -95,7 +106,7 @@
 
     <!-- Optional image (remove if you don’t have one yet) -->
     <div class="media-slot" aria-label="Scenarios preview">
-      <img src="assets/img/cards/scenarios.jpg" alt="Collage of medical, firecraft, and hiking scenarios" loading="lazy" decoding="async" />
+      <img src="images/scenarios-field-response-noir.webp" alt="Wilderness responders assessing a bundled hiker beside an organized emergency camp" width="1440" height="900" loading="lazy" decoding="async" />
     </div>
 
     <ul class="mini-list">
@@ -111,14 +122,14 @@
       <h2>Field Guides &amp; Articles</h2>
       <div class="guide-preview">
         <article class="guide-card">
-          <h3><a href="guides/fire-readiness.html">Wilderness Fire Readiness 101</a></h3>
+          <h3><a href="fire-readiness.html">Wilderness Fire Readiness 101</a></h3>
           <p>Essential ignition methods, safety practices, and gear setups for mastering the flame.</p>
           <!-- Optional media slot -->
           <div class="media-slot" aria-label="Guide media slot" hidden></div>
         </article>
 
         <article class="guide-card">
-          <h3><a href="guides/emt-kit-basics.html">Building the Ultimate EMT Kit</a></h3>
+          <h3><a href="emt-kit-basics.html">Building the Ultimate EMT Kit</a></h3>
           <p>A professional breakdown of trauma tools, packaging strategy, and practical field use.</p>
           <!-- Optional media slot -->
           <div class="media-slot" aria-label="Guide media slot" hidden></div>
@@ -136,22 +147,7 @@
   <!-- JS-injected unified footer -->
   <footer class="site-footer" id="siteFooter"></footer>
 
-  <!-- Minimal enhancements: year + mobile toggle + shared footer injection -->
-  <script>
-    (function () {
-      // Mobile nav toggle
-      var toggle = document.querySelector('.nav-toggle');
-      var nav = document.getElementById('primary-navigation');
-      if (toggle && nav) {
-        toggle.addEventListener('click', function () {
-          var expanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', String(!expanded));
-          nav.classList.toggle('is-open');
-        });
-      }
-    }());
-  </script>
-  <script src="assets/app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
 

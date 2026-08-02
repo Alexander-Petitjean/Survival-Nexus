@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Fire-building layers and safety zone</title>
+  <desc id="desc">A fire lay progressing from tinder to pencil-size kindling to larger fuel, surrounded by a cleared mineral-soil safety zone with water and shovel nearby.</desc>
+  <defs><style>
+    .bg{fill:#0c0e11}.ring{fill:none;stroke:#667078;stroke-width:3;stroke-dasharray:9 8}.soil{fill:#202124;stroke:#3f464b;stroke-width:3}.rock{fill:#46494b;stroke:#71777b;stroke-width:2}.wood{stroke:#8b6847;stroke-width:16;stroke-linecap:round}.twig{stroke:#b09162;stroke-width:7;stroke-linecap:round}.flame{fill:#b85a2d;stroke:#e09a45;stroke-width:3}.t{fill:#f2f3f4;font:700 19px system-ui,sans-serif}.s{fill:#c6cdd1;font:15px system-ui,sans-serif}.a{fill:none;stroke:#aeb6bb;stroke-width:2}
+  </style><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L9 3L0 6Z" fill="#aeb6bb"/></marker></defs>
+  <rect class="bg" width="960" height="600" rx="22"/>
+  <text class="t" x="40" y="45">BUILD SMALL → FEED GRADUALLY → CONTAIN</text>
+  <ellipse class="ring" cx="440" cy="355" rx="330" ry="205"/>
+  <ellipse class="soil" cx="440" cy="375" rx="225" ry="132"/>
+  <g><circle class="rock" cx="244" cy="354" r="27"/><circle class="rock" cx="285" cy="285" r="27"/><circle class="rock" cx="360" cy="252" r="27"/><circle class="rock" cx="445" cy="244" r="27"/><circle class="rock" cx="530" cy="260" r="27"/><circle class="rock" cx="600" cy="306" r="27"/><circle class="rock" cx="635" cy="375" r="27"/><circle class="rock" cx="590" cy="445" r="27"/><circle class="rock" cx="505" cy="480" r="27"/><circle class="rock" cx="410" cy="487" r="27"/><circle class="rock" cx="320" cy="458" r="27"/><circle class="rock" cx="260" cy="415" r="27"/></g>
+  <path class="wood" d="M340 420L525 309M555 421L365 310"/>
+  <path class="twig" d="M390 390L470 305M485 392L407 305M370 365L506 342M507 367L375 337"/>
+  <path class="flame" d="M438 392Q388 347 430 300Q429 339 454 314Q484 350 463 392Z"/>
+  <path class="a" marker-end="url(#m)" d="M80 168H319L390 319"/><text class="t" x="80" y="130">1 • TINDER</text><text class="s" x="80" y="154">Fine, dry, loosely nested</text>
+  <path class="a" marker-end="url(#m)" d="M690 150H578L503 320"/><text class="t" x="700" y="116">2 • KINDLING</text><text class="s" x="700" y="140">Pencil → finger size</text>
+  <path class="a" marker-end="url(#m)" d="M730 462H610L540 409"/><text class="t" x="740" y="435">3 • FUEL</text><text class="s" x="740" y="459">Add only after stable flame</text>
+  <text class="t" x="60" y="525">CLEAR SAFETY ZONE</text><text class="s" x="60" y="550">Mineral soil • no roots or overhead fuels</text>
+  <text class="t" x="620" y="525">WATER + TOOL READY</text><text class="s" x="620" y="550">Douse • stir • feel for heat • repeat</text>
+  <text class="s" x="60" y="580">Check local restrictions and burn bans before ignition.</text>
+</svg>
