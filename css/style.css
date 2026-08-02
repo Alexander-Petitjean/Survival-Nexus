@@ -316,6 +316,62 @@ section>h2{max-width:var(--maxw);margin:0 auto 1rem;padding-inline:0;font-size:1
 }
 .evidence-badge{border-color:rgba(var(--accent-rgb),.5);background:rgba(var(--accent-rgb),.12);color:var(--text)}
 
+/* ============== 72-hour guide and checklist ============== */
+.article-jump-links{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.55rem 1rem;margin:0 0 2rem;
+  padding:.85rem 1rem;border:1px solid var(--line);border-radius:12px;background:var(--surface)
+}
+.article-jump-links a,.source-list a,.guide-article section a:not(.cta-button){
+  text-decoration:underline;text-decoration-color:rgba(var(--accent-rgb),.55);text-underline-offset:.2em
+}
+.guide-lede,.guide-article>section{padding:1rem 0}
+.callout{
+  margin:1.25rem 0;padding:1rem;border:1px solid rgba(var(--accent-rgb),.45);
+  border-left:4px solid var(--accent);border-radius:12px;background:rgba(var(--accent-rgb),.08)
+}
+.caution-callout{border-color:rgba(255,176,32,.55);border-left-color:var(--warn);background:rgba(255,176,32,.08)}
+.kit-layer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1rem 0}
+.kit-layer-grid article{padding:1rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.kit-layer-grid h3{margin:.55rem 0 .25rem}.kit-layer-grid p{margin:.25rem 0;color:var(--text-dim)}
+.source-list{margin-top:1rem;border-top:1px solid var(--line)}
+.checklist-shell{max-width:60rem;margin:0 auto;padding:2rem 1rem}
+.checklist-intro{padding:0}.household-fields{display:flex;flex-wrap:wrap;gap:1rem 2rem;margin:1rem 0}
+.write-line{display:inline-block;width:7rem;border-bottom:1px solid currentColor}
+.checklist-toolbar{
+  position:sticky;top:.5rem;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  margin:1rem 0;padding:.75rem 1rem;border:1px solid var(--line);border-radius:12px;background:var(--header-bg);backdrop-filter:blur(8px)
+}
+.checklist-toolbar p{margin:0;font-weight:700}.checklist-toolbar>div{display:flex;gap:.5rem}
+.secondary-button,.cta-button{cursor:pointer}
+.emergency-checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.emergency-checklist fieldset{margin:0;padding:1rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.emergency-checklist legend{padding:0 .4rem;font-size:1.1rem;font-weight:800}
+.emergency-checklist label{grid-template-columns:auto 1fr;align-items:start;gap:.7rem;padding:.55rem 0;border-bottom:1px solid var(--line);cursor:pointer}
+.emergency-checklist label:last-child{border-bottom:0}
+.emergency-checklist input{width:1.25rem;height:1.25rem;margin:.15rem 0 0;accent-color:var(--accent)}
+.emergency-checklist label:has(input:checked){color:var(--text-dim);text-decoration:line-through}
+.checklist-notes{padding:1.5rem 0}.notes-lines{min-height:9rem;background:repeating-linear-gradient(transparent 0,transparent 1.9rem,var(--line) 1.95rem,var(--line) 2rem)}
+.checklist-source-note{color:var(--text-dim);font-size:.9rem}
+.print-only{display:none}
+@media (max-width:720px){
+  .kit-layer-grid,.emergency-checklist{grid-template-columns:1fr}
+  .checklist-toolbar{position:static;align-items:stretch;flex-direction:column}
+  .checklist-toolbar>div{display:grid;grid-template-columns:1fr 1fr}
+}
+
+@media print{
+  @page{margin:.45in;size:auto}
+  :root,:root[data-theme="light"]{--bg:#fff;--surface:#fff;--muted:#fff;--text:#000;--text-dim:#222;--line:#777;color-scheme:light}
+  .checklist-page{font-size:10pt;background:#fff;color:#000}
+  .checklist-page .site-header,.checklist-page .site-footer,.checklist-toolbar,.checklist-intro>p,.checklist-source-note{display:none !important}
+  .print-only{display:block}.print-title{font-size:18pt;font-weight:800;margin:0 0 .1in}.checklist-shell{max-width:none;padding:0}.checklist-intro{display:block !important}.checklist-intro h2{font-size:13pt;margin:0 0 .1in}
+  .household-fields{margin:0 0 .2in}.emergency-checklist{grid-template-columns:1fr 1fr;gap:.12in}
+  .emergency-checklist fieldset{break-inside:avoid;padding:.1in;box-shadow:none}
+  .emergency-checklist legend{font-size:11pt}.emergency-checklist label{padding:.04in 0;line-height:1.25}
+  .emergency-checklist label:has(input:checked){color:#000;text-decoration:none}
+  .checklist-notes{break-inside:avoid;padding:.12in 0 0}.checklist-notes h2{font-size:13pt;margin:.05in 0}.notes-lines{min-height:.8in}
+}
+
 /* ============== Grids & Cards ============== */
 .category-grid,.guide-grid,.card-grid{
   --cols:1;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));
