@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Understand hypothermia physiology, safe rewarming methods, and practical field drills for cold-weather survival.">
   <title>Hypothermia & Heat Retention 101 | Survival Nexus</title>
-  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -22,15 +22,19 @@
   <header class="site-header">
     <nav class="navbar">
       <div class="logo">Survival Nexus</div>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../guides.html" class="active">Guides</a></li>
-        <li><a href="../suppliers.html">Suppliers</a></li>
-        <li><a href="../reviews.html">Reviews</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
+      </button>
+      <ul id="primary-navigation" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guides.html" class="active">Guides</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="Reviews.html">Reviews</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
+    <script src="app.js"></script>
     <div class="hero small-hero">
       <h1>Hypothermia &amp; Heat Retention 101</h1>
       <p>Recognize cooling trends early and rewarm safely using physiology-based field methods.</p>
@@ -66,4 +70,34 @@
       <li><strong>Active external warming:</strong> apply heat packs to armpits, chest, groin — core before limbs.</li>
       <li><strong>Active internal:</strong> warm sweet liquids (no caffeine/alcohol); carbohydrates fuel shivering.</li>
     </ol>
-    <p><em>Never</em> rub cold limbs or immerse
+    <p><em>Never</em> rub cold limbs or immerse a person in hot water. Handle the person gently, rewarm the core slowly, and activate emergency medical services for suspected hypothermia.</p>
+
+    <h2>4) Immediate Field Priorities</h2>
+    <ol>
+      <li>Move the person out of wind and precipitation, then insulate them from the ground.</li>
+      <li>Remove wet clothing with as little unnecessary movement as possible and replace it with dry insulation.</li>
+      <li>Warm the chest, neck, head, and groin gradually. Do not apply direct high heat to bare skin.</li>
+      <li>Monitor breathing and responsiveness while arranging evacuation. Give warm, sweet, nonalcoholic fluids only if the person is fully alert and able to swallow.</li>
+    </ol>
+
+    <section class="affiliate-callout" aria-labelledby="cold-gear-heading">
+      <h3 id="cold-gear-heading">Emergency Exposure Layer</h3>
+      <p class="affiliate-disclosure" role="note"><strong>Paid-link disclosure:</strong> If you purchase through the Amazon link below, I may earn a commission at no added cost to you.</p>
+      <ul class="affiliate-product-list">
+        <li>
+          <div>
+            <strong>SOL Emergency Bivvy with Whistle</strong>
+            <p>A compact wind-and-rain barrier for an unexpected exposure emergency. It is not a temperature-rated sleeping bag or a substitute for evacuation and medical care.</p>
+          </div>
+          <a class="cta-button sm" href="https://amzn.to/4wD56FI" target="_blank" rel="sponsored nofollow noopener" aria-label="View the SOL Emergency Bivvy on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+        </li>
+      </ul>
+    </section>
+
+    <p class="text-dim">Medical references: <a href="https://www.cdc.gov/winter-weather/prevention/index.html" target="_blank" rel="noopener">CDC hypothermia guidance</a> · <a href="https://www.redcross.org/take-a-class/resources/learn-first-aid/hypothermia" target="_blank" rel="noopener">American Red Cross first aid</a></p>
+    <p><a class="secondary-button" href="guides.html">← Back to Guides</a></p>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+</body>
+</html>

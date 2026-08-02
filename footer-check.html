@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Local development audit for shared Survival Nexus footers and scripts.">
 <title>Footer Check | Survival Nexus</title>
 <style>
   body { font-family: Arial, sans-serif; background:#111; color:#eee; padding:20px; }
-  table { border-collapse: collapse; width:100%; }
+  table { border-collapse: collapse; width:100%; display:block; overflow-x:auto; }
   th, td { border:1px solid #333; padding:8px; }
   th { background:#222; }
   tr.ok td { background:#132; color:#8f8; }
@@ -14,6 +15,7 @@
 </style>
 </head>
 <body>
+<main id="main">
 <h1>🔍 Footer Audit — Survival Nexus</h1>
 <p>This tool checks whether each page has a footer placeholder (<code>#siteFooter</code>) and loaded <code>app.js</code> correctly.</p>
 
@@ -27,13 +29,16 @@ const pages = [
   "index.html",
   "guides.html",
   "suppliers.html",
-  "reviews.html",
+  "Reviews.html",
   "about.html",
   "contact.html",
-  "guides/fire-readiness.html",
-  "guides/emt-kit-basics.html",
-  "guides/vagabond-travel.html",
-  "guides/treasure-tools.html"
+  "scenarios.html",
+  "resources.html",
+  "fire-readiness.html",
+  "emt-kit-basics.html",
+  "vagabond-travel.html",
+  "treasure-tools.html",
+  "72-hour-packloadbalance.html"
 ];
 
 const tbody = document.querySelector('#results tbody');
@@ -56,7 +61,7 @@ async function checkPage(url) {
     }
     const row = document.createElement('tr');
     row.className = hasFooter && hasScript ? 'ok' : 'missing';
-    row.innerHTML = `<td><a href="${url}" target="_blank">${url}</a></td><td>${status}</td><td>${details}</td>`;
+    row.innerHTML = `<td><a href="${url}" target="_blank" rel="noopener">${url}</a></td><td>${status}</td><td>${details}</td>`;
     tbody.appendChild(row);
   } catch (err) {
     const row = document.createElement('tr');
@@ -68,5 +73,6 @@ async function checkPage(url) {
 
 pages.forEach(checkPage);
 </script>
+</main>
 </body>
 </html>

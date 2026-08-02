@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="72-hour pack setup optimized for amputee mobility: ergonomics, center of gravity, socket comfort, and compression strategy with field drills."/>
   <title>72-Hour Pack Load Balance (Amputee Adaptation) | Survival Nexus</title>
-  <link rel="stylesheet" href="../assets/styles.css"/>
+  <link rel="stylesheet" href="css/style.css" />
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -22,17 +22,21 @@
   <header class="site-header">
     <nav class="navbar">
       <div class="logo">Survival Nexus</div>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../guides.html" class="active">Guides</a></li>
-        <li><a href="../suppliers.html">Suppliers</a></li>
-        <li><a href="../reviews.html">Reviews</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
+      </button>
+      <ul id="primary-navigation" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guides.html" class="active">Guides</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="Reviews.html">Reviews</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
     <div class="hero small-hero">
       <h1>72-Hour Pack Load Balance (Amputee Adaptation)</h1>
+
       <p>Ergonomics and compression for efficient gait, socket comfort, and stable center of gravity.</p>
     </div>
   </header>
@@ -70,6 +74,10 @@
       <li><strong>High-access (IFAK, rain shell, gloves):</strong> Top lid or front pocket; do not let these become tail-heavy.</li>
     </ul>
     <p class="text-dim">Rule of thumb: target total pack mass ≈ <strong>10–15% body mass</strong> for mixed terrain; adjust for fitness, terrain grade, and prosthetic energy cost.</p>
+    <figure class="field-diagram">
+      <img src="images/diagram-pack-load.svg" alt="Backpack diagram showing dense items high and close to the back, medium items around the core, soft items low, and quick-access equipment at the top" width="960" height="560" loading="lazy" decoding="async" />
+      <figcaption>Keep the dense core close to the frame; use soft items to lock it in place and reduce sway.</figcaption>
+    </figure>
 
     <h2>5) Compression Strategy (No Sway = Less Fatigue)</h2>
     <ol>
@@ -108,20 +116,39 @@
       <li><strong>Excess trunk lean:</strong> Move dense items higher and closer to the frame; shorten load-lifters slightly.</li>
     </ul>
 
-    <section class="affiliate-callout">
-      <h3>Recommended Gear Patterns</h3>
-      <ul>
-        <li><a href="../suppliers.html#travel">Packs with real hip belts</a> — transfer load off the shoulders to reduce socket shear.</li>
-        <li><a href="../suppliers.html#travel">Compression sacks &amp; cubes</a> — create a rigid center block to minimize sway.</li>
-        <li><a href="../suppliers.html#emt">Hot spots kit</a> — tape, blister care, skin barrier wipes for brim/friction zones.</li>
+    <section class="affiliate-callout" aria-labelledby="pack-gear-heading">
+      <h3 id="pack-gear-heading">Researched Pack-System Examples</h3>
+      <p class="affiliate-disclosure" role="note"><strong>Paid-link disclosure:</strong> If you purchase through an Amazon link below, I may earn a commission at no added cost to you.</p>
+      <ul class="affiliate-product-list">
+        <li>
+          <div>
+            <strong>Osprey Exos 48 Backpack</strong>
+            <p>A lightweight framed-pack example. Torso length, hip-belt position, socket clearance, and comfortable load are personal—verify fit before use.</p>
+          </div>
+          <a class="cta-button sm" href="https://amzn.to/4bivITJ" target="_blank" rel="sponsored nofollow noopener" aria-label="View the Osprey Exos 48 backpack on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+        </li>
+        <li>
+          <div>
+            <strong>Sea to Summit eVac Compression Dry Bag, 13L</strong>
+            <p>Compresses soft insulation into a more stable pack core. Its roll-top closure is not intended for prolonged submersion.</p>
+          </div>
+          <a class="cta-button sm" href="https://amzn.to/3RCPHG8" target="_blank" rel="sponsored nofollow noopener" aria-label="View the Sea to Summit eVac 13-liter compression dry bag on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+        </li>
+        <li>
+          <div>
+            <strong>Black Diamond Spot 400-R Headlamp</strong>
+            <p>A rechargeable headlamp with red-light and lockout modes. Carry a compatible charging plan and a separate backup light.</p>
+          </div>
+          <a class="cta-button sm" href="https://amzn.to/4ftoLlg" target="_blank" rel="sponsored nofollow noopener" aria-label="View the Black Diamond Spot 400-R headlamp on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+        </li>
       </ul>
-      <p class="text-dim">These are patterns; select specific products that fit your frame and prosthetic setup.</p>
+      <p class="text-dim">These are examples, not universal prescriptions. Work with your prosthetist or clinician when pack fit affects socket comfort, gait, or skin integrity.</p>
     </section>
 
-    <p><a class="secondary-button" href="../guides.html">← Back to Guides</a></p>
+    <p><a class="secondary-button" href="guides.html">← Back to Guides</a></p>
   </main>
 
   <footer class="site-footer" id="siteFooter"></footer>
-  <script src="../assets/app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

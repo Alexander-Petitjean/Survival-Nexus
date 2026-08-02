@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Affiliate Disclosure for Survival Nexus — how affiliate links work, what we recommend, and our review standards." />
   <title>Affiliate Disclosure | Survival Nexus</title>
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -13,11 +13,14 @@
   <header class="site-header">
     <nav class="navbar">
       <div class="logo"><a href="index.html">Survival Nexus</a></div>
-      <ul class="nav-links">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
+      </button>
+      <ul id="primary-navigation" class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="guides.html">Guides</a></li>
         <li><a href="suppliers.html">Suppliers</a></li>
-        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="Reviews.html">Reviews</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -32,14 +35,14 @@
     <section>
       <h2>1. How Affiliate Links Work</h2>
       <p>
-        Some links on Survival Nexus are <strong>affiliate links</strong>. If you click a link and purchase a product, we may earn a small commission at no extra cost to you. These commissions help us maintain the site and fund field testing.
+        Some links on Survival Nexus are <strong>affiliate links</strong>. If you click a link and purchase a product, we may earn a small commission at no extra cost to you. These commissions help maintain the site and support continued research and testing.
       </p>
     </section>
 
     <section>
       <h2>2. Amazon Associates Disclosure</h2>
       <p>
-        <em>As an Amazon Associate, we earn from qualifying purchases.</em> We only link to items we believe are reliable for field use.
+        <em>As an Amazon Associate I earn from qualifying purchases.</em>
       </p>
     </section>
 
@@ -54,8 +57,9 @@
       <h2>4. Editorial Independence</h2>
       <ul>
         <li>We do not accept payment for positive reviews or placements.</li>
-        <li>Gear is selected based on field performance, reliability, and value.</li>
-        <li>Affiliate status does not change our testing standards or conclusions.</li>
+        <li>Gear shortlists consider published specifications, manufacturer guidance, safety, reliability, and value.</li>
+        <li>We distinguish researched selections from items that have been personally tested.</li>
+        <li>Affiliate status does not determine our conclusions.</li>
       </ul>
     </section>
 
@@ -72,16 +76,17 @@
       <p>
         If you have questions about our affiliate relationships or want a non-affiliate link to a product, contact us via our <a href="contact.html">Contact Page</a>.
       </p>
-      <p><em>Last updated: October 2025</em></p>
+      <p><em>Last updated: July 30, 2026</em></p>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="siteFooter">
     <p>© <span id="year"></span> Survival Nexus. All rights reserved.</p>
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  <script src="app.js"></script>
 </body>
 </html>

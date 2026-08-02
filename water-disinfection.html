@@ -5,17 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Field guide to safe water purification—filters, tablets, UV, and the biology behind disinfection.">
   <title>Emergency Water Disinfection 101 | Survival Nexus</title>
-  <link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="site-header">…nav omitted…</header>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Primary">
+      <div class="logo">
+        <a href="index.html" aria-label="Survival Nexus Home">Survival Nexus</a>
+      </div>
+
+      <!-- Mobile menu toggle (icon-only, label hidden via .sr-only in CSS) -->
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
+      </button>
+
+      <ul id="primary-navigation" class="nav-links">
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="guides.html">Guides</a></li>
+		<li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="Reviews.html">Reviews</a></li>
+		<li><a href="scenarios.html">Scenarios</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+		<li><a href="disclaimer.html">Disclaimer</a></li>
+      </ul>
+    </nav>
+
+  <section class="hero small-hero article-hero hero-guide-water">
+    <div class="hero-inner">
+      <h1>Emergency Water Disinfection 101</h1>
+      <p>Learn the science and the practice—how filtration, chemicals, and UV neutralize microbial threats.</p>
+    </div>
+  </section>
+  </header>
 
   <main id="main" class="maxw guide-article">
-    <h1>Emergency Water Disinfection 101</h1>
-    <p class="intro">Learn the science and the practice—how filtration, chemicals, and UV neutralize microbial threats.</p>
 
     <h2>1. Understanding Waterborne Hazards</h2>
     <p>Protozoa (Giardia, Cryptosporidium), bacteria (E. coli, Vibrio), and viruses (Hep A, Norovirus) are the main biological contaminants. They differ in resistance to chlorine and UV—understand that difference before treatment.</p>
+    <figure class="field-diagram">
+      <img src="images/diagram-water-decision.svg" alt="Decision chart for selecting, clarifying, and treating emergency water by boiling, filtering, chemical disinfection, or UV" width="960" height="600" loading="lazy" decoding="async" />
+      <figcaption>Start with the cleanest available source. Cloudy water should be settled and prefiltered before the final treatment step.</figcaption>
+    </figure>
 
     <h2>2. Filtration: Mechanical Barriers</h2>
     <p>Filters physically remove protozoa and bacteria; pore size below 0.2 μm is ideal. Note that viruses require finer treatment (chemical or UV).</p>
@@ -25,7 +56,7 @@
     </ul>
 
     <h2>3. Chemical Disinfection</h2>
-    <p>Chlorine dioxide oxidizes cell walls and proteins; iodine denatures enzymes. Explain contact time (30 min minimum, 4 °C doubles time) and biological mode of action.</p>
+    <p>Chlorine dioxide oxidizes cell walls and proteins; iodine denatures enzymes. Required contact time varies by organism, temperature, turbidity, and product. Follow the product label exactly—some chlorine-dioxide treatments require up to four hours.</p>
 
     <h2>4. UV Sterilization</h2>
     <p>Ultraviolet light at 254 nm damages nucleic acids—prevents replication. Works best in clear water; turbidity reduces efficacy. Always prefilter cloudy water.</p>
@@ -33,8 +64,29 @@
     <h2>5. Field Exercise</h2>
     <p>Collect water from two sources—turbid and clear. Treat both with the same method. Observe clarity, taste, and note time to complete treatment. Discuss what changed and why.</p>
 
-    <section class="affiliate-callout">
-      <h3>Recommended Gear</h3>
-      <ul>
-        <li><a href="../suppliers.html#travel">Klymit / REI Co-op Filters</a></li>
-        <li><a href="../
+    <section class="affiliate-callout" aria-labelledby="water-gear-heading">
+      <h3 id="water-gear-heading">Researched Water-Treatment Pair</h3>
+      <p class="affiliate-disclosure" role="note"><strong>Paid-link disclosure:</strong> If you purchase through an Amazon link below, I may earn a commission at no added cost to you.</p>
+      <ul class="affiliate-product-list">
+        <li>
+          <div>
+            <strong>Sawyer Squeeze SP129 Filter</strong>
+            <p>A backflushable hollow-fiber filter. Once used, protect it from freezing because internal damage may not be visible.</p>
+          </div>
+          <a class="cta-button sm" href="https://amzn.to/3TuTplJ" target="_blank" rel="sponsored nofollow noopener" aria-label="View the Sawyer Squeeze SP129 filter on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+        </li>
+        <li>
+          <div>
+            <strong>Katadyn Micropur MP1 Tablets</strong>
+            <p>A chlorine-dioxide backup for clear water. Follow the package dosage and full contact time; treatment cannot remove chemical contamination.</p>
+          </div>
+          <a class="cta-button sm" href="https://amzn.to/4fK507R" target="_blank" rel="sponsored nofollow noopener" aria-label="View Katadyn Micropur MP1 tablets on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" role="img" aria-labelledby="title desc">
+  <title id="title">Three-zone EMT kit layout</title>
+  <desc id="desc">An opened medical kit divided into immediate hemorrhage control, wound packing and pressure, and support adjunct zones.</desc>
+  <defs><style>
+    .bg{fill:#0c0e11}.case{fill:#14181b;stroke:#4a5258;stroke-width:4}.z1{fill:#452126;stroke:#a94e58;stroke-width:2}.z2{fill:#3e321d;stroke:#ad7c3d;stroke-width:2}.z3{fill:#19372a;stroke:#4d956d;stroke-width:2}.t{fill:#f3f4f5;font:700 19px system-ui,sans-serif}.s{fill:#c6cdd1;font:15px system-ui,sans-serif}.tag{fill:#0d1012;stroke:#69747b;stroke-width:2}
+  </style></defs>
+  <rect class="bg" width="960" height="580" rx="22"/>
+  <text class="t" x="40" y="45">PACK BY URGENCY • REACH BY TOUCH</text>
+  <rect class="case" x="70" y="74" width="820" height="445" rx="30"/>
+  <rect class="z1" x="95" y="100" width="235" height="365" rx="18"/>
+  <rect class="z2" x="350" y="100" width="255" height="365" rx="18"/>
+  <rect class="z3" x="625" y="100" width="240" height="365" rx="18"/>
+  <text class="t" x="120" y="136">1 • IMMEDIATE</text><text class="s" x="120" y="163">Front / outside pocket</text>
+  <rect class="tag" x="120" y="190" width="185" height="58" rx="10"/><text class="t" x="144" y="225">TOURNIQUETS ×2</text>
+  <rect class="tag" x="120" y="264" width="185" height="58" rx="10"/><text class="t" x="155" y="300">TRAUMA SHEARS</text>
+  <rect class="tag" x="120" y="338" width="185" height="58" rx="10"/><text class="t" x="167" y="374">GLOVES</text>
+  <text class="t" x="375" y="136">2 • CONTROL</text><text class="s" x="375" y="163">Middle compartment</text>
+  <rect class="tag" x="375" y="190" width="205" height="58" rx="10"/><text class="t" x="402" y="225">HEMOSTATIC GAUZE</text>
+  <rect class="tag" x="375" y="264" width="205" height="58" rx="10"/><text class="t" x="400" y="300">PRESSURE BANDAGE</text>
+  <rect class="tag" x="375" y="338" width="205" height="58" rx="10"/><text class="t" x="425" y="374">TAPE / GAUZE</text>
+  <text class="t" x="650" y="136">3 • SUPPORT</text><text class="s" x="650" y="163">Back compartment</text>
+  <rect class="tag" x="650" y="190" width="190" height="58" rx="10"/><text class="t" x="671" y="225">CHEST SEALS</text>
+  <rect class="tag" x="650" y="264" width="190" height="58" rx="10"/><text class="t" x="684" y="300">CPR MASK</text>
+  <rect class="tag" x="650" y="338" width="190" height="58" rx="10"/><text class="t" x="666" y="374">THERMAL BLANKET</text>
+  <text class="s" x="118" y="439">Rip tabs outward</text><text class="s" x="383" y="439">Group by task</text><text class="s" x="651" y="439">Protect from crushing</text>
+  <text class="s" x="120" y="553">Train with your exact layout. Replace opened, expired, damaged, or contaminated supplies.</text>
+</svg>

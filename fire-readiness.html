@@ -5,28 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Wilderness Fire Readiness 101 – learn ignition methods, gear setup, and fire safety from Survival Nexus.">
   <title>Wilderness Fire Readiness 101 | Survival Nexus</title>
-  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
   <header class="site-header">
     <nav class="navbar">
-      <div class="logo">Survival Nexus</div>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../guides.html" class="active">Guides</a></li>
-        <li><a href="../suppliers.html">Suppliers</a></li>
-        <li><a href="../reviews.html">Reviews</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
+      <div class="logo">Survival Nexus</div>                                                  
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true">☰</span><span class="sr-only">Menu</span>
+      </button>
+      <ul id="primary-navigation" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="guides.html" class="active">Guides</a></li>
+        <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="Reviews.html">Reviews</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <div class="hero small-hero">
+    <div class="hero small-hero article-hero hero-guide-fire">
       <h1>Wilderness Fire Readiness 101</h1>
       <p>Ignition methods, firecraft techniques, and safety for real-world conditions.</p>
     </div>
   </header>
 
-  <main class="maxw">
+  <main id="main" class="maxw">
     <article class="guide-article">
       <h2>1. Mindset: Control, Not Chaos</h2>
       <p>Fire is both a survival asset and a risk multiplier. The key is control—understanding conditions, materials, and timing. Respect fire as a system: fuel, oxygen, ignition, and containment.</p>
@@ -51,25 +54,42 @@
 
       <h2>5. Safety & Environment</h2>
       <p>Always clear the ground of debris, build on mineral soil, and keep water nearby. Observe local burn bans. Extinguish fully: stir, douse, repeat until cool to the touch.</p>
+      <figure class="field-diagram">
+        <img src="images/diagram-fire-layers-safety.svg" alt="Fire-building diagram showing tinder, progressively larger kindling and fuel inside a cleared mineral-soil safety zone" width="960" height="600" loading="lazy" decoding="async" />
+        <figcaption>Build from fine tinder to larger fuel only after each layer is burning steadily, and keep the surrounding safety zone clear.</figcaption>
+      </figure>
 
       <h2>6. Field Exercise</h2>
       <p>Set a 10-minute timer. Ignite a fire using your secondary method (not your lighter). Note the materials, weather, and number of attempts. This builds skill and timing awareness.</p>
 
-      <section class="affiliate-callout">
-        <h3>Recommended Gear</h3>
-        <ul>
-          <li><a href="../suppliers.html#fire">EmberPeak Outfitters</a> — Ferro rods & stormproof matches</li>
-          <li><a href="../suppliers.html#travel">RoamLite Travel Works</a> — Compact tarp shelters</li>
+      <section class="affiliate-callout" aria-labelledby="fire-gear-heading">
+        <h3 id="fire-gear-heading">Researched Gear Shortlist</h3>
+        <p class="affiliate-disclosure" role="note"><strong>Paid-link disclosure:</strong> If you purchase through an Amazon link below, I may earn a commission at no added cost to you.</p>
+        <ul class="affiliate-product-list">
+          <li>
+            <div>
+              <strong>bayite 4-Inch Ferro Rod</strong>
+              <p>A large rod and dedicated striker for practicing a dependable backup ignition method.</p>
+            </div>
+            <a class="cta-button sm" href="https://amzn.to/4fGD3xI" target="_blank" rel="sponsored nofollow noopener" aria-label="View the bayite ferro rod on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+          </li>
+          <li>
+            <div>
+              <strong>MSR PocketRocket Deluxe Stove</strong>
+              <p>A regulated canister stove for outdoor cooking. Never operate a fuel-burning stove in a tent, vehicle, or other enclosed space.</p>
+            </div>
+            <a class="cta-button sm" href="https://amzn.to/4yQBE0i" target="_blank" rel="sponsored nofollow noopener" aria-label="View the MSR PocketRocket Deluxe stove on Amazon; paid link opens in a new tab">View on Amazon (paid link)</a>
+          </li>
         </ul>
       </section>
     </article>
 
-    <a href="../guides.html" class="secondary-button">← Back to Guides</a>
+    <a href="guides.html" class="secondary-button">← Back to Guides</a>
   </main>
 
 <footer class="site-footer" id="siteFooter"></footer>
 
 
-  <script src="../assets/app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

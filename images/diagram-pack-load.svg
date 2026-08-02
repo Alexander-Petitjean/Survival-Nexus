@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Backpack load distribution</title>
+  <desc id="desc">A side-view backpack showing dense items high and close to the back, medium items around the core, soft items low and outward, and quick-access items at the top.</desc>
+  <defs>
+    <style>
+      .bg{fill:#0c0e11}.panel{fill:#15191d;stroke:#343a40;stroke-width:2}.line{fill:none;stroke:#77838c;stroke-width:3}.label{fill:#eef1f3;font:700 20px system-ui,sans-serif}.small{fill:#bdc5ca;font:16px system-ui,sans-serif}.heavy{fill:#8e3434}.medium{fill:#3f7754}.soft{fill:#394b60}.access{fill:#b07a35}.arrow{stroke:#d4d9dc;stroke-width:2;fill:none}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L9 3L0 6Z" fill="#d4d9dc"/></marker>
+  </defs>
+  <rect class="bg" width="960" height="560" rx="22"/>
+  <text class="label" x="40" y="48">KEEP MASS CLOSE • HIGH • STABLE</text>
+  <path class="panel" d="M305 86Q238 114 232 193L221 407Q219 474 290 490H516Q578 482 580 422V159Q573 94 501 83Z"/>
+  <path class="line" d="M305 95Q331 136 320 475"/>
+  <rect class="access" x="331" y="112" width="212" height="58" rx="14"/>
+  <rect class="heavy" x="332" y="181" width="118" height="151" rx="16"/>
+  <rect class="medium" x="459" y="181" width="85" height="151" rx="16"/>
+  <rect class="soft" x="332" y="342" width="212" height="113" rx="16"/>
+  <path class="line" d="M245 190Q156 209 176 365Q185 417 227 433"/>
+  <path class="line" d="M284 489Q310 522 362 503M503 488Q474 522 423 503"/>
+  <text class="label" x="353" y="147">QUICK ACCESS</text>
+  <text class="small" x="347" y="213">DENSE / HEAVY</text><text class="small" x="347" y="239">water • food</text><text class="small" x="347" y="265">fuel</text>
+  <text class="small" x="473" y="214">MEDIUM</text><text class="small" x="473" y="240">cook kit</text><text class="small" x="473" y="266">shelter</text>
+  <text class="label" x="354" y="388">SOFT / BULKY</text><text class="small" x="365" y="420">sleep kit • insulation</text>
+  <path class="arrow" marker-end="url(#arrow)" d="M730 126H557"/>
+  <text class="label" x="745" y="120">IFAK • SHELL</text><text class="small" x="745" y="146">Reach without unpacking</text>
+  <path class="arrow" marker-end="url(#arrow)" d="M735 242H562"/>
+  <text class="label" x="745" y="236">TIGHT CORE</text><text class="small" x="745" y="262">Against the back panel</text>
+  <path class="arrow" marker-end="url(#arrow)" d="M735 383H560"/>
+  <text class="label" x="745" y="377">FILL VOIDS</text><text class="small" x="745" y="403">Compress to stop sway</text>
+  <text class="small" x="40" y="530">Fit varies: stop and adjust for pain, numbness, skin shear, or excess trunk lean.</text>
+</svg>
