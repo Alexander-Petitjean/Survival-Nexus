@@ -196,6 +196,46 @@ main,header,footer,section{width:100%}
 .hero-scenarios{
   background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.3) 68%),linear-gradient(0deg,rgba(4,7,9,.94),transparent 72%),url('../images/scenarios-field-response-noir.webp');
 }
+:root[data-theme="light"] .article-hero{
+  color:#172019;
+}
+:root[data-theme="light"] .article-hero h1{
+  text-shadow:0 2px 16px rgba(255,255,255,.95);
+}
+:root[data-theme="light"] .article-hero p{
+  color:#34443a;
+  text-shadow:0 2px 12px rgba(255,255,255,.95);
+}
+:root[data-theme="light"] .hero-guide-cold-firecraft{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.32) 66%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-cold-firecraft-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-water{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.3) 66%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-water-disinfection-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-shock{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.28) 66%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-shock-recognition-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-emt{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.3) 66%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-emt-kit-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-travel{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.26) 66%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-travel-light-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-treasure{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.26) 66%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-treasure-recovery-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-fire{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.26) 66%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-fire-readiness-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-72-hour{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.24) 68%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-72-hour-kit-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-ten-essentials{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.22) 68%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-ten-essentials-daylight.webp');
+}
+:root[data-theme="light"] .hero-scenarios{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.24) 68%),linear-gradient(0deg,rgba(244,245,242,.74),transparent 72%),url('../images/scenarios-field-response-daylight.webp');
+}
 @media (max-width:720px){
   .article-hero{
     min-height:25rem;
@@ -224,6 +264,20 @@ main,header,footer,section{width:100%}
 .hero-home p{color:#e1e4e7}
 .hero-home h1{max-width:12ch;text-wrap:balance;text-shadow:0 3px 18px rgba(0,0,0,.8)}
 .hero-home p{max-width:42ch;text-shadow:0 2px 12px rgba(0,0,0,.9)}
+:root[data-theme="light"] .hero-home{
+  background:
+    linear-gradient(90deg,rgba(244,245,242,.97) 0%,rgba(244,245,242,.82) 42%,rgba(244,245,242,.08) 76%),
+    linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(244,245,242,.5) 100%),
+    url('../images/home-hero-daylight.webp') center/cover no-repeat;
+  color:#172019;
+}
+:root[data-theme="light"] .hero-home h1{
+  text-shadow:0 3px 18px rgba(255,255,255,.95);
+}
+:root[data-theme="light"] .hero-home p{
+  color:#34443a;
+  text-shadow:0 2px 12px rgba(255,255,255,.95);
+}
 @media (max-width:720px){
   .hero-home{
     background:
@@ -231,6 +285,11 @@ main,header,footer,section{width:100%}
       url('../images/home-hero-noir.webp') 68% center/cover no-repeat;
     min-height:31rem;
     place-items:end start;
+  }
+  :root[data-theme="light"] .hero-home{
+    background:
+      linear-gradient(180deg,rgba(244,245,242,.18),rgba(244,245,242,.96)),
+      url('../images/home-hero-daylight.webp') 68% center/cover no-repeat;
   }
 }
 
