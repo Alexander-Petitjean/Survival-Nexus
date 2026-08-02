@@ -3,7 +3,11 @@ import { dirname, extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const htmlFiles = readdirSync(root).filter(file => extname(file).toLowerCase() === '.html');
+const rootFiles = readdirSync(root);
+const verificationFiles = rootFiles.filter(file => /^google[a-f0-9]+\.html$/i.test(file));
+const htmlFiles = rootFiles.filter(file => (
+  extname(file).toLowerCase() === '.html' && !verificationFiles.includes(file)
+));
 const errors = [];
 const warnings = [];
 const siteBase = 'https://alexander-petitjean.github.io/Survival-Nexus/';
@@ -15,6 +19,13 @@ const expectedNoindex = new Set([
 const indexableCanonicalUrls = [];
 
 const report = (collection, file, message) => collection.push(`${file}: ${message}`);
+
+for (const file of verificationFiles) {
+  const expected = `google-site-verification: ${file}`;
+  if (readFileSync(resolve(root, file), 'utf8').trim() !== expected) {
+    report(errors, file, 'Google site verification token does not match its filename');
+  }
+}
 
 for (const file of htmlFiles) {
   const source = readFileSync(resolve(root, file), 'utf8');
