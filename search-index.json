@@ -1,0 +1,17 @@
+[
+  {"title":"Cold-Weather Firecraft & Fatwood Chemistry","url":"cold-firecraft.html","type":"Guide","description":"Build fire in freezing and wet conditions using prepared tinder and raised platforms.","tags":["fire","fatwood","winter","ignition"]},
+  {"title":"Wilderness Fire Readiness 101","url":"fire-readiness.html","type":"Guide","description":"Core ignition methods, fire lays, preparation, and environmental safety.","tags":["fire","shelter","ferro rod","stove"]},
+  {"title":"Emergency Water Disinfection 101","url":"water-disinfection.html","type":"Guide","description":"Compare filters, chemical treatment, boiling, and UV disinfection.","tags":["water","filter","tablets","purification","hydration"]},
+  {"title":"Shock Recognition & Field Management","url":"shock-recognition.html","type":"Guide","description":"Recognize shock, control major bleeding, preserve heat, and plan evacuation.","tags":["medical","emt","bleeding","trauma","shock"]},
+  {"title":"Building the Ultimate EMT Kit","url":"emt-kit-basics.html","type":"Guide","description":"Organize a trauma kit around critical actions and repeatable access.","tags":["medical","emt","first aid","tourniquet","kit"]},
+  {"title":"Hypothermia & Heat Retention 101","url":"hypothermia.html","type":"Guide","description":"Understand cold stress, warning signs, insulation, and careful rewarming.","tags":["medical","cold","winter","hypothermia","rewarming"]},
+  {"title":"Travel Light: Vagabonding Essentials","url":"vagabond-travel.html","type":"Guide","description":"Build modular shelter, water, heat, navigation, and communication systems.","tags":["travel","hiking","navigation","shelter","packing"]},
+  {"title":"72-Hour Pack Load Balance","url":"72-hour-packloadbalance.html","type":"Guide","description":"Adaptive pack loading for stable gait, socket comfort, and efficient movement.","tags":["adaptive","amputee","pack","hiking","mobility"]},
+  {"title":"Treasure Tools & Recovery Basics","url":"treasure-tools.html","type":"Guide","description":"Research sites, isolate targets, and recover finds responsibly.","tags":["metal detecting","treasure","recovery","tools"]},
+  {"title":"Scenarios & Solutions","url":"scenarios.html","type":"Scenarios","description":"Field problems covering medical response, fire, hiking, and target recovery.","tags":["emergency","playbook","medical","fire","hiking","treasure"]},
+  {"title":"Gear Reviews","url":"Reviews.html","type":"Gear notes","description":"Transparent research summaries for trauma, fire, travel, water, and stove equipment.","tags":["reviews","gear","comparison","equipment"]},
+  {"title":"Supplier Directory","url":"suppliers.html","type":"Directory","description":"Filter outdoor suppliers by category, region, certification, and lead time.","tags":["supplier","shop","gear","brands"]},
+  {"title":"Training & Resources","url":"resources.html","type":"Resources","description":"Find recognized training organizations, official guidance, and field references.","tags":["training","course","official","medical","preparedness"]},
+  {"title":"About Survival Nexus","url":"about.html","type":"About","description":"Learn about the project, its adaptive perspective, and editorial approach.","tags":["methodology","author","editorial","adaptive"]},
+  {"title":"Affiliate Disclosure","url":"disclosure.html","type":"Policy","description":"How paid links, researched recommendations, and editorial independence work.","tags":["affiliate","disclosure","ethics","review"]}
+]

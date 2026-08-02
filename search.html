@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Search Survival Nexus guides, scenarios, gear notes, suppliers, and training resources." />
+  <title>Search | Survival Nexus</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="siteHeader"></header>
+  <main id="main">
+    <div class="hero small-hero">
+      <h1>Search Survival Nexus</h1>
+      <p>Find a skill, field problem, guide, or piece of gear.</p>
+    </div>
+    <section class="search-shell">
+      <form id="site-search-form" class="site-search-form" role="search">
+        <label for="site-search-input">
+          <span>Search terms</span>
+          <input id="site-search-input" name="q" type="search" autocomplete="off" placeholder="Try water, hypothermia, pack, or fire" />
+        </label>
+        <button class="cta-button" type="submit">Search</button>
+      </form>
+      <p id="site-search-summary" class="text-dim" role="status">Loading search…</p>
+      <div id="site-search-results" class="site-search-results"></div>
+    </section>
+  </main>
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+</body>
+</html>

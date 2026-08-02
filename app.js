@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setCurrentYear();
   highlightActiveNav();
   initSupplierFilters();
+  initSiteSearch();
+  injectRelatedContent();
 });
 
 function initThemeToggle() {
@@ -136,6 +138,7 @@ function injectHeader() {
     <nav class="navbar" aria-label="Primary">
       <div class="logo"><a href="index.html" aria-label="Survival Nexus home">Survival Nexus</a></div>
       <div class="nav-actions">
+        <a class="search-link" href="search.html" aria-label="Search Survival Nexus">Search</a>
         <button class="theme-toggle" type="button" aria-pressed="false">
           <span data-theme-icon aria-hidden="true">☀</span>
           <span data-theme-label>Light</span>
@@ -176,6 +179,7 @@ function injectFooter() {
           <li><a href="guides.html">Guides</a></li>
           <li><a href="suppliers.html">Suppliers</a></li>
           <li><a href="Reviews.html">Reviews</a></li>
+          <li><a href="search.html">Search</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="disclosure.html">Affiliate Disclosure</a></li>
@@ -273,4 +277,126 @@ function initSupplierFilters() {
   form.addEventListener('input', apply);
   form.addEventListener('reset', () => requestAnimationFrame(apply));
   apply();
+}
+
+/* ----- SITE SEARCH ----- */
+async function initSiteSearch() {
+  const form = document.getElementById('site-search-form');
+  const input = document.getElementById('site-search-input');
+  const results = document.getElementById('site-search-results');
+  const summary = document.getElementById('site-search-summary');
+  if (!form || !input || !results || !summary) return;
+
+  let index = [];
+  try {
+    const response = await fetch('search-index.json');
+    if (!response.ok) throw new Error(`Search index returned ${response.status}`);
+    index = await response.json();
+  } catch {
+    summary.textContent = 'Search is temporarily unavailable. Browse the Guides or Resources pages instead.';
+    return;
+  }
+
+  const render = query => {
+    const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    results.replaceChildren();
+    if (!terms.length) {
+      summary.textContent = 'Enter a skill, situation, or piece of gear.';
+      return;
+    }
+
+    const matches = index
+      .map(item => {
+        const searchable = `${item.title} ${item.description} ${(item.tags || []).join(' ')}`.toLowerCase();
+        const score = terms.reduce((total, term) => total + (searchable.includes(term) ? 1 : 0), 0);
+        return { item, score };
+      })
+      .filter(result => result.score > 0)
+      .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title));
+
+    summary.textContent = `${matches.length} ${matches.length === 1 ? 'result' : 'results'} for “${query.trim()}”`;
+    for (const { item } of matches) {
+      const card = document.createElement('article');
+      card.className = 'search-result-card';
+      const title = document.createElement('h2');
+      const link = document.createElement('a');
+      link.href = item.url;
+      link.textContent = item.title;
+      const description = document.createElement('p');
+      description.textContent = item.description;
+      const type = document.createElement('span');
+      type.className = 'badge';
+      type.textContent = item.type;
+      title.append(link);
+      card.append(type, title, description);
+      results.append(card);
+    }
+  };
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const query = input.value;
+    const url = new URL(location.href);
+    if (query.trim()) url.searchParams.set('q', query.trim());
+    else url.searchParams.delete('q');
+    history.replaceState(null, '', url);
+    render(query);
+  });
+
+  const initialQuery = new URLSearchParams(location.search).get('q') || '';
+  input.value = initialQuery;
+  render(initialQuery);
+}
+
+/* ----- RELATED CONTENT ----- */
+function injectRelatedContent() {
+  const current = location.pathname.split('/').pop();
+  const related = {
+    'cold-firecraft.html': ['fire-readiness.html', 'hypothermia.html', 'scenarios.html#fire'],
+    'fire-readiness.html': ['cold-firecraft.html', 'water-disinfection.html', 'scenarios.html#fire'],
+    'water-disinfection.html': ['emt-kit-basics.html', 'vagabond-travel.html', 'resources.html'],
+    'shock-recognition.html': ['emt-kit-basics.html', 'hypothermia.html', 'scenarios.html#emt'],
+    'emt-kit-basics.html': ['shock-recognition.html', 'hypothermia.html', 'resources.html'],
+    'hypothermia.html': ['cold-firecraft.html', 'shock-recognition.html', 'scenarios.html#emt'],
+    'vagabond-travel.html': ['72-hour-packloadbalance.html', 'water-disinfection.html', 'resources.html'],
+    '72-hour-packloadbalance.html': ['vagabond-travel.html', 'emt-kit-basics.html', 'scenarios.html#hiking'],
+    'treasure-tools.html': ['scenarios.html#treasure', 'Reviews.html', 'suppliers.html#treasure']
+  }[current];
+  const main = document.querySelector('main');
+  if (!related || !main || main.querySelector('.related-content')) return;
+
+  const labels = {
+    'cold-firecraft.html': 'Cold-Weather Firecraft',
+    'fire-readiness.html': 'Fire Readiness 101',
+    'water-disinfection.html': 'Water Disinfection',
+    'shock-recognition.html': 'Shock Recognition',
+    'emt-kit-basics.html': 'EMT Kit Basics',
+    'hypothermia.html': 'Hypothermia & Heat Retention',
+    'vagabond-travel.html': 'Vagabonding Essentials',
+    '72-hour-packloadbalance.html': '72-Hour Pack Load Balance',
+    'Reviews.html': 'Gear Reviews',
+    'resources.html': 'Training & Resources',
+    'suppliers.html#treasure': 'Treasure Suppliers',
+    'scenarios.html#fire': 'Fire Scenarios',
+    'scenarios.html#emt': 'Medical Scenarios',
+    'scenarios.html#hiking': 'Hiking Scenarios',
+    'scenarios.html#treasure': 'Recovery Scenarios'
+  };
+  const section = document.createElement('section');
+  section.className = 'related-content';
+  section.setAttribute('aria-labelledby', 'related-content-heading');
+  const heading = document.createElement('h2');
+  heading.id = 'related-content-heading';
+  heading.textContent = 'Continue learning';
+  const list = document.createElement('ul');
+  for (const url of related) {
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = url;
+    link.textContent = labels[url] || url;
+    item.append(link);
+    list.append(item);
+  }
+  section.append(heading, list);
+  main.append(section);
 }
