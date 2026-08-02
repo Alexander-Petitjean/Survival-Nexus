@@ -6,6 +6,13 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const htmlFiles = readdirSync(root).filter(file => extname(file).toLowerCase() === '.html');
 const errors = [];
 const warnings = [];
+const siteBase = 'https://alexander-petitjean.github.io/Survival-Nexus/';
+const expectedNoindex = new Set([
+  '404.html',
+  'footer-check.html',
+  'search.html'
+]);
+const indexableCanonicalUrls = [];
 
 const report = (collection, file, message) => collection.push(`${file}: ${message}`);
 
@@ -14,11 +21,45 @@ for (const file of htmlFiles) {
   const titles = source.match(/<title\b[^>]*>[\s\S]*?<\/title>/gi) || [];
   const descriptions = source.match(/<meta\s+[^>]*name=["']description["'][^>]*>/gi) || [];
   const h1s = source.match(/<h1\b[^>]*>/gi) || [];
-  const isRedirect = /<meta\s+[^>]*http-equiv=["']refresh["']/i.test(source);
+  const metaTags = source.match(/<meta\b[^>]*>/gi) || [];
+  const refreshTag = metaTags.find(tag => /http-equiv=["']refresh["']/i.test(tag));
+  const refreshContent = refreshTag?.match(/content=["']([^"']+)["']/i)?.[1];
+  const refreshTarget = refreshContent?.match(/url\s*=\s*(.+)\s*$/i)?.[1]?.trim();
+  const isRedirect = Boolean(refreshTag);
+  const robotsTags = source.match(/<meta\s+[^>]*name=["']robots["'][^>]*>/gi) || [];
+  const isNoindex = robotsTags.some(tag => /content=["'][^"']*\bnoindex\b/i.test(tag));
+  const canonicalTags = source.match(/<link\s+[^>]*rel=["'][^"']*\bcanonical\b[^"']*["'][^>]*>/gi) || [];
+  const canonicalUrls = canonicalTags
+    .map(tag => tag.match(/href=["']([^"']+)["']/i)?.[1])
+    .filter(Boolean);
 
   if (titles.length !== 1) report(errors, file, `expected one <title>; found ${titles.length}`);
   if (descriptions.length !== 1) report(warnings, file, `expected one meta description; found ${descriptions.length}`);
   if (h1s.length !== 1) report(errors, file, `expected one <h1>; found ${h1s.length}`);
+  if ((expectedNoindex.has(file) || isRedirect) && !isNoindex) {
+    report(errors, file, 'expected a noindex robots directive');
+  }
+  if (!expectedNoindex.has(file) && !isRedirect) {
+    const expectedCanonical = file === 'index.html' ? siteBase : `${siteBase}${file}`;
+    if (canonicalUrls.length !== 1) {
+      report(errors, file, `expected one canonical URL; found ${canonicalUrls.length}`);
+    } else if (canonicalUrls[0] !== expectedCanonical) {
+      report(errors, file, `canonical URL should be "${expectedCanonical}"`);
+    }
+    if (isNoindex) report(warnings, file, 'public page is unexpectedly marked noindex');
+    if (!isNoindex && canonicalUrls.length === 1) indexableCanonicalUrls.push(canonicalUrls[0]);
+  }
+  if (isRedirect) {
+    if (!refreshTarget) report(errors, file, 'redirect is missing a readable refresh target');
+    if (canonicalUrls.length !== 1) {
+      report(errors, file, `redirect should have one canonical URL; found ${canonicalUrls.length}`);
+    } else if (refreshTarget) {
+      const expectedCanonical = new URL(refreshTarget, siteBase).href;
+      if (canonicalUrls[0] !== expectedCanonical) {
+        report(errors, file, `redirect canonical should be "${expectedCanonical}"`);
+      }
+    }
+  }
   if (!isRedirect && file !== 'footer-check.html') {
     if (!/id=["']siteFooter["']/i.test(source)) report(errors, file, 'missing #siteFooter placeholder');
     if (!/<script\b[^>]*src=["']app\.js(?:[?#][^"']*)?["']/i.test(source)) report(errors, file, 'missing app.js');
@@ -47,6 +88,29 @@ for (const file of htmlFiles) {
       report(errors, file, `invalid JSON-LD (${error.message})`);
     }
   }
+}
+
+const sitemapPath = resolve(root, 'sitemap.xml');
+if (!existsSync(sitemapPath)) {
+  report(errors, 'sitemap.xml', 'missing sitemap');
+} else {
+  const sitemap = readFileSync(sitemapPath, 'utf8');
+  const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gi)].map(match => match[1].trim());
+  const uniqueSitemapUrls = new Set(sitemapUrls);
+  if (sitemapUrls.length !== uniqueSitemapUrls.size) report(errors, 'sitemap.xml', 'contains duplicate URLs');
+  for (const url of indexableCanonicalUrls) {
+    if (!uniqueSitemapUrls.has(url)) report(errors, 'sitemap.xml', `missing indexable canonical "${url}"`);
+  }
+  for (const url of uniqueSitemapUrls) {
+    if (!indexableCanonicalUrls.includes(url)) report(errors, 'sitemap.xml', `contains non-indexable or unknown URL "${url}"`);
+  }
+}
+
+const robotsPath = resolve(root, 'robots.txt');
+if (!existsSync(robotsPath)) {
+  report(errors, 'robots.txt', 'missing robots file');
+} else if (!readFileSync(robotsPath, 'utf8').includes(`Sitemap: ${siteBase}sitemap.xml`)) {
+  report(errors, 'robots.txt', 'missing the canonical sitemap declaration');
 }
 
 const searchIndexPath = resolve(root, 'search-index.json');
