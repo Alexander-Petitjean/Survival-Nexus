@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A printable, interactive 72-hour emergency checklist for household water, food, health needs, communication, evacuation, pets, and maintenance." />
+  <title>72-Hour Emergency Checklist | Survival Nexus</title>
+  <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/72-hour-checklist.html" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="checklist-page">
+  <a class="skip-link" href="#main">Skip to checklist</a>
+  <header class="site-header" id="siteHeader">
+    <div class="hero small-hero">
+      <div class="hero-inner">
+        <span class="badge evidence-badge">Print + save progress</span>
+        <h1>72-Hour Emergency Checklist</h1>
+        <p>Scale quantities for your household, check each item as you pack it, and print a clean paper copy.</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="checklist-shell">
+    <p class="print-only print-title">72-Hour Emergency Checklist</p>
+    <section class="checklist-intro" aria-labelledby="use-heading">
+      <h2 id="use-heading">Household plan</h2>
+      <p>This three-day checklist is a starting layer. Build a longer home reserve where practical, and follow local officials during an emergency. Read the <a href="72-hour-emergency-kit.html">full 72-hour guide</a> for planning details and official sources.</p>
+      <div class="household-fields" aria-label="Household planning blanks">
+        <span>People: <span class="write-line" aria-hidden="true"></span></span>
+        <span>Pets/service animals: <span class="write-line" aria-hidden="true"></span></span>
+        <span>Review date: <span class="write-line" aria-hidden="true"></span></span>
+      </div>
+    </section>
+
+    <div class="checklist-toolbar" role="region" aria-label="Checklist controls">
+      <p id="checklist-progress" aria-live="polite">0 of 35 items checked</p>
+      <div>
+        <button class="secondary-button" id="reset-checklist" type="button">Reset</button>
+        <button class="cta-button" id="print-checklist" type="button">Print checklist</button>
+      </div>
+    </div>
+
+    <form id="emergency-checklist" class="emergency-checklist">
+      <fieldset>
+        <legend>Water and food</legend>
+        <label><input id="water-supply" type="checkbox" /> Water: people × 3 days × at least 1 gallon per day</label>
+        <label><input id="extra-water" type="checkbox" /> Extra water for heat, illness, pregnancy, pets, or special needs</label>
+        <label><input id="portable-water" type="checkbox" /> Safely portable water containers</label>
+        <label><input id="water-backup" type="checkbox" /> Backup water-treatment method and its instructions</label>
+        <label><input id="food-supply" type="checkbox" /> Three days of shelf-stable food for each person</label>
+        <label><input id="special-food" type="checkbox" /> Infant formula, special-diet food, and pet/service-animal food</label>
+        <label><input id="can-opener" type="checkbox" /> Manual can opener and simple eating utensils</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Health and personal needs</legend>
+        <label><input id="first-aid" type="checkbox" /> First-aid kit and first-aid reference</label>
+        <label><input id="medications" type="checkbox" /> Prescription medicines; work toward a seven-day supply when possible</label>
+        <label><input id="health-record" type="checkbox" /> Prescription copies, allergies, conditions, clinician, and pharmacy contacts</label>
+        <label><input id="medical-devices" type="checkbox" /> Daily medical devices and consumables</label>
+        <label><input id="adaptive-items" type="checkbox" /> Glasses, hearing-aid batteries, mobility/communication-device supplies, and chargers</label>
+        <label><input id="hygiene" type="checkbox" /> Soap/sanitizer, masks, toilet paper, menstrual products, diapers, and personal care</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Communication, light, and power</legend>
+        <label><input id="radio" type="checkbox" /> Battery-powered or hand-crank emergency radio</label>
+        <label><input id="lights" type="checkbox" /> Flashlights/headlamps and spare compatible batteries</label>
+        <label><input id="phone-power" type="checkbox" /> Phone cables and a charged, tested power bank</label>
+        <label><input id="whistle" type="checkbox" /> Whistle or other accessible signaling method</label>
+        <label><input id="contacts" type="checkbox" /> Paper contact list and out-of-area contact</label>
+        <label><input id="alerts" type="checkbox" /> Local emergency alerts enabled</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Shelter, clothing, sanitation, and tools</legend>
+        <label><input id="clothing" type="checkbox" /> Weather layers, sturdy footwear, rain gear, and spare socks</label>
+        <label><input id="sleep" type="checkbox" /> Blankets or sleeping bags for each person</label>
+        <label><input id="sanitation" type="checkbox" /> Waste bags, ties, wipes, and sanitation supplies</label>
+        <label><input id="tools" type="checkbox" /> Multi-tool, duct tape, cordage, gloves, and small repair kit</label>
+        <label><input id="map" type="checkbox" /> Local paper map and waterproof writing tools</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Documents, evacuation, children, and animals</legend>
+        <label><input id="documents" type="checkbox" /> Protected copies of ID, insurance, prescriptions, and key records</label>
+        <label><input id="cash-keys" type="checkbox" /> Small bills and spare home/vehicle keys</label>
+        <label><input id="routes" type="checkbox" /> Two evacuation routes and two meeting places</label>
+        <label><input id="vehicle" type="checkbox" /> Vehicle fuel/charge plan or alternate transportation plan</label>
+        <label><input id="children" type="checkbox" /> Child comfort items and quiet activities</label>
+        <label><input id="animal-kit" type="checkbox" /> Leash/harness, carrier, medications, ID, records, photo, and waste supplies</label>
+        <label><input id="destinations" type="checkbox" /> Accessible and pet-friendly destinations identified</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Test and maintain</legend>
+        <label><input id="departure-drill" type="checkbox" /> Household completed a five-minute departure drill</label>
+        <label><input id="carry-test" type="checkbox" /> Each portable bag was safely carry-tested</label>
+        <label><input id="power-test" type="checkbox" /> Radio, lights, chargers, and manual tools were tested</label>
+        <label><input id="rotation" type="checkbox" /> Water, food, medicines, batteries, and equipment dates were checked</label>
+      </fieldset>
+    </form>
+
+    <section class="checklist-notes" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">Household notes</h2>
+      <div class="notes-lines" aria-hidden="true"></div>
+    </section>
+
+    <p class="checklist-source-note">Baseline quantities: CDC, American Red Cross, and Ready.gov guidance. Full links and review date are in the <a href="72-hour-emergency-kit.html#sources">guide’s source list</a>.</p>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   highlightActiveNav();
   initSupplierFilters();
   initSiteSearch();
+  initEmergencyChecklist();
   injectRelatedContent();
 });
 
@@ -213,7 +214,9 @@ function highlightActiveNav() {
     'treasure-tools.html',
     'fire-readiness.html',
     'hypothermia.html',
-    '72-hour-packloadbalance.html'
+    '72-hour-packloadbalance.html',
+    '72-hour-emergency-kit.html',
+    '72-hour-checklist.html'
   ]);
 
   links.forEach(link => {
@@ -231,6 +234,50 @@ function highlightActiveNav() {
     activeLink.classList.add('active');
     if (currentLink) activeLink.setAttribute('aria-current', 'page');
   }
+}
+
+/* ----- 72-HOUR CHECKLIST ----- */
+function initEmergencyChecklist() {
+  const form = document.getElementById('emergency-checklist');
+  const progress = document.getElementById('checklist-progress');
+  const reset = document.getElementById('reset-checklist');
+  const print = document.getElementById('print-checklist');
+  if (!form || !progress || !reset || !print) return;
+
+  const storageKey = 'survival-nexus-72-hour-checklist';
+  const boxes = Array.from(form.querySelectorAll('input[type="checkbox"]'));
+
+  const updateProgress = () => {
+    const checked = boxes.filter(box => box.checked).length;
+    progress.textContent = `${checked} of ${boxes.length} items checked`;
+  };
+
+  const save = () => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(boxes.filter(box => box.checked).map(box => box.id)));
+    } catch {
+      // The checklist remains usable when storage is unavailable.
+    }
+  };
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    if (Array.isArray(saved)) boxes.forEach(box => { box.checked = saved.includes(box.id); });
+  } catch {
+    // Ignore invalid or unavailable saved state.
+  }
+
+  form.addEventListener('change', () => {
+    save();
+    updateProgress();
+  });
+  reset.addEventListener('click', () => {
+    boxes.forEach(box => { box.checked = false; });
+    try { localStorage.removeItem(storageKey); } catch { /* Storage is optional. */ }
+    updateProgress();
+  });
+  print.addEventListener('click', () => window.print());
+  updateProgress();
 }
 
 /* ----- SUPPLIER FILTERS ----- */
@@ -358,8 +405,10 @@ function injectRelatedContent() {
     'shock-recognition.html': ['emt-kit-basics.html', 'hypothermia.html', 'scenarios.html#emt'],
     'emt-kit-basics.html': ['shock-recognition.html', 'hypothermia.html', 'resources.html'],
     'hypothermia.html': ['cold-firecraft.html', 'shock-recognition.html', 'scenarios.html#emt'],
-    'vagabond-travel.html': ['72-hour-packloadbalance.html', 'water-disinfection.html', 'resources.html'],
-    '72-hour-packloadbalance.html': ['vagabond-travel.html', 'emt-kit-basics.html', 'scenarios.html#hiking'],
+    'vagabond-travel.html': ['72-hour-emergency-kit.html', '72-hour-packloadbalance.html', 'water-disinfection.html'],
+    '72-hour-packloadbalance.html': ['72-hour-emergency-kit.html', 'vagabond-travel.html', 'scenarios.html#hiking'],
+    '72-hour-emergency-kit.html': ['72-hour-checklist.html', '72-hour-packloadbalance.html', 'water-disinfection.html'],
+    '72-hour-checklist.html': ['72-hour-emergency-kit.html', '72-hour-packloadbalance.html', 'resources.html'],
     'treasure-tools.html': ['scenarios.html#treasure', 'Reviews.html', 'suppliers.html#treasure']
   }[current];
   const main = document.querySelector('main');
@@ -374,6 +423,8 @@ function injectRelatedContent() {
     'hypothermia.html': 'Hypothermia & Heat Retention',
     'vagabond-travel.html': 'Vagabonding Essentials',
     '72-hour-packloadbalance.html': '72-Hour Pack Load Balance',
+    '72-hour-emergency-kit.html': '72-Hour Emergency Kit Guide',
+    '72-hour-checklist.html': 'Printable 72-Hour Checklist',
     'Reviews.html': 'Gear Reviews',
     'resources.html': 'Training & Resources',
     'suppliers.html#treasure': 'Treasure Suppliers',
