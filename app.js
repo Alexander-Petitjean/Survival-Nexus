@@ -20,6 +20,7 @@ function getPreferredTheme() {
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;
+  syncThemeImages(theme);
 }
 
 applyTheme(getPreferredTheme());
@@ -27,6 +28,7 @@ applyTheme(getPreferredTheme());
 document.addEventListener("DOMContentLoaded", () => {
   ensureSkipLink();
   injectHeader();
+  initThemeImages();
   initThemeToggle();
   initNavToggle();
   injectFooter();
@@ -38,6 +40,30 @@ document.addEventListener("DOMContentLoaded", () => {
   initEmergencyChecklist();
   injectRelatedContent();
 });
+
+function getDaylightImageSrc(src) {
+  return src
+    .replace(/-noir\.png$/i, '-daylight.webp')
+    .replace(/-noir\.webp$/i, '-daylight.webp');
+}
+
+function initThemeImages() {
+  document.querySelectorAll('img[src*="-noir."]').forEach((img) => {
+    const darkSrc = img.getAttribute('src');
+    if (!darkSrc) return;
+    img.dataset.darkSrc = darkSrc;
+    img.dataset.lightSrc = getDaylightImageSrc(darkSrc);
+  });
+  syncThemeImages(document.documentElement.dataset.theme || getPreferredTheme());
+}
+
+function syncThemeImages(theme) {
+  if (!document.body) return;
+  document.querySelectorAll('img[data-dark-src][data-light-src]').forEach((img) => {
+    const nextSrc = theme === 'light' ? img.dataset.lightSrc : img.dataset.darkSrc;
+    if (nextSrc && img.getAttribute('src') !== nextSrc) img.setAttribute('src', nextSrc);
+  });
+}
 
 function initThemeToggle() {
   const toggle = document.querySelector('.theme-toggle');
