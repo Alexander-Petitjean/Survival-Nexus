@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Play a fictional, choice-dependent wilderness survival story. Pick a U.S. region, roll a season, make decisions, and learn what happens next." />
+  <title>Field Choices | Survival Nexus</title>
+  <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/field-choices.html" />
+  <link rel="stylesheet" href="css/style.css?v=20260802" />
+</head>
+<body class="page-field-game">
+  <a class="skip-link" href="#main">Skip to game</a>
+  <header class="site-header" id="siteHeader" role="banner">
+    <div class="hero small-hero game-hero">
+      <div>
+        <p class="game-kicker">A Survival Nexus field game</p>
+        <h1>Field Choices</h1>
+        <p>A fictional emergency. A random season. Your decisions write the outcome.</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="game-shell">
+    <noscript><p class="callout caution-callout">This interactive story needs JavaScript enabled.</p></noscript>
+
+    <section class="game-intro" aria-labelledby="game-intro-title">
+      <div>
+        <span class="game-step-label">How it works</span>
+        <h2 id="game-intro-title">Choose your ground. The weather chooses you.</h2>
+        <p>You have a day pack, a phone at 18%, a lighter, one liter of water, a basic first-aid pouch, and the clothes you arrived in. Pick a region; a random number generator selects the season. Every option changes your condition and the choices that follow.</p>
+      </div>
+      <aside class="game-safety-note" aria-label="Safety note">
+        <strong>Training fiction—not field instructions.</strong>
+        <p>These are fictional composites inspired by realistic problems, not accounts of real people. In an actual emergency, contact local emergency services and follow official guidance.</p>
+      </aside>
+    </section>
+
+    <section id="region-screen" class="game-panel" aria-labelledby="region-title">
+      <div class="game-panel-heading">
+        <span class="game-step-label">Step 1 of 4</span>
+        <h2 id="region-title">Where does your story begin?</h2>
+        <p>Terrain changes the hazard, but sound priorities travel well.</p>
+      </div>
+      <div id="region-grid" class="region-grid"></div>
+    </section>
+
+    <section id="loadout-screen" class="game-panel" aria-labelledby="loadout-title" hidden>
+      <div class="game-panel-heading">
+        <span class="game-step-label">Step 2 of 4</span>
+        <h2 id="loadout-title" tabindex="-1">Choose three additions</h2>
+        <p>Your basic kit is already packed. Pick only three extras; they can unlock safer actions later.</p>
+      </div>
+      <div id="loadout-grid" class="loadout-grid"></div>
+      <div class="loadout-footer">
+        <p id="loadout-count" aria-live="polite">0 of 3 selected</p>
+        <button id="begin-story" class="cta-button" type="button" disabled>Roll season and begin</button>
+      </div>
+    </section>
+
+    <section id="story-screen" class="game-panel" aria-labelledby="story-title" hidden>
+      <div class="game-toolbar">
+        <div>
+          <span id="chapter-label" class="game-step-label">Chapter 1 of 4</span>
+          <h2 id="story-title" tabindex="-1">The situation</h2>
+        </div>
+        <button id="restart-game" class="game-text-button" type="button">Start over</button>
+      </div>
+
+      <div class="game-status" aria-label="Current status">
+        <div><span>Region</span><strong id="status-region">—</strong></div>
+        <div><span>Season roll</span><strong id="status-season">—</strong></div>
+        <div><span>Condition</span><strong id="status-condition">100</strong></div>
+        <div><span>Daylight</span><strong id="status-daylight">5 hours</strong></div>
+        <div><span>Water</span><strong id="status-water">1.0 L</strong></div>
+        <div><span>Signal</span><strong id="status-signal">Weak</strong></div>
+      </div>
+
+      <div id="event-banner" class="event-banner" role="status"></div>
+
+      <article class="story-card" aria-live="polite" aria-atomic="true">
+        <p id="story-location" class="story-location"></p>
+        <p id="story-copy" class="story-copy"></p>
+        <div id="story-consequence" class="story-consequence" hidden></div>
+      </article>
+      <div id="choice-list" class="choice-list" aria-label="Choose your next action"></div>
+    </section>
+
+    <section id="ending-screen" class="game-panel ending-panel" aria-labelledby="ending-title" hidden>
+      <span class="game-step-label">Field report</span>
+      <p id="ending-grade" class="ending-grade"></p>
+      <h2 id="ending-title" tabindex="-1"></h2>
+      <p id="ending-copy" class="ending-copy"></p>
+      <div class="debrief-grid">
+        <section><h3>What happened</h3><p id="debrief-happened"></p></section>
+        <section><h3>What to do</h3><p id="debrief-do"></p></section>
+        <section><h3>What to expect</h3><p id="debrief-expect"></p></section>
+      </div>
+      <ol id="decision-log" class="decision-log" aria-label="Your decision chain"></ol>
+      <div class="ending-actions">
+        <button id="play-again" class="cta-button" type="button">Play another case</button>
+        <a class="secondary-button" href="scenarios.html">Read scenario playbooks</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+  <script src="field-choices.js"></script>
+</body>
+</html>
