@@ -190,6 +190,9 @@ main,header,footer,section{width:100%}
 .hero-guide-fire{
   background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.32) 64%),linear-gradient(0deg,rgba(4,7,9,.92),transparent 70%),url('../images/guide-fire-readiness-noir.webp');
 }
+.hero-guide-wildfire{
+  background-image:linear-gradient(90deg,rgba(4,7,9,.95),rgba(4,7,9,.34) 68%),linear-gradient(0deg,rgba(4,7,9,.94),transparent 72%),url('../images/guide-fire-readiness-noir.webp');
+}
 .hero-guide-72-hour{
   background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.28) 68%),linear-gradient(0deg,rgba(4,7,9,.92),transparent 72%),url('../images/guide-72-hour-kit-noir.webp');
 }
@@ -235,6 +238,9 @@ main,header,footer,section{width:100%}
 }
 :root[data-theme="light"] .hero-guide-fire{
   background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.26) 66%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-fire-readiness-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-wildfire{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.28) 68%),linear-gradient(0deg,rgba(244,245,242,.76),transparent 72%),url('../images/guide-fire-readiness-daylight.webp');
 }
 :root[data-theme="light"] .hero-guide-72-hour{
   background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.24) 68%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-72-hour-kit-daylight.webp');
