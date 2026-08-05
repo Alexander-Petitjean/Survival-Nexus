@@ -193,6 +193,12 @@ main,header,footer,section{width:100%}
 .hero-guide-ten-essentials{
   background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.26) 68%),linear-gradient(0deg,rgba(4,7,9,.92),transparent 72%),url('../images/guide-ten-essentials-noir.webp');
 }
+.hero-guide-navigation{
+  background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.3) 68%),linear-gradient(0deg,rgba(4,7,9,.92),transparent 72%),url('../images/guide-travel-light-noir.webp');
+}
+.hero-guide-shelter{
+  background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.3) 68%),linear-gradient(0deg,rgba(4,7,9,.92),transparent 72%),url('../images/category-fire-shelter-noir.webp');
+}
 .hero-scenarios{
   background-image:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.3) 68%),linear-gradient(0deg,rgba(4,7,9,.94),transparent 72%),url('../images/scenarios-field-response-noir.webp');
 }
@@ -232,6 +238,12 @@ main,header,footer,section{width:100%}
 }
 :root[data-theme="light"] .hero-guide-ten-essentials{
   background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.22) 68%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-ten-essentials-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-navigation{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.26) 68%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/guide-travel-light-daylight.webp');
+}
+:root[data-theme="light"] .hero-guide-shelter{
+  background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.26) 68%),linear-gradient(0deg,rgba(244,245,242,.72),transparent 72%),url('../images/category-fire-shelter-daylight.webp');
 }
 :root[data-theme="light"] .hero-scenarios{
   background-image:linear-gradient(90deg,rgba(244,245,242,.96),rgba(244,245,242,.24) 68%),linear-gradient(0deg,rgba(244,245,242,.74),transparent 72%),url('../images/scenarios-field-response-daylight.webp');
