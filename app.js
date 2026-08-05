@@ -261,6 +261,7 @@ function injectFooter() {
           <li><a href="suppliers.html">Suppliers</a></li>
           <li><a href="Reviews.html">Reviews</a></li>
           <li><a href="search.html">Search</a></li>
+          <li><a href="field-conditions.html">Field Conditions</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="disclosure.html">Affiliate Disclosure</a></li>

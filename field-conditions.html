@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Check official NWS weather, USGS earthquakes, and recent FEMA disaster declarations for a chosen U.S. location." />
+  <title>Field Conditions: Weather, Earthquakes &amp; FEMA | Survival Nexus</title>
+  <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/field-conditions.html" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to field conditions</a>
+  <header id="siteHeader"></header>
+
+  <main id="main">
+    <div class="hero small-hero">
+      <h1>Field Conditions</h1>
+      <p>Check official NWS weather, nearby USGS earthquake records, and recent FEMA disaster declarations.</p>
+    </div>
+
+    <section class="conditions-shell" aria-labelledby="location-heading">
+      <div class="callout caution-callout" role="note">
+        <strong>Alerts are only one input.</strong> No active alert does not mean conditions are safe. Check the complete forecast, local land-manager notices, closures, fire restrictions, and conditions on the ground. In an emergency, call 911.
+      </div>
+
+      <h2 id="location-heading">Choose a location</h2>
+      <p>Survival Nexus does not request location access automatically and does not store coordinates. You can share the device location once or enter coordinates yourself.</p>
+
+      <div class="conditions-location-actions">
+        <button class="cta-button" id="use-device-location" type="button">Use my current location</button>
+        <span class="text-dim" aria-hidden="true">or</span>
+        <form id="coordinates-form" class="coordinates-form">
+          <label for="latitude">Latitude
+            <input id="latitude" name="latitude" type="number" min="-90" max="90" step="any" required placeholder="39.7392" inputmode="decimal" />
+          </label>
+          <label for="longitude">Longitude
+            <input id="longitude" name="longitude" type="number" min="-180" max="180" step="any" required placeholder="-104.9903" inputmode="decimal" />
+          </label>
+          <button class="secondary-button" type="submit">Check coordinates</button>
+        </form>
+      </div>
+
+      <p id="conditions-status" class="conditions-status" role="status" aria-live="polite">No location has been shared.</p>
+      <section id="forecast-section" class="forecast-section" aria-labelledby="forecast-heading" hidden>
+        <div class="forecast-heading-row">
+          <div>
+            <span class="badge">Official NWS forecast</span>
+            <h2 id="forecast-heading">Point Forecast</h2>
+            <p id="forecast-location" class="text-dim"></p>
+          </div>
+          <a id="complete-forecast-link" target="_blank" rel="noopener">Complete forecast ↗</a>
+        </div>
+        <h3>Upcoming periods</h3>
+        <div id="forecast-periods" class="forecast-periods"></div>
+        <details class="hourly-forecast">
+          <summary>Next 12 hours</summary>
+          <div id="hourly-periods" class="hourly-periods"></div>
+        </details>
+        <p id="forecast-updated" class="text-dim"></p>
+      </section>
+
+      <section aria-labelledby="active-alerts-heading">
+        <h2 id="active-alerts-heading">Active Alerts</h2>
+      <div id="conditions-results" class="conditions-results" aria-live="polite"></div>
+      </section>
+
+      <section class="earthquake-section" aria-labelledby="earthquakes-heading">
+        <h2 id="earthquakes-heading">Recent Nearby Earthquakes</h2>
+        <p class="text-dim">USGS-recorded earthquakes of magnitude 2.5 or greater within 500 km during the past seven days, limited to the ten most recent. This is an event catalog—not earthquake prediction or an all-clear.</p>
+        <div id="earthquake-results" class="earthquake-results" aria-live="polite"></div>
+      </section>
+
+      <section class="fema-section" aria-labelledby="fema-heading">
+        <h2 id="fema-heading">Recent FEMA Declarations</h2>
+        <p class="text-dim">The six most recently declared, unique disasters for the state resolved by NWS. Declarations are administrative records—not live warnings, current incident boundaries, or confirmation that a person qualifies for assistance.</p>
+        <div id="fema-results" class="fema-results" aria-live="polite"></div>
+      </section>
+
+      <noscript>
+        <div class="callout">JavaScript is required for the live alert lookup. Visit <a href="https://www.weather.gov/">weather.gov</a> for official conditions.</div>
+      </noscript>
+
+      <section class="conditions-about" aria-labelledby="about-alerts-heading">
+        <h2 id="about-alerts-heading">About this data</h2>
+        <p>Results come directly from National Weather Service, U.S. Geological Survey, and OpenFEMA APIs and are not cached or modified by Survival Nexus. Weather and FEMA lookup coverage is for the United States and its territories. Times appear in your device’s local time zone.</p>
+        <p><a href="https://www.weather.gov/documentation/services-web-api">NWS API documentation</a> · <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS earthquake API documentation</a> · <a href="https://www.fema.gov/about/openfema/data-sets">OpenFEMA datasets</a></p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+  <script src="field-conditions.js"></script>
+</body>
+</html>
