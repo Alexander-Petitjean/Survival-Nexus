@@ -107,6 +107,9 @@ main,header,footer,section{width:100%}
 .nav-links a:hover{border-color:var(--line);background:var(--muted)}
 .nav-links a.active,
 .nav-links a[aria-current="page"]{background:var(--accent);color:#fff}
+.nav-links .conditions-nav-link{border-color:rgba(var(--accent-rgb),.65);background:rgba(var(--accent-rgb),.1);font-weight:800}
+.nav-links .conditions-nav-link:hover{border-color:var(--accent);background:rgba(var(--accent-rgb),.2)}
+.nav-links .conditions-nav-link[aria-current="page"]{background:var(--accent);color:#fff}
 
 /* Mobile toggle + animation */
 .nav-toggle{

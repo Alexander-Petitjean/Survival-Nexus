@@ -230,6 +230,7 @@ function injectHeader() {
       </div>
       <ul id="primary-navigation" class="nav-links">
         <li><a href="index.html">Home</a></li>
+        <li><a class="conditions-nav-link" href="field-conditions.html">Live Conditions</a></li>
         <li><a href="guides.html">Guides</a></li>
         <li><a href="suppliers.html">Suppliers</a></li>
         <li><a href="Reviews.html">Reviews</a></li>
