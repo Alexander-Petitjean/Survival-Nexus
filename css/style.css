@@ -427,6 +427,37 @@ section>h2{max-width:var(--maxw);margin:0 auto 1rem;padding-inline:0;font-size:1
 .kit-layer-grid h3{margin:.55rem 0 .25rem}.kit-layer-grid p{margin:.25rem 0;color:var(--text-dim)}
 .source-list{margin-top:1rem;border-top:1px solid var(--line)}
 
+/* ============== Live field conditions ============== */
+.conditions-shell{max-width:var(--maxw);margin:0 auto;padding:2rem 1rem 4rem}
+.conditions-location-actions{display:flex;align-items:end;gap:1rem;flex-wrap:wrap;margin:1rem 0}
+.coordinates-form{display:flex;align-items:end;gap:.75rem;flex-wrap:wrap}
+.coordinates-form label{display:grid;gap:.3rem;font-weight:700}
+.coordinates-form input{width:10rem;min-height:44px;padding:.55rem .7rem;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text)}
+.conditions-status{margin:1.5rem 0;padding:.8rem 1rem;border-left:4px solid var(--accent);background:var(--muted);font-weight:700}
+.conditions-results{display:grid;gap:1rem}
+.condition-card{padding:clamp(1rem,3vw,1.5rem);border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+.condition-card h2{margin:.45rem 0}.condition-card h3{margin:1rem 0 .3rem;font-size:1rem}
+.condition-labels,.condition-links{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.condition-severity{display:inline-block;padding:.2rem .55rem;border-radius:999px;border:1px solid var(--line);font-size:.8rem;font-weight:800}
+.severity-extreme,.severity-severe{border-color:#e5484d;background:rgba(229,72,77,.14)}
+.severity-moderate{border-color:var(--warn);background:rgba(255,176,32,.12)}
+.condition-headline{font-weight:700}.condition-copy{white-space:pre-line}
+.condition-timing{display:grid;grid-template-columns:max-content 1fr;gap:.25rem .8rem;padding:.75rem 0;border-block:1px solid var(--line)}
+.condition-timing dt{font-weight:800}.condition-timing dd{margin:0}
+.condition-links{margin-top:1rem}.conditions-about{margin-top:2.5rem;border-top:1px solid var(--line)}
+.forecast-section{margin:1.5rem 0 2.5rem;padding:clamp(1rem,3vw,1.5rem);border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.forecast-heading-row{display:flex;align-items:start;justify-content:space-between;gap:1rem;flex-wrap:wrap}.forecast-heading-row h2{margin:.35rem 0 0}.forecast-heading-row p{margin:0}
+.forecast-periods{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.75rem}.forecast-card{padding:.85rem;border:1px solid var(--line);border-radius:12px;background:var(--muted)}
+.forecast-card h4,.forecast-card p{margin:.2rem 0}.forecast-temperature{font-size:1.45rem;font-weight:900}
+.hourly-forecast{margin-top:1rem}.hourly-forecast summary{min-height:44px;padding:.55rem 0;font-weight:800;cursor:pointer}
+.hourly-periods{border-top:1px solid var(--line)}.hourly-row{display:grid;grid-template-columns:6rem 4rem minmax(10rem,1fr) minmax(8rem,.7fr);gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--line)}
+.earthquake-section{margin-top:2.5rem}.earthquake-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+.earthquake-card{padding:1rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}.earthquake-card h3{margin:.4rem 0}.earthquake-magnitude{display:inline-block;padding:.2rem .55rem;border:1px solid var(--warn);border-radius:999px;background:rgba(255,176,32,.12);font-size:.85rem;font-weight:900}
+.fema-section{margin-top:2.5rem}.fema-results{display:grid;gap:1rem}.fema-card{padding:1rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}.fema-card h3{margin:.4rem 0}.fema-card .condition-timing{grid-template-columns:10rem 1fr}
+@media (max-width:640px){.coordinates-form{display:grid;width:100%;grid-template-columns:1fr 1fr}.coordinates-form input{width:100%}.coordinates-form button{grid-column:1/-1}.condition-timing{grid-template-columns:1fr}.condition-timing dd{margin-bottom:.5rem}}
+@media (max-width:640px){.hourly-row{grid-template-columns:5rem 3.5rem 1fr}.hourly-row .text-dim{grid-column:2/-1}}
+@media (max-width:640px){.fema-card .condition-timing{grid-template-columns:1fr}}
+
 /* ============== Homepage preparedness blueprint ============== */
 .home-preparedness-guide{
   scroll-margin-top:1rem;

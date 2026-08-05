@@ -21,3 +21,13 @@ node scripts/check-site.mjs
 ```
 
 Run the validator whenever pages, links, scripts, stylesheets, or images change.
+
+## Test the live-data parser
+
+The Field Conditions tool reads official data directly in the visitor's browser from the National Weather Service, U.S. Geological Survey, and OpenFEMA APIs. Location access is opt-in; coordinates are not stored by Survival Nexus. OpenFEMA receives only the state abbreviation resolved by NWS.
+
+Run the parser tests with Node.js 18 or newer:
+
+```sh
+node --test tests/field-conditions.test.js
+```
