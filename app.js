@@ -233,6 +233,7 @@ function injectHeader() {
         <li><a class="conditions-nav-link" href="field-conditions.html">Live Conditions</a></li>
         <li><a href="guides.html">Guides</a></li>
         <li><a href="suppliers.html">Suppliers</a></li>
+        <li><a href="gear-buyers-guide.html">Buyer’s Guide</a></li>
         <li><a href="Reviews.html">Reviews</a></li>
         <li><a href="scenarios.html">Scenarios</a></li>
         <li><a href="field-choices.html">Field Game</a></li>
