@@ -280,7 +280,7 @@ main,header,footer,section{width:100%}
   background:
     linear-gradient(90deg, rgba(5,8,10,.96) 0%, rgba(5,8,10,.78) 42%, rgba(5,8,10,.2) 76%),
     linear-gradient(180deg, rgba(0,0,0,.16) 0%, rgba(0,0,0,.78) 100%),
-    url('../images/home-hero-noir.webp') center/cover no-repeat;
+    url('../images/home-response-hero-v2.png') center/cover no-repeat;
   min-height:clamp(30rem,65vh,44rem);
   padding:6rem max(1rem,calc((100vw - var(--maxw))/2)) 4rem;
   place-items:center start;
@@ -301,7 +301,7 @@ main,header,footer,section{width:100%}
   background:
     linear-gradient(90deg,rgba(244,245,242,.97) 0%,rgba(244,245,242,.82) 42%,rgba(244,245,242,.08) 76%),
     linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(244,245,242,.5) 100%),
-    url('../images/home-hero-daylight.webp') center/cover no-repeat;
+    url('../images/home-response-hero-v2.png') center/cover no-repeat;
   color:#172019;
 }
 :root[data-theme="light"] .hero-home h1{
@@ -321,14 +321,14 @@ main,header,footer,section{width:100%}
   .hero-home{
     background:
       linear-gradient(180deg,rgba(5,8,10,.52),rgba(5,8,10,.96)),
-      url('../images/home-hero-noir.webp') 68% center/cover no-repeat;
+      url('../images/home-response-hero-v2.png') 68% center/cover no-repeat;
     min-height:31rem;
     place-items:end start;
   }
   :root[data-theme="light"] .hero-home{
     background:
       linear-gradient(180deg,rgba(244,245,242,.18),rgba(244,245,242,.96)),
-      url('../images/home-hero-daylight.webp') 68% center/cover no-repeat;
+      url('../images/home-response-hero-v2.png') 68% center/cover no-repeat;
   }
   .hero-actions{width:100%}
   .hero-actions a{flex:1 1 11rem}
