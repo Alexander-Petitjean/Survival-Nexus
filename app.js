@@ -231,14 +231,10 @@ function injectHeader() {
       <ul id="primary-navigation" class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a class="conditions-nav-link" href="field-conditions.html">Live Conditions</a></li>
-        <li><a href="guides.html">Guides</a></li>
-        <li><a href="suppliers.html">Suppliers</a></li>
-        <li><a href="gear-buyers-guide.html">Buyer’s Guide</a></li>
-        <li><a href="Reviews.html">Reviews</a></li>
+        <li><a href="guides.html">Responder Guides</a></li>
         <li><a href="scenarios.html">Scenarios</a></li>
-        <li><a href="field-choices.html">Field Game</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resources.html">Training Resources</a></li>
+        <li><a href="archive.html">Outdoor Archive</a></li>
       </ul>
     </nav>
   `;
@@ -254,13 +250,16 @@ function injectFooter() {
   footer.innerHTML = `
     <div class="footer-grid">
       <section class="footer-brand">
-        <p><strong>Survival Nexus</strong> — Practical preparedness research, adaptive design, guides, and gear notes.</p>
+        <p><strong>Survival Nexus</strong> — Research-informed EMS, fire, rescue, wildfire, and adaptive-readiness education.</p>
 		<p class="ai-note"> Some images on this site are AI-generated for illustrative purposes only and do not depict real people or events.</p>
       </section>
       <nav class="footer-nav" aria-label="Footer">
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="guides.html">Guides</a></li>
+          <li><a href="scenarios.html">Scenarios</a></li>
+          <li><a href="resources.html">Training Resources</a></li>
+          <li><a href="archive.html">Outdoor Archive</a></li>
           <li><a href="suppliers.html">Suppliers</a></li>
           <li><a href="Reviews.html">Reviews</a></li>
           <li><a href="gear-buyers-guide.html">Buyer’s Guide</a></li>
@@ -517,16 +516,16 @@ function injectRelatedContent() {
     'shock-recognition.html': 'Shock Recognition',
     'emt-kit-basics.html': 'EMT Kit Basics',
     'hypothermia.html': 'Hypothermia & Heat Retention',
-    'vagabond-travel.html': 'Vagabonding Essentials',
+    'vagabond-travel.html': 'Lightweight Travel Systems',
     '72-hour-packloadbalance.html': '72-Hour Pack Load Balance',
     '72-hour-emergency-kit.html': '72-Hour Emergency Kit Guide',
     '72-hour-checklist.html': 'Printable 72-Hour Checklist',
     '72-hour-gear-comparisons.html': '72-Hour Gear Comparisons',
     'ten-essentials.html': 'The Ten Essentials',
     'index.html#preparedness-blueprint': 'The Preparedness Blueprint',
-    'Reviews.html': 'Gear Reviews',
+    'Reviews.html': 'Equipment Research Notes',
     'resources.html': 'Training & Resources',
-    'suppliers.html#treasure': 'Treasure Suppliers',
+    'suppliers.html#treasure': 'Archived Recovery Suppliers',
     'scenarios.html#fire': 'Fire Scenarios',
     'scenarios.html#emt': 'Medical Scenarios',
     'scenarios.html#hiking': 'Hiking Scenarios',
