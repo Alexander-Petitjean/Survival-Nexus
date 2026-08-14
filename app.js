@@ -231,9 +231,11 @@ function injectHeader() {
       <ul id="primary-navigation" class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a class="conditions-nav-link" href="field-conditions.html">Live Conditions</a></li>
-        <li><a href="guides.html">Responder Guides</a></li>
+        <li><a href="guides.html">Learn</a></li>
         <li><a href="scenarios.html">Scenarios</a></li>
         <li><a href="resources.html">Training Resources</a></li>
+        <li><a href="nightbird-app/index.html">Nightbird</a></li>
+        <li><a href="shop.html">Shop Gear</a></li>
         <li><a href="archive.html">Outdoor Archive</a></li>
       </ul>
     </nav>
@@ -259,6 +261,8 @@ function injectFooter() {
           <li><a href="guides.html">Guides</a></li>
           <li><a href="scenarios.html">Scenarios</a></li>
           <li><a href="resources.html">Training Resources</a></li>
+          <li><a href="nightbird-app/index.html">Nightbird</a></li>
+          <li><a href="shop.html">Shop Gear</a></li>
           <li><a href="archive.html">Outdoor Archive</a></li>
           <li><a href="suppliers.html">Suppliers</a></li>
           <li><a href="Reviews.html">Reviews</a></li>
@@ -305,7 +309,7 @@ function highlightActiveNav() {
     '72-hour-checklist.html',
     'ten-essentials.html'
   ]);
-  const reviewPages = new Set(['72-hour-gear-comparisons.html']);
+  const commercialPages = new Set(['shop.html', 'gear-buyers-guide.html', '72-hour-gear-comparisons.html', 'Reviews.html', 'suppliers.html']);
 
   links.forEach(link => {
     link.classList.remove('active');
@@ -314,8 +318,8 @@ function highlightActiveNav() {
 
   const currentLink = Array.from(links).find(link => link.getAttribute('href') === current);
   const activeLink = currentLink || (
-    guidePages.has(current) || reviewPages.has(current)
-      ? Array.from(links).find(link => link.getAttribute('href') === (reviewPages.has(current) ? 'Reviews.html' : 'guides.html'))
+    guidePages.has(current) || commercialPages.has(current)
+      ? Array.from(links).find(link => link.getAttribute('href') === (commercialPages.has(current) ? 'shop.html' : 'guides.html'))
       : null
   );
   if (activeLink) {
