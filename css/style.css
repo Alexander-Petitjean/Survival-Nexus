@@ -1142,6 +1142,12 @@ summary::-webkit-details-marker{display:none}
 /* Anchor jumps land below sticky header */
 [id] { scroll-margin-top: 80px; } /* adjust if your header height differs */
 
+/* Commercial pages use a distinct warm accent so shopping is visually separate from safety education. */
+.page-shop .site-header{border-top:4px solid var(--warn)}
+.page-shop .hero{background-image:linear-gradient(135deg,rgba(255,176,32,.08),transparent 60%)}
+.page-shop .affiliate-disclosure{border-left-color:var(--warn)}
+.page-learn .site-header{border-top:4px solid var(--accent)}
+
 /* ============== Field Choices interactive story ============== */
 .page-field-game{background:linear-gradient(180deg,var(--bg),rgba(var(--accent-rgb),.05) 38rem,var(--bg))}
 .game-hero{min-height:22rem;place-items:end start;text-align:left;padding-inline:max(1rem,calc((100vw - var(--maxw))/2));background:radial-gradient(circle at 78% 32%,rgba(var(--accent-rgb),.24),transparent 25%),repeating-linear-gradient(115deg,transparent 0 44px,rgba(255,255,255,.025) 45px 46px),linear-gradient(135deg,#07120c,var(--surface) 65%,#18130c)}
