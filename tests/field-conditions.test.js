@@ -4,6 +4,9 @@ const {
   normalizeAlerts,
   normalizeForecast,
   normalizeEarthquakes,
+  distanceKm,
+  trendForReadings,
+  normalizeStreamGauges,
   groupFemaDeclarations
 } = require('../field-conditions.js');
 
@@ -55,6 +58,52 @@ test('USGS earthquakes accept an empty catalog', () => {
 
 test('USGS earthquakes reject a malformed response', () => {
   assert.throws(() => normalizeEarthquakes(null), /features array/);
+});
+
+test('distance calculation returns a useful nearby distance', () => {
+  const distance = distanceKm(39.7392, -104.9903, 40.015, -105.2705);
+  assert.ok(distance > 35 && distance < 50);
+});
+
+test('stream trend recognizes rising, falling, and steady readings', () => {
+  const readings = (first, last) => [
+    { value: String(first), dateTime: '2026-08-14T10:00:00Z' },
+    { value: String(last), dateTime: '2026-08-14T16:00:00Z' }
+  ];
+  assert.equal(trendForReadings(readings(100, 120), '00060'), 'Rising');
+  assert.equal(trendForReadings(readings(100, 80), '00060'), 'Falling');
+  assert.equal(trendForReadings(readings(100, 102), '00060'), 'Steady');
+  assert.equal(trendForReadings([{ value: '100', dateTime: '2026-08-14T16:00:00Z' }], '00060'), 'Trend unavailable');
+  assert.equal(trendForReadings([{ value: null, dateTime: '2026-08-14T16:00:00Z' }], '00060'), 'Trend unavailable');
+});
+
+test('USGS water series group parameters by site and sort by distance', () => {
+  const makeSeries = (siteNumber, name, latitude, longitude, parameterCode, values) => ({
+    sourceInfo: {
+      siteName: name,
+      siteCode: [{ value: siteNumber }],
+      geoLocation: { geogLocation: { latitude, longitude } }
+    },
+    variable: { variableCode: [{ value: parameterCode }], unit: { unitCode: parameterCode === '00060' ? 'ft3/s' : 'ft' } },
+    values: [{ value: values }]
+  });
+  const data = { value: { timeSeries: [
+    makeSeries('002', 'Far Creek', 40.5, -105, '00060', [{ value: '50', dateTime: '2026-08-14T16:00:00Z' }]),
+    makeSeries('001', 'Near Creek', 40.01, -105, '00060', [
+      { value: '100', dateTime: '2026-08-14T10:00:00Z' },
+      { value: '120', dateTime: '2026-08-14T16:00:00Z' }
+    ]),
+    makeSeries('001', 'Near Creek', 40.01, -105, '00065', [{ value: '3.2', dateTime: '2026-08-14T16:00:00Z' }])
+  ] } };
+  const gauges = normalizeStreamGauges(data, 40, -105, 3);
+  assert.deepEqual(gauges.map(gauge => gauge.siteNumber), ['001', '002']);
+  assert.equal(gauges[0].metrics['00060'].trend, 'Rising');
+  assert.equal(gauges[0].metrics['00065'].value, 3.2);
+});
+
+test('USGS water normalization accepts empty results and rejects malformed data', () => {
+  assert.deepEqual(normalizeStreamGauges({ value: { timeSeries: [] } }, 40, -105), []);
+  assert.throws(() => normalizeStreamGauges({}, 40, -105), /missing time series/);
 });
 
 test('FEMA records group designated areas by disaster number', () => {

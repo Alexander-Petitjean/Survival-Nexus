@@ -24,6 +24,69 @@ const FieldConditionsCore = (() => {
     return expectFeatures(data, 'USGS earthquake');
   }
 
+  function distanceKm(latitudeA, longitudeA, latitudeB, longitudeB) {
+    const toRadians = value => value * Math.PI / 180;
+    const deltaLatitude = toRadians(latitudeB - latitudeA);
+    const deltaLongitude = toRadians(longitudeB - longitudeA);
+    const a = Math.sin(deltaLatitude / 2) ** 2
+      + Math.cos(toRadians(latitudeA)) * Math.cos(toRadians(latitudeB)) * Math.sin(deltaLongitude / 2) ** 2;
+    return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  function trendForReadings(readings, parameterCode) {
+    const usable = (readings || [])
+      .filter(reading => reading?.value != null)
+      .map(reading => ({ value: Number(reading.value), dateTime: reading?.dateTime }))
+      .filter(reading => Number.isFinite(reading.value) && reading.dateTime)
+      .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
+    if (usable.length < 2) return 'Trend unavailable';
+    const first = usable[0].value;
+    const last = usable.at(-1).value;
+    const threshold = parameterCode === '00065' ? 0.1 : Math.max(Math.abs(first) * 0.05, 1);
+    if (last - first > threshold) return 'Rising';
+    if (first - last > threshold) return 'Falling';
+    return 'Steady';
+  }
+
+  function normalizeStreamGauges(data, latitude, longitude, limit = 3) {
+    const series = data?.value?.timeSeries;
+    if (!Array.isArray(series)) throw new Error('USGS water response is missing time series.');
+    const sites = new Map();
+    series.forEach(item => {
+      const source = item?.sourceInfo || {};
+      const siteNumber = source.siteCode?.[0]?.value;
+      const point = source.geoLocation?.geogLocation || {};
+      const siteLatitude = Number(point.latitude);
+      const siteLongitude = Number(point.longitude);
+      const parameterCode = item?.variable?.variableCode?.[0]?.value;
+      const readings = (item?.values || []).flatMap(group => group?.value || []);
+      if (!siteNumber || !['00060', '00065'].includes(parameterCode) || !Number.isFinite(siteLatitude) || !Number.isFinite(siteLongitude) || !readings.length) return;
+      const latest = [...readings]
+        .filter(reading => reading?.value != null && Number.isFinite(Number(reading.value)) && reading?.dateTime)
+        .sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime))[0];
+      if (!latest) return;
+      if (!sites.has(siteNumber)) {
+        sites.set(siteNumber, {
+          siteNumber,
+          name: source.siteName || `USGS ${siteNumber}`,
+          latitude: siteLatitude,
+          longitude: siteLongitude,
+          distanceKm: distanceKm(latitude, longitude, siteLatitude, siteLongitude),
+          metrics: {}
+        });
+      }
+      sites.get(siteNumber).metrics[parameterCode] = {
+        value: Number(latest.value),
+        dateTime: latest.dateTime,
+        unit: item?.variable?.unit?.unitCode || '',
+        trend: trendForReadings(readings, parameterCode)
+      };
+    });
+    return [...sites.values()]
+      .sort((a, b) => a.distanceKm - b.distanceKm)
+      .slice(0, limit);
+  }
+
   function groupFemaDeclarations(data, limit = 6) {
     const records = data?.DisasterDeclarationsSummaries;
     if (!Array.isArray(records)) throw new Error('OpenFEMA response is missing declaration records.');
@@ -40,7 +103,7 @@ const FieldConditionsCore = (() => {
     return [...grouped.values()].slice(0, limit);
   }
 
-  return { normalizeAlerts, normalizeForecast, normalizeEarthquakes, groupFemaDeclarations };
+  return { normalizeAlerts, normalizeForecast, normalizeEarthquakes, distanceKm, trendForReadings, normalizeStreamGauges, groupFemaDeclarations };
 })();
 
 if (typeof module !== 'undefined' && module.exports) module.exports = FieldConditionsCore;
@@ -51,15 +114,22 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
   const coordinatesForm = document.getElementById('coordinates-form');
   const status = document.getElementById('conditions-status');
   const results = document.getElementById('conditions-results');
+  const observationSection = document.getElementById('observation-section');
+  const observationStation = document.getElementById('observation-station');
+  const observationResults = document.getElementById('observation-results');
+  const observationUpdated = document.getElementById('observation-updated');
+  const observationLink = document.getElementById('observation-link');
   const forecastSection = document.getElementById('forecast-section');
   const forecastLocation = document.getElementById('forecast-location');
   const forecastPeriods = document.getElementById('forecast-periods');
   const hourlyPeriods = document.getElementById('hourly-periods');
   const forecastUpdated = document.getElementById('forecast-updated');
   const completeForecastLink = document.getElementById('complete-forecast-link');
+  const waterResults = document.getElementById('water-results');
+  const airQualityLocation = document.getElementById('air-quality-location');
   const earthquakeResults = document.getElementById('earthquake-results');
   const femaResults = document.getElementById('fema-results');
-  if (!locationButton || !coordinatesForm || !status || !results || !forecastSection || !forecastLocation || !forecastPeriods || !hourlyPeriods || !forecastUpdated || !completeForecastLink || !earthquakeResults || !femaResults) return;
+  if (!locationButton || !coordinatesForm || !status || !results || !observationSection || !observationStation || !observationResults || !observationUpdated || !observationLink || !forecastSection || !forecastLocation || !forecastPeriods || !hourlyPeriods || !forecastUpdated || !completeForecastLink || !waterResults || !airQualityLocation || !earthquakeResults || !femaResults) return;
 
   const severityRank = new Map([
     ['Extreme', 0], ['Severe', 1], ['Moderate', 2], ['Minor', 3], ['Unknown', 4]
@@ -82,6 +152,8 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
     locationButton.disabled = busy;
     coordinatesForm.querySelectorAll('button, input').forEach(element => { element.disabled = busy; });
     results.setAttribute('aria-busy', String(busy));
+    observationResults.setAttribute('aria-busy', String(busy));
+    waterResults.setAttribute('aria-busy', String(busy));
     earthquakeResults.setAttribute('aria-busy', String(busy));
     femaResults.setAttribute('aria-busy', String(busy));
   }
@@ -93,6 +165,16 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
     return new Intl.DateTimeFormat(undefined, {
       dateStyle: 'medium', timeStyle: 'short'
     }).format(date);
+  }
+
+  function formatAge(value) {
+    const time = new Date(value).getTime();
+    if (!Number.isFinite(time)) return 'age unavailable';
+    const minutes = Math.max(0, Math.round((Date.now() - time) / 60000));
+    if (minutes < 2) return 'about 1 minute old';
+    if (minutes < 60) return `${minutes} minutes old`;
+    const hours = Math.round(minutes / 60);
+    return `${hours} hour${hours === 1 ? '' : 's'} old`;
   }
 
   function addText(parent, tag, text, className) {
@@ -195,8 +277,94 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
     addText(row, 'time', new Intl.DateTimeFormat(undefined, { weekday: 'short', hour: 'numeric' }).format(new Date(period.startTime)));
     addText(row, 'strong', Number.isFinite(period.temperature) ? `${period.temperature}°${period.temperatureUnit || ''}` : '—');
     addText(row, 'span', period.shortForecast || 'Forecast unavailable');
-    addText(row, 'span', [period.windSpeed, period.windDirection].filter(Boolean).join(' ') || 'Wind unavailable', 'text-dim');
+    const precipitation = period.probabilityOfPrecipitation?.value == null ? null : Number(period.probabilityOfPrecipitation.value);
+    const humidity = period.relativeHumidity?.value == null ? null : Number(period.relativeHumidity.value);
+    const details = [
+      [period.windSpeed, period.windDirection].filter(Boolean).join(' ') || null,
+      period.windGust ? `gust ${period.windGust}` : null,
+      Number.isFinite(precipitation) ? `${Math.round(precipitation)}% precip` : null,
+      Number.isFinite(humidity) ? `${Math.round(humidity)}% RH` : null
+    ].filter(Boolean).join(' · ');
+    addText(row, 'span', details || 'Details unavailable', 'text-dim');
     return row;
+  }
+
+  function numericMeasure(measure) {
+    if (measure?.value == null) return null;
+    const value = Number(measure.value);
+    return Number.isFinite(value) ? value : null;
+  }
+
+  function formatTemperature(measure) {
+    const value = numericMeasure(measure);
+    if (value === null) return 'Not reported';
+    const unit = measure?.unitCode || '';
+    return unit.includes('degC') ? `${Math.round(value * 9 / 5 + 32)}°F` : `${Math.round(value)}°`;
+  }
+
+  function formatSpeed(measure) {
+    const value = numericMeasure(measure);
+    if (value === null) return 'Not reported';
+    const unit = measure?.unitCode || '';
+    if (unit.includes('km_h-1')) return `${Math.round(value * 0.621371)} mph`;
+    if (unit.includes('m_s-1')) return `${Math.round(value * 2.23694)} mph`;
+    return `${Math.round(value)} ${unit.split(':').at(-1) || ''}`.trim();
+  }
+
+  function formatVisibility(measure) {
+    const value = numericMeasure(measure);
+    if (value === null) return 'Not reported';
+    return measure?.unitCode?.includes(':m') ? `${(value / 1609.344).toFixed(1)} mi` : `${Math.round(value)}`;
+  }
+
+  function formatPrecipitation(measure) {
+    const value = numericMeasure(measure);
+    if (value === null) return 'Not reported';
+    return measure?.unitCode?.includes(':mm') ? `${(value / 25.4).toFixed(2)} in` : `${value}`;
+  }
+
+  function renderObservationMetric(label, value) {
+    const card = document.createElement('div');
+    card.className = 'observation-metric';
+    addText(card, 'span', label);
+    addText(card, 'strong', value);
+    return card;
+  }
+
+  async function loadObservation(latitude, longitude) {
+    const pointData = await fetchJson(`https://api.weather.gov/points/${encodeURIComponent(latitude.toFixed(4))},${encodeURIComponent(longitude.toFixed(4))}`, 'application/geo+json');
+    const stationsUrl = safeNwsUrl(pointData?.properties?.observationStations);
+    if (!stationsUrl) throw new Error('The weather service did not provide observation stations for this point.');
+    const stationData = await fetchJson(stationsUrl, 'application/geo+json');
+    const stations = FieldConditionsCore.normalizeEarthquakes(stationData);
+    const station = stations
+      .map(feature => {
+        const coordinates = feature?.geometry?.coordinates || [];
+        const stationLongitude = Number(coordinates[0]);
+        const stationLatitude = Number(coordinates[1]);
+        return { feature, distance: Number.isFinite(stationLatitude) && Number.isFinite(stationLongitude) ? FieldConditionsCore.distanceKm(latitude, longitude, stationLatitude, stationLongitude) : Infinity };
+      })
+      .sort((a, b) => a.distance - b.distance)[0]?.feature;
+    const stationUrl = safeNwsUrl(station?.id);
+    if (!stationUrl) throw new Error('No usable NWS observation station was returned.');
+    const observationData = await fetchJson(`${stationUrl}/observations/latest`, 'application/geo+json');
+    const observation = observationData?.properties || {};
+    const stationName = station?.properties?.name || station?.properties?.stationIdentifier || 'Nearest reporting station';
+    observationStation.textContent = `${stationName}${Number.isFinite(Number(station?.geometry?.coordinates?.[0])) ? ` · ${Math.round(FieldConditionsCore.distanceKm(latitude, longitude, Number(station.geometry.coordinates[1]), Number(station.geometry.coordinates[0])))} km away` : ''}`;
+    observationResults.replaceChildren(
+      renderObservationMetric('Conditions', observation.textDescription || 'Not reported'),
+      renderObservationMetric('Temperature', formatTemperature(observation.temperature)),
+      renderObservationMetric('Feels like', formatTemperature(observation.heatIndex?.value != null ? observation.heatIndex : observation.windChill)),
+      renderObservationMetric('Wind', formatSpeed(observation.windSpeed)),
+      renderObservationMetric('Peak gust', formatSpeed(observation.windGust)),
+      renderObservationMetric('Relative humidity', numericMeasure(observation.relativeHumidity) === null ? 'Not reported' : `${Math.round(numericMeasure(observation.relativeHumidity))}%`),
+      renderObservationMetric('Visibility', formatVisibility(observation.visibility)),
+      renderObservationMetric('Past-hour precipitation', formatPrecipitation(observation.precipitationLastHour))
+    );
+    observationUpdated.textContent = `Observed ${formatDate(observation.timestamp)} (${formatAge(observation.timestamp)}). Station observations can be delayed or incomplete; check the reading time before use.`;
+    observationLink.href = stationUrl.replace('api.weather.gov/stations/', 'www.weather.gov/wrh/timeseries?site=');
+    observationSection.hidden = false;
+    return stationName;
   }
 
   async function loadForecast(latitude, longitude) {
@@ -236,15 +404,6 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
     return alerts.length;
   }
 
-  function distanceKm(latitudeA, longitudeA, latitudeB, longitudeB) {
-    const toRadians = value => value * Math.PI / 180;
-    const deltaLatitude = toRadians(latitudeB - latitudeA);
-    const deltaLongitude = toRadians(longitudeB - longitudeA);
-    const a = Math.sin(deltaLatitude / 2) ** 2
-      + Math.cos(toRadians(latitudeA)) * Math.cos(toRadians(latitudeB)) * Math.sin(deltaLongitude / 2) ** 2;
-    return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  }
-
   function renderEarthquake(feature, latitude, longitude) {
     const properties = feature?.properties || {};
     const coordinates = feature?.geometry?.coordinates || [];
@@ -263,7 +422,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
     const facts = document.createElement('dl');
     facts.className = 'condition-timing';
     const distance = Number.isFinite(eventLatitude) && Number.isFinite(eventLongitude)
-      ? `${Math.round(distanceKm(latitude, longitude, eventLatitude, eventLongitude))} km from selected point`
+      ? `${Math.round(FieldConditionsCore.distanceKm(latitude, longitude, eventLatitude, eventLongitude))} km from selected point`
       : 'Not available';
     [
       ['Time', formatDate(properties.time)],
@@ -311,6 +470,60 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
       earthquakeResults.append(...earthquakes.map(feature => renderEarthquake(feature, latitude, longitude)));
     }
     return earthquakes.length;
+  }
+
+  function renderWaterGauge(gauge) {
+    const card = document.createElement('article');
+    card.className = 'water-card';
+    addText(card, 'span', `${Math.round(gauge.distanceKm)} km away`, 'badge');
+    addText(card, 'h3', gauge.name);
+    const discharge = gauge.metrics['00060'];
+    const stage = gauge.metrics['00065'];
+    const facts = document.createElement('dl');
+    facts.className = 'condition-timing';
+    [
+      ['Streamflow', discharge ? `${discharge.value.toLocaleString()} ${discharge.unit || 'ft³/s'}` : 'Not reported'],
+      ['Gauge height', stage ? `${stage.value.toFixed(2)} ${stage.unit || 'ft'}` : 'Not reported'],
+      ['Latest reading', `${formatDate(discharge?.dateTime || stage?.dateTime)} (${formatAge(discharge?.dateTime || stage?.dateTime)})`],
+      ['Six-hour tendency', discharge?.trend || stage?.trend || 'Trend unavailable']
+    ].forEach(([term, value]) => { addText(facts, 'dt', term); addText(facts, 'dd', value); });
+    card.append(facts);
+    const link = document.createElement('a');
+    link.href = `https://waterdata.usgs.gov/monitoring-location/USGS-${encodeURIComponent(gauge.siteNumber)}/`;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = 'Open official USGS gauge ↗';
+    card.append(link);
+    return card;
+  }
+
+  async function loadWaterGauges(latitude, longitude) {
+    const latitudeRadius = 0.75;
+    const longitudeRadius = Math.min(1.5, 0.75 / Math.max(Math.cos(latitude * Math.PI / 180), 0.25));
+    const bounds = [
+      Math.max(-180, longitude - longitudeRadius),
+      Math.max(-90, latitude - latitudeRadius),
+      Math.min(180, longitude + longitudeRadius),
+      Math.min(90, latitude + latitudeRadius)
+    ].map(value => value.toFixed(4)).join(',');
+    const parameters = new URLSearchParams({
+      format: 'json,1.1',
+      bBox: bounds,
+      parameterCd: '00060,00065',
+      siteStatus: 'active',
+      period: 'PT6H'
+    });
+    const data = await fetchJson(`https://waterservices.usgs.gov/nwis/iv/?${parameters}`, 'application/json');
+    const gauges = FieldConditionsCore.normalizeStreamGauges(data, latitude, longitude, 3);
+    if (!gauges.length) {
+      const note = document.createElement('div');
+      note.className = 'callout';
+      note.textContent = 'No matching USGS streamflow or gauge-height readings were returned near this point.';
+      waterResults.append(note);
+    } else {
+      waterResults.append(...gauges.map(renderWaterGauge));
+    }
+    return gauges.length;
   }
 
   function declarationTypeLabel(type) {
@@ -381,15 +594,19 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
   async function fetchConditions(latitude, longitude) {
     setBusy(true);
     results.replaceChildren();
+    observationSection.hidden = true;
+    observationResults.replaceChildren();
     forecastSection.hidden = true;
     forecastPeriods.replaceChildren();
     hourlyPeriods.replaceChildren();
+    waterResults.replaceChildren();
     earthquakeResults.replaceChildren();
     femaResults.replaceChildren();
-    status.textContent = 'Checking NWS weather, USGS earthquakes, and FEMA declarations…';
+    airQualityLocation.textContent = `Use the official map to inspect monitors and smoke information around ${latitude.toFixed(4)}, ${longitude.toFixed(4)}.`;
+    status.textContent = 'Checking NWS weather, USGS stream gauges and earthquakes, and FEMA declarations…';
 
-    const [forecastOutcome, alertsOutcome, earthquakeOutcome] = await Promise.allSettled([
-      loadForecast(latitude, longitude), loadAlerts(latitude, longitude), loadEarthquakes(latitude, longitude)
+    const [forecastOutcome, observationOutcome, alertsOutcome, waterOutcome, earthquakeOutcome] = await Promise.allSettled([
+      loadForecast(latitude, longitude), loadObservation(latitude, longitude), loadAlerts(latitude, longitude), loadWaterGauges(latitude, longitude), loadEarthquakes(latitude, longitude)
     ]);
     let femaOutcome;
     if (forecastOutcome.status === 'fulfilled' && forecastOutcome.value?.state) {
@@ -397,7 +614,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
     } else {
       femaOutcome = { status: 'rejected', reason: new Error('FEMA lookup requires a state resolved by NWS.') };
     }
-    const outcomes = [forecastOutcome, alertsOutcome, earthquakeOutcome, femaOutcome];
+    const outcomes = [forecastOutcome, observationOutcome, alertsOutcome, waterOutcome, earthquakeOutcome, femaOutcome];
     const failures = outcomes.filter(outcome => outcome.status === 'rejected');
 
     if (alertsOutcome.status === 'rejected') {
@@ -405,6 +622,19 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
       message.className = 'callout caution-callout';
       message.textContent = 'Active alerts could not be loaded. Use weather.gov to verify official alerts.';
       results.append(message);
+    }
+    if (observationOutcome.status === 'rejected') {
+      observationSection.hidden = false;
+      const message = document.createElement('div');
+      message.className = 'callout caution-callout';
+      message.textContent = 'Current NWS station observations could not be loaded. Use the complete forecast link to verify current conditions.';
+      observationResults.append(message);
+    }
+    if (waterOutcome.status === 'rejected') {
+      const message = document.createElement('div');
+      message.className = 'callout caution-callout';
+      message.textContent = 'Nearby USGS stream-gauge readings could not be loaded. Do not infer that a crossing or waterway is safe.';
+      waterResults.append(message);
     }
     if (earthquakeOutcome.status === 'rejected') {
       const message = document.createElement('div');
@@ -421,13 +651,14 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
     const point = `${latitude.toFixed(4)},${longitude.toFixed(4)}`;
     if (!failures.length) {
       const alertCount = alertsOutcome.value;
+      const gaugeCount = waterOutcome.value;
       const earthquakeCount = earthquakeOutcome.value;
       const declarationCount = femaOutcome.value;
-      status.textContent = `Conditions loaded for ${point}: ${alertCount} active alert${alertCount === 1 ? '' : 's'}, ${earthquakeCount} recent earthquake${earthquakeCount === 1 ? '' : 's'}, and ${declarationCount} recent FEMA declaration${declarationCount === 1 ? '' : 's'}.`;
+      status.textContent = `Conditions loaded for ${point}: current weather, ${alertCount} active alert${alertCount === 1 ? '' : 's'}, ${gaugeCount} nearby stream gauge${gaugeCount === 1 ? '' : 's'}, ${earthquakeCount} recent earthquake${earthquakeCount === 1 ? '' : 's'}, and ${declarationCount} recent FEMA declaration${declarationCount === 1 ? '' : 's'}.`;
     } else if (failures.length < outcomes.length) {
       status.textContent = `Some official data loaded for ${point}, but ${failures.length} ${failures.length === 1 ? 'service was' : 'services were'} unavailable. Verify conditions at the linked agency sites.`;
     } else {
-      status.textContent = 'Official weather, earthquake, and FEMA data could not be loaded. Check your connection and use the agency websites.';
+      status.textContent = 'Official weather, water, earthquake, and FEMA data could not be loaded. Check your connection and use the agency websites.';
     }
     setBusy(false);
   }
