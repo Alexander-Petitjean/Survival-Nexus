@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Check official NWS weather, USGS earthquakes, and recent FEMA disaster declarations for a chosen U.S. location." />
-  <title>Field Conditions: Weather, Earthquakes &amp; FEMA | Survival Nexus</title>
+  <meta name="description" content="Check official observed weather, forecasts, alerts, nearby stream gauges, earthquakes, smoke resources, and FEMA context for a U.S. location." />
+  <title>Live Field Conditions: Weather, Water, Smoke &amp; Hazards | Survival Nexus</title>
   <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/field-conditions.html" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -15,7 +15,7 @@
   <main id="main">
     <div class="hero small-hero">
       <h1>Field Conditions</h1>
-      <p>Check official NWS weather, nearby USGS earthquake records, and recent FEMA disaster declarations.</p>
+      <p>Check official observed weather, forecasts, alerts, nearby stream gauges, earthquakes, smoke resources, and recent FEMA context.</p>
     </div>
 
     <section class="conditions-shell" aria-labelledby="location-heading">
@@ -41,6 +41,20 @@
       </div>
 
       <p id="conditions-status" class="conditions-status" role="status" aria-live="polite">No location has been shared.</p>
+
+      <section id="observation-section" class="observation-section" aria-labelledby="observation-heading" hidden>
+        <div class="forecast-heading-row">
+          <div>
+            <span class="badge">Official NWS observation</span>
+            <h2 id="observation-heading">Conditions Right Now</h2>
+            <p id="observation-station" class="text-dim"></p>
+          </div>
+          <a id="observation-link" target="_blank" rel="noopener">Open station ↗</a>
+        </div>
+        <div id="observation-results" class="observation-grid"></div>
+        <p id="observation-updated" class="text-dim"></p>
+      </section>
+
       <section id="forecast-section" class="forecast-section" aria-labelledby="forecast-heading" hidden>
         <div class="forecast-heading-row">
           <div>
@@ -64,17 +78,34 @@
       <div id="conditions-results" class="conditions-results" aria-live="polite"></div>
       </section>
 
+      <section class="water-section" aria-labelledby="water-heading">
+        <h2 id="water-heading">Nearby Stream Gauges</h2>
+        <p class="text-dim">The three nearest matching USGS stream gauges within the search area, using provisional readings from the past six hours. A gauge is not a crossing assessment, flood forecast, or all-clear for another point on the waterway.</p>
+        <div id="water-results" class="water-results" aria-live="polite"></div>
+      </section>
+
+      <section class="air-quality-section" aria-labelledby="air-quality-heading">
+        <h2 id="air-quality-heading">Smoke &amp; Air Quality</h2>
+        <div class="condition-card">
+          <span class="badge">Official AirNow map</span>
+          <h3>Check monitors, smoke plumes and fire information</h3>
+          <p id="air-quality-location">Choose a location to connect this check with the selected coordinates.</p>
+          <p>Air quality can vary sharply over short distances and time. Satellite-detected smoke aloft does not necessarily describe ground-level exposure.</p>
+          <a id="air-quality-link" class="secondary-button" href="https://fire.airnow.gov/" target="_blank" rel="noopener">Open AirNow Fire and Smoke Map ↗</a>
+        </div>
+      </section>
+
       <section class="earthquake-section" aria-labelledby="earthquakes-heading">
         <h2 id="earthquakes-heading">Recent Nearby Earthquakes</h2>
         <p class="text-dim">USGS-recorded earthquakes of magnitude 2.5 or greater within 500 km during the past seven days, limited to the ten most recent. This is an event catalog—not earthquake prediction or an all-clear.</p>
         <div id="earthquake-results" class="earthquake-results" aria-live="polite"></div>
       </section>
 
-      <section class="fema-section" aria-labelledby="fema-heading">
-        <h2 id="fema-heading">Recent FEMA Declarations</h2>
+      <details class="fema-section">
+        <summary id="fema-heading">Recent FEMA administrative context</summary>
         <p class="text-dim">The six most recently declared, unique disasters for the state resolved by NWS. Declarations are administrative records—not live warnings, current incident boundaries, or confirmation that a person qualifies for assistance.</p>
-        <div id="fema-results" class="fema-results" aria-live="polite"></div>
-      </section>
+        <div id="fema-results" class="fema-results" aria-live="polite" aria-labelledby="fema-heading"></div>
+      </details>
 
       <noscript>
         <div class="callout">JavaScript is required for the live alert lookup. Visit <a href="https://www.weather.gov/">weather.gov</a> for official conditions.</div>
@@ -82,8 +113,8 @@
 
       <section class="conditions-about" aria-labelledby="about-alerts-heading">
         <h2 id="about-alerts-heading">About this data</h2>
-        <p>Results come directly from National Weather Service, U.S. Geological Survey, and OpenFEMA APIs and are not cached or modified by Survival Nexus. Weather and FEMA lookup coverage is for the United States and its territories. Times appear in your device’s local time zone.</p>
-        <p><a href="https://www.weather.gov/documentation/services-web-api">NWS API documentation</a> · <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS earthquake API documentation</a> · <a href="https://www.fema.gov/about/openfema/data-sets">OpenFEMA datasets</a></p>
+        <p>Results come directly from National Weather Service, U.S. Geological Survey, and OpenFEMA APIs and are not cached or modified by Survival Nexus. AirNow opens as an official external map. Coverage is primarily for the United States and its territories. Times appear in your device’s local time zone.</p>
+        <p><a href="https://www.weather.gov/documentation/services-web-api">NWS API documentation</a> · <a href="https://waterservices.usgs.gov/docs/instantaneous-values/instantaneous-values-details/">USGS instantaneous water data</a> · <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS earthquake API documentation</a> · <a href="https://www.fema.gov/about/openfema/data-sets">OpenFEMA datasets</a> · <a href="https://fire.airnow.gov/">AirNow Fire and Smoke Map</a></p>
       </section>
     </section>
   </main>
