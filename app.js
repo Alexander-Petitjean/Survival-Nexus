@@ -234,6 +234,10 @@ function injectHeader() {
         <li><a href="guides.html">Learn</a></li>
         <li><a href="scenarios.html">Scenarios</a></li>
         <li><a href="resources.html">Training Resources</a></li>
+        <li><a href="readiness-matrix.html">Readiness Meter</a></li>
+        <li><a href="wildfire-risk.html">Wildfire Risk</a></li>
+        <li><a href="evacuation-trigger.html">Trigger Planner</a></li>
+        <li><a href="kit-calculator.html">72-Hour Kit</a></li>
         <li><a href="nightbird-app/index.html">Nightbird</a></li>
         <li><a href="shop.html">Shop Gear</a></li>
         <li><a href="archive.html">Outdoor Archive</a></li>
@@ -261,6 +265,10 @@ function injectFooter() {
           <li><a href="guides.html">Guides</a></li>
           <li><a href="scenarios.html">Scenarios</a></li>
           <li><a href="resources.html">Training Resources</a></li>
+          <li><a href="readiness-matrix.html">Readiness Meter</a></li>
+          <li><a href="wildfire-risk.html">Wildfire Risk</a></li>
+          <li><a href="evacuation-trigger.html">Trigger Planner</a></li>
+          <li><a href="kit-calculator.html">72-Hour Kit</a></li>
           <li><a href="nightbird-app/index.html">Nightbird</a></li>
           <li><a href="shop.html">Shop Gear</a></li>
           <li><a href="archive.html">Outdoor Archive</a></li>

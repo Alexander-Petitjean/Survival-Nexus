@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Plan an evacuation trigger based on wildfire, smoke, flood, and access conditions with simple decision guidance." />
+  <title>Evacuation Trigger Planner | Survival Nexus</title>
+  <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/evacuation-trigger.html" />
+  <link rel="stylesheet" href="css/style.css?v=20260802" />
+</head>
+<body class="page-article">
+  <a class="skip-link" href="#main">Skip to tool</a>
+  <header class="site-header" id="siteHeader" role="banner"></header>
+
+  <main id="main" class="page-shell tool-page-shell">
+    <section class="hero small-hero">
+      <div>
+        <p class="eyebrow">Interactive tool</p>
+        <h1>Evacuation Trigger Planner</h1>
+        <p>Set a clear departure threshold before conditions escalate and make a safe exit decision simpler under stress.</p>
+      </div>
+    </section>
+
+    <section class="tool-card tool-panel row-layout" aria-labelledby="trigger-heading">
+      <div class="tool-copy">
+        <span class="badge">Departure planning</span>
+        <h2 id="trigger-heading">When is the trigger point?</h2>
+        <p>A trigger plan is a simple rule: once the conditions cross a line, you leave. It reduces the chance of hesitation when the situation starts changing quickly.</p>
+      </div>
+
+      <div class="tool-results" aria-live="polite">
+        <div class="score-ring">
+          <strong id="trigger-score">0</strong>
+          <span>/100</span>
+        </div>
+        <p id="trigger-label" class="result-label">No trigger set yet</p>
+      </div>
+    </section>
+
+    <section class="tool-panel" aria-labelledby="trigger-questions-heading">
+      <h2 id="trigger-questions-heading">Set the household trigger</h2>
+      <form id="trigger-form" class="readiness-form">
+        <div class="form-grid tool-grid">
+          <label>
+            <span>Primary hazard</span>
+            <select name="hazard">
+              <option value="smoke">Smoke</option>
+              <option value="fire">Wildfire / active fire</option>
+              <option value="wind">High wind and gusts</option>
+              <option value="flood">Flooding or rising water</option>
+              <option value="utility">Utility outage or infrastructure failure</option>
+              <option value="none" selected>None yet / monitor only</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Route status</span>
+            <select name="route">
+              <option value="clear" selected>Clear route</option>
+              <option value="narrowed">Narrowed or congested</option>
+              <option value="blocked">Blocked or deteriorating</option>
+              <option value="unknown">Uncertain or not confirmed</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Alert level</span>
+            <select name="alert">
+              <option value="none" selected>No active alert</option>
+              <option value="watch">Watch</option>
+              <option value="warning">Warning</option>
+              <option value="order">Mandatory evacuation order</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Access</span>
+            <select name="access">
+              <option value="easy" selected>Easy access / multiple options</option>
+              <option value="slow">Slower but still workable</option>
+              <option value="limited">Limited access</option>
+              <option value="impossible">Access likely to fail</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Mobility readiness</span>
+            <select name="mobility">
+              <option value="ready" selected>Everyone can move easily</option>
+              <option value="moderate">Some slowdowns or assistance</option>
+              <option value="limited">Mobility or access constraints</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Communication</span>
+            <select name="communication">
+              <option value="strong" selected>Good contact and signal</option>
+              <option value="partial">Partial or uncertain signal</option>
+              <option value="weak">Weak communication</option>
+            </select>
+          </label>
+        </div>
+      </form>
+    </section>
+
+    <section class="tool-panel recovery-panel" aria-labelledby="trigger-steps-heading">
+      <h2 id="trigger-steps-heading">Suggested trigger actions</h2>
+      <ul id="trigger-steps" class="tool-list"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+  <script src="evacuation-trigger.js"></script>
+</body>
+</html>

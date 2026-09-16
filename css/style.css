@@ -133,6 +133,94 @@ main,header,footer,section{width:100%}
   .nav-links a{width:100%;border-radius:10px}
 }
 
+.tool-card, .tool-panel{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.tool-page-shell{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:1rem;
+}
+
+.row-layout{
+  display:grid;
+  grid-template-columns:1.5fr .8fr;
+  gap:1.25rem;
+  align-items:center;
+}
+
+.tool-panel{
+  padding:1.25rem;
+  margin:1rem 0;
+}
+
+.tool-copy h2, .tool-panel h2{
+  margin-top:.5rem;
+}
+
+.score-ring{
+  display:grid;
+  place-items:center;
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:radial-gradient(circle at center, var(--surface) 55%, rgba(var(--accent-rgb),.18) 56%, rgba(var(--accent-rgb),.12) 72%, transparent 74%);
+  border:3px solid rgba(var(--accent-rgb),.3);
+  margin-inline:auto;
+  text-align:center;
+}
+
+.score-ring strong{
+  font-size:2.5rem;
+  line-height:1;
+}
+
+.result-label{
+  margin-top:.75rem;
+  text-align:center;
+  color:var(--text-dim);
+  font-weight:600;
+}
+
+.readiness-form .tool-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+}
+
+.readiness-form label{
+  display:grid;
+  gap:.4rem;
+  font-weight:600;
+}
+
+.readiness-form select{
+  width:100%;
+  padding:.8rem .9rem;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:var(--bg);
+  color:var(--text);
+}
+
+.tool-list{
+  margin:1rem 0 0;
+  padding-left:1.25rem;
+  color:var(--text-dim);
+}
+
+.tool-list li + li{
+  margin-top:.5rem;
+}
+
+.tool-summary{
+  color:var(--text-dim);
+}
+
 /* ============== Hero ============== */
 .hero{
   display:grid;place-items:center;padding:6rem 1rem 3rem;

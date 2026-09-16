@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Estimate how ready a household is for a short emergency with a quick survival-readiness score and improvement checklist." />
+  <title>Readiness Meter | Survival Nexus</title>
+  <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/readiness-matrix.html" />
+  <link rel="stylesheet" href="css/style.css?v=20260802" />
+</head>
+<body class="page-article">
+  <a class="skip-link" href="#main">Skip to tool</a>
+  <header class="site-header" id="siteHeader" role="banner"></header>
+
+  <main id="main" class="page-shell tool-page-shell">
+    <section class="hero small-hero">
+      <div>
+        <p class="eyebrow">Interactive tool</p>
+        <h1>Readiness Meter</h1>
+        <p>Quickly score a household plan and highlight the gaps that matter most before an incident.</p>
+      </div>
+    </section>
+
+    <section class="tool-card tool-panel row-layout" aria-labelledby="tool-heading">
+      <div class="tool-copy">
+        <span class="badge">Household planning</span>
+        <h2 id="tool-heading">How resilient is your emergency plan?</h2>
+        <p>Use the form to estimate your current readiness across core systems: water, alerts, medicines, communication, charging, drills, and shelter.</p>
+      </div>
+
+      <div class="tool-results" aria-live="polite">
+        <div class="score-ring">
+          <strong id="readiness-score">0</strong>
+          <span>/100</span>
+        </div>
+        <p id="readiness-label" class="result-label">Not scored yet</p>
+      </div>
+    </section>
+
+    <section class="tool-panel" aria-labelledby="questions-heading">
+      <h2 id="questions-heading">Rate your household plan</h2>
+      <form id="readiness-form" class="readiness-form">
+        <div class="form-grid tool-grid">
+          <label>
+            <span>Household size</span>
+            <select name="householdSize">
+              <option value="1">1 person</option>
+              <option value="2">2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+              <option value="5">5 people</option>
+              <option value="6">6 people</option>
+              <option value="7">7 people</option>
+              <option value="8">8+ people</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Water stored</span>
+            <select name="waterDays">
+              <option value="1">Less than 3 days</option>
+              <option value="3" selected>3 days</option>
+              <option value="5">5 days</option>
+              <option value="7">7 days</option>
+              <option value="10">10 days</option>
+              <option value="14">2 weeks</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Alert coverage</span>
+            <select name="alertCoverage">
+              <option value="0">No alert plan</option>
+              <option value="1">Some coverage</option>
+              <option value="2" selected>Strong local alerts + backup</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Medication and accessibility plan</span>
+            <select name="medicationPlan">
+              <option value="0">Not organized</option>
+              <option value="1">Partly planned</option>
+              <option value="2" selected>Documented and stored</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Communication plan</span>
+            <select name="communicationPlan">
+              <option value="0">No plan</option>
+              <option value="1">One backup contact</option>
+              <option value="2" selected>Call tree plus distant contact</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Charging and power backup</span>
+            <select name="chargingPlan">
+              <option value="0">No backup</option>
+              <option value="1">Some backup</option>
+              <option value="2" selected>Phone, radio, and battery layer</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Practice drill</span>
+            <select name="practiceDrill">
+              <option value="0">Never practiced</option>
+              <option value="1">One recent drill</option>
+              <option value="2" selected>Regularly practiced</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Shelter and temperature plan</span>
+            <select name="shelterPlan">
+              <option value="0">No clear plan</option>
+              <option value="1">Partial shelter plan</option>
+              <option value="2" selected>Defined heat/cold/smoke plan</option>
+            </select>
+          </label>
+        </div>
+      </form>
+    </section>
+
+    <section class="tool-panel recovery-panel" aria-labelledby="recommendations-heading">
+      <h2 id="recommendations-heading">What to improve next</h2>
+      <p id="readiness-summary" class="tool-summary">The score will update here.</p>
+      <ul id="readiness-actions" class="tool-list"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+  <script src="readiness-matrix.js"></script>
+</body>
+</html>

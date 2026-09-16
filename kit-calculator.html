@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Estimate the weight of a 72-hour household emergency kit and the water you should carry for each person and pet." />
+  <title>72-Hour Kit Calculator | Survival Nexus</title>
+  <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/kit-calculator.html" />
+  <link rel="stylesheet" href="css/style.css?v=20260802" />
+</head>
+<body class="page-article">
+  <a class="skip-link" href="#main">Skip to tool</a>
+  <header class="site-header" id="siteHeader" role="banner"></header>
+
+  <main id="main" class="page-shell tool-page-shell">
+    <section class="hero small-hero">
+      <div>
+        <p class="eyebrow">Interactive tool</p>
+        <h1>72-Hour Kit Calculator</h1>
+        <p>Estimate the water load, base weight, and total pack burden for a short household emergency.</p>
+      </div>
+    </section>
+
+    <section class="tool-card tool-panel row-layout" aria-labelledby="kit-heading">
+      <div class="tool-copy">
+        <span class="badge">Household kit</span>
+        <h2 id="kit-heading">How much are you carrying?</h2>
+        <p>Use this as a rough planning estimate. The goal is not perfection; it is an honest sense of mass, water, and carrying burden.</p>
+      </div>
+
+      <div class="tool-results" aria-live="polite">
+        <div class="score-ring">
+          <strong id="kit-result">0 kg</strong>
+        </div>
+        <p id="kit-water" class="result-label">0 L water</p>
+        <p id="kit-total" class="result-label">Base load</p>
+      </div>
+    </section>
+
+    <section class="tool-panel" aria-labelledby="kit-questions-heading">
+      <h2 id="kit-questions-heading">Plan your load</h2>
+      <form id="kit-form" class="readiness-form">
+        <div class="form-grid tool-grid">
+          <label>
+            <span>Adults</span>
+            <select name="adults">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Children</span>
+            <select name="children">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Pets</span>
+            <select name="pets">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Days</span>
+            <select name="days">
+              <option value="2">2</option>
+              <option value="3" selected>3</option>
+              <option value="5">5</option>
+              <option value="7">7</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Gear modules</span>
+            <select name="gear">
+              <option value="2">2 modules</option>
+              <option value="4" selected>4 modules</option>
+              <option value="6">6 modules</option>
+              <option value="8">8 modules</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Medical and comfort items</span>
+            <select name="medical">
+              <option value="1">1 load</option>
+              <option value="2" selected>2 loads</option>
+              <option value="3">3 loads</option>
+              <option value="4">4 loads</option>
+            </select>
+          </label>
+        </div>
+      </form>
+    </section>
+
+    <section class="tool-panel recovery-panel" aria-labelledby="kit-advice-heading">
+      <h2 id="kit-advice-heading">Packing advice</h2>
+      <p id="kit-advice" class="tool-summary">The load breakdown updates here.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+  <script src="kit-calculator.js"></script>
+</body>
+</html>

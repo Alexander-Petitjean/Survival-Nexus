@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Estimate wildfire risk using terrain, weather, fuel, and preparation factors with practical safety guidance." />
+  <title>Wildfire Risk Planner | Survival Nexus</title>
+  <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/wildfire-risk.html" />
+  <link rel="stylesheet" href="css/style.css?v=20260802" />
+</head>
+<body class="page-article">
+  <a class="skip-link" href="#main">Skip to tool</a>
+  <header class="site-header" id="siteHeader" role="banner"></header>
+
+  <main id="main" class="page-shell tool-page-shell">
+    <section class="hero small-hero">
+      <div>
+        <p class="eyebrow">Interactive tool</p>
+        <h1>Wildfire Risk Planner</h1>
+        <p>Use weather, fuel, terrain, and preparedness factors to estimate immediate risk and the next safest action.</p>
+      </div>
+    </section>
+
+    <section class="tool-card tool-panel row-layout" aria-labelledby="risk-heading">
+      <div class="tool-copy">
+        <span class="badge">Fire readiness</span>
+        <h2 id="risk-heading">Estimate the situation</h2>
+        <p>Risk is a function of more than one variable. Keep it simple: choose the conditions that best match your area, season, and preparation.</p>
+      </div>
+
+      <div class="tool-results" aria-live="polite">
+        <div class="score-ring">
+          <strong id="wildfire-score">0</strong>
+          <span>/100</span>
+        </div>
+        <p id="wildfire-label" class="result-label">Risk not yet assessed</p>
+      </div>
+    </section>
+
+    <section class="tool-panel" aria-labelledby="wildfire-questions-heading">
+      <h2 id="wildfire-questions-heading">Current conditions</h2>
+      <form id="wildfire-form" class="readiness-form">
+        <div class="form-grid tool-grid">
+          <label>
+            <span>Region</span>
+            <select name="region">
+              <option value="west" selected>Western / drier landscape</option>
+              <option value="rural">Rural interface</option>
+              <option value="suburban">Suburban edge</option>
+              <option value="nonwest">Less fire-prone region</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Fuel condition</span>
+            <select name="fuel">
+              <option value="dry" selected>Dry grass, brush, or dead fuel</option>
+              <option value="moderate">Mixed fuel conditions</option>
+              <option value="moist">Moist or green conditions</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Wind</span>
+            <select name="wind">
+              <option value="high" selected>High / gusty</option>
+              <option value="moderate">Moderate</option>
+              <option value="low">Low</option>
+              <option value="extreme">Extreme</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Slope</span>
+            <select name="slope">
+              <option value="steep" selected>Steep slope</option>
+              <option value="ridge">Ridge or channeled terrain</option>
+              <option value="gentle">Gentle ground</option>
+              <option value="flat">Flat terrain</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Alert status</span>
+            <select name="alert">
+              <option value="evacuation" selected>Evacuation order or emergency notice</option>
+              <option value="warning">Warning</option>
+              <option value="watch">Watch</option>
+              <option value="none">No active advisory</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Preparedness</span>
+            <select name="prepared">
+              <option value="low" selected>Low preparedness</option>
+              <option value="medium">Moderate</option>
+              <option value="high">High</option>
+            </select>
+          </label>
+        </div>
+      </form>
+    </section>
+
+    <section class="tool-panel recovery-panel" aria-labelledby="risk-guidance-heading">
+      <h2 id="risk-guidance-heading">Recommended actions</h2>
+      <ul id="wildfire-guidance" class="tool-list"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+  <script src="wildfire-risk.js"></script>
+</body>
+</html>
