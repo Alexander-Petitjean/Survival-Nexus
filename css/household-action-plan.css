@@ -1,0 +1,21 @@
+.household-plan-results{display:grid;grid-template-columns:minmax(0,1fr) minmax(15rem,1.3fr);gap:1.5rem;align-items:center}
+.household-plan-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.household-plan-metrics div{display:grid;gap:.25rem;padding-left:.8rem;border-left:3px solid var(--accent)}
+.household-plan-metrics strong{font-size:1.5rem;line-height:1.2}
+.household-plan-metrics span{font-size:.9rem;color:var(--text-dim)}
+.household-plan-form .tool-panel{box-shadow:none}
+.household-plan-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;padding:1rem 0}
+.household-plan-toolbar p{flex-basis:100%;margin:0;color:var(--text-dim)}
+.household-plan-footnote{font-size:.9rem}
+@media (max-width:720px){.household-plan-results{grid-template-columns:1fr}.household-plan-metrics{grid-template-columns:1fr}}
+@media print{
+  .household-plan-page{background:#fff;color:#000;font-size:10pt}
+  .household-plan-page .site-header,.household-plan-page .site-footer,.household-plan-toolbar,.household-plan-footnote,.household-plan-form{display:none !important}
+  .household-plan-page .tool-page-shell{max-width:none;padding:0}
+  .household-plan-page .hero{padding:.1in 0}
+  .household-plan-page .tool-panel{margin:.12in 0;padding:.12in;border:1px solid #777;border-radius:0;box-shadow:none;background:#fff;color:#000;break-inside:avoid}
+  .household-plan-page .household-plan-results{grid-template-columns:1fr}
+  .household-plan-page .household-plan-metrics{grid-template-columns:repeat(3,1fr)}
+  .household-plan-page .badge{border:1px solid #555}
+  .household-plan-page .caution-callout{padding:.1in;border:1px solid #777;background:#fff;color:#000}
+}

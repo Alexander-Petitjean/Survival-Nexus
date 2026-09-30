@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Build a private household emergency action plan with prioritized readiness steps and a 72-hour water and kit-load estimate." />
+  <title>Household Action Plan | Survival Nexus</title>
+  <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/household-action-plan.html" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/household-action-plan.css" />
+</head>
+<body class="page-article household-plan-page">
+  <a class="skip-link" href="#main">Skip to household plan</a>
+  <header id="siteHeader"></header>
+
+  <main id="main" class="page-shell tool-page-shell">
+    <section class="hero small-hero">
+      <div>
+        <p class="eyebrow">Interactive tool</p>
+        <h1>Household Action Plan</h1>
+        <p>Turn your household’s preparedness gaps into a short, prioritized plan you can save in this browser or print.</p>
+      </div>
+    </section>
+
+    <div class="callout caution-callout" role="note">
+      This is a planning aid, not an emergency alert or safety guarantee. Follow local officials and emergency services. Estimates are approximate; needs vary with climate, health, activity, and access to resupply.
+    </div>
+
+    <section class="tool-panel household-plan-results" aria-labelledby="plan-results-heading" aria-live="polite">
+      <div>
+        <span class="badge">Your current plan</span>
+        <h2 id="plan-results-heading">Priorities and estimates</h2>
+        <p id="plan-household-summary" class="tool-summary"></p>
+        <p id="plan-readiness-label" class="tool-summary">Update the inputs to build your plan.</p>
+      </div>
+      <div class="household-plan-metrics">
+        <div><strong id="plan-readiness-score">0</strong><span>Readiness estimate / 100</span></div>
+        <div><strong id="plan-water-estimate">0 L</strong><span>Estimated water for kit duration</span></div>
+        <div><strong id="plan-weight-estimate">0 kg</strong><span>Estimated total kit load</span></div>
+      </div>
+    </section>
+
+    <form id="household-plan-form" class="household-plan-form">
+      <section class="tool-panel" aria-labelledby="household-details-heading">
+        <h2 id="household-details-heading">Household</h2>
+        <div class="form-grid tool-grid">
+          <label><span>Adults</span>
+            <select name="adults"><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+          </label>
+          <label><span>Children</span>
+            <select name="children"><option value="0" selected>None</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
+          </label>
+          <label><span>Pets</span>
+            <select name="pets"><option value="0" selected>None</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+          </label>
+          <label><span>Water stored for</span>
+            <select name="waterDays"><option value="1" selected>Less than 3 days</option><option value="3">3 days</option><option value="5">5 days</option><option value="7">7 days</option><option value="10">10 days</option><option value="14">2 weeks</option></select>
+          </label>
+        </div>
+      </section>
+
+      <section class="tool-panel" aria-labelledby="kit-details-heading">
+        <h2 id="kit-details-heading">72-hour kit estimate</h2>
+        <p class="text-dim">The estimate uses rough water and load assumptions. It is not a packing limit or a substitute for testing what your household can carry.</p>
+        <div class="form-grid tool-grid">
+          <label><span>Kit duration</span>
+            <select name="days"><option value="2">2 days</option><option value="3" selected>3 days</option><option value="5">5 days</option><option value="7">7 days</option></select>
+          </label>
+          <label><span>Gear modules</span>
+            <select name="gear"><option value="2">2 modules</option><option value="4" selected>4 modules</option><option value="6">6 modules</option><option value="8">8 modules</option></select>
+          </label>
+          <label><span>Medical and comfort loads</span>
+            <select name="medical"><option value="1">1 load</option><option value="2" selected>2 loads</option><option value="3">3 loads</option><option value="4">4 loads</option></select>
+          </label>
+        </div>
+      </section>
+
+      <section class="tool-panel" aria-labelledby="readiness-details-heading">
+        <h2 id="readiness-details-heading">Readiness systems</h2>
+        <div class="form-grid tool-grid">
+          <label><span>Local alerts and backup</span>
+            <select name="alertCoverage"><option value="0" selected>Not confirmed / unsure</option><option value="1">Some coverage</option><option value="2">Local alerts and a backup</option></select>
+          </label>
+          <label><span>Medication and accessibility plan</span>
+            <select name="medicationPlan"><option value="0" selected>Not confirmed / unsure</option><option value="1">Partly planned</option><option value="2">Documented with backup arrangements</option></select>
+          </label>
+          <label><span>Household communication</span>
+            <select name="communicationPlan"><option value="0" selected>Not confirmed / unsure</option><option value="1">One backup contact</option><option value="2">Check-in plan and out-of-area contact</option></select>
+          </label>
+          <label><span>Charging and power backup</span>
+            <select name="chargingPlan"><option value="0" selected>Not confirmed / unsure</option><option value="1">Some backup</option><option value="2">Phone, radio, and battery layer</option></select>
+          </label>
+          <label><span>Practice drill</span>
+            <select name="practiceDrill"><option value="0" selected>Not confirmed / unsure</option><option value="1">One recent drill</option><option value="2">Regularly practiced</option></select>
+          </label>
+          <label><span>Shelter and temperature plan</span>
+            <select name="shelterPlan"><option value="0" selected>Not confirmed / unsure</option><option value="1">Partial shelter plan</option><option value="2">Plan for heat, cold, and smoke</option></select>
+          </label>
+        </div>
+      </section>
+    </form>
+
+    <section class="tool-panel recovery-panel" aria-labelledby="priorities-heading">
+      <h2 id="priorities-heading">Prioritized next steps</h2>
+      <ul id="plan-priorities" class="tool-list"></ul>
+      <p id="plan-pack-advice" class="tool-summary"></p>
+    </section>
+
+    <section class="household-plan-toolbar" aria-label="Plan actions">
+      <button id="save-household-plan" class="cta-button" type="button">Save in this browser</button>
+      <button id="print-household-plan" class="secondary-button" type="button">Print plan</button>
+      <button id="clear-household-plan" class="secondary-button" type="button">Clear saved plan</button>
+      <p id="plan-storage-status" role="status" aria-live="polite">Your answers stay in this browser unless you choose to save them.</p>
+    </section>
+
+    <p class="text-dim household-plan-footnote">Saving uses this device’s local browser storage only. No account is created and this tool does not send plan answers to Survival Nexus. Anyone with access to this browser may be able to see saved data.</p>
+  </main>
+
+  <footer class="site-footer" id="siteFooter"></footer>
+  <script src="app.js"></script>
+  <script src="readiness-matrix.js"></script>
+  <script src="kit-calculator.js"></script>
+  <script src="household-action-plan.js"></script>
+</body>
+</html>
