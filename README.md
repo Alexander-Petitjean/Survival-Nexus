@@ -31,3 +31,11 @@ Run the parser tests with Node.js 18 or newer:
 ```sh
 node --test tests/field-conditions.test.js
 ```
+
+## Validate affiliate links
+
+Check that Amazon links use the required paid-link label and link attributes, and that the shared footer contains the Associates statement:
+
+```sh
+node scripts/check-affiliate-links.mjs
+```
