@@ -166,7 +166,7 @@ function App() {
 
           <article className="panel close-panel">
             <div className="panel-heading"><div><span className="step">06</span><h2>Close the loop</h2></div></div>
-            <label><span>What needs recovery, restocking, or a conversation?</span><textarea rows="5" value={data.decompression} onChange={(e) => update('decompression', e.target.value)} placeholder="A private prompt—not an official report." /></label>
+            <label><span>What needs recovery, restocking, or a conversation?</span><textarea rows="5" value={data.decompression} onChange={(e) => update('decompression', e.target.value)} placeholder="A private prompt, not an official report." /></label>
             <div className="close-prompts"><span>Hydrate</span><span>Restock</span><span>Document officially</span><span>Check in</span><span>Get home safely</span></div>
           </article>
         </section>
@@ -176,7 +176,7 @@ function App() {
           <button className="danger-button" type="button" onClick={resetShift}>Clear this shift</button>
         </section>
       </main>
-      <footer><strong>Nightbird prototype</strong><span>Personal readiness—not operational authority.</span><a href="../index.html">Return to Survival Nexus</a></footer>
+      <footer><strong>Nightbird prototype</strong><span>Personal readiness, not operational authority.</span><a href="../index.html">Return to Survival Nexus</a></footer>
     </div>
   );
 }

@@ -252,7 +252,7 @@ function injectFooter() {
   footer.innerHTML = `
     <div class="footer-grid">
       <section class="footer-brand">
-        <p><strong>Survival Nexus</strong> — Research-informed EMS, fire, rescue, wildfire, and adaptive-readiness education.</p>
+        <p><strong>Survival Nexus</strong>: Research-informed EMS, fire, rescue, wildfire, and adaptive-readiness education.</p>
 		<p class="ai-note"> Some images on this site are AI-generated for illustrative purposes only and do not depict real people or events.</p>
       </section>
       <nav class="footer-nav" aria-label="Footer">

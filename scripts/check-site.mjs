@@ -4,13 +4,14 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const rootFiles = readdirSync(root);
+const siteDomain = readFileSync(resolve(root, 'CNAME'), 'utf8').trim();
 const verificationFiles = rootFiles.filter(file => /^google[a-f0-9]+\.html$/i.test(file));
 const htmlFiles = rootFiles.filter(file => (
   extname(file).toLowerCase() === '.html' && !verificationFiles.includes(file)
 ));
 const errors = [];
 const warnings = [];
-const siteBase = 'https://alexander-petitjean.github.io/Survival-Nexus/';
+const siteBase = `https://${siteDomain}/`;
 const expectedNoindex = new Set([
   '404.html',
   'footer-check.html',

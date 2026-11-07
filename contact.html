@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Contact Survival Nexus for reviews, supplier listings, and collaboration." />
   <title>Contact | Survival Nexus</title>
-  <link rel="canonical" href="https://alexander-petitjean.github.io/Survival-Nexus/contact.html" />
+  <link rel="canonical" href="https://survival-nexus.com/contact.html" />
   <link rel="stylesheet" href="css/style.css" /> 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"ContactPage",
     "name":"Contact Survival Nexus",
-    "url":"https://alexander-petitjean.github.io/Survival-Nexus/contact.html",
+    "url":"https://survival-nexus.com/contact.html",
     "about":"Reviews, supplier directory submissions, collaboration requests",
     "publisher":{
       "@type":"Organization",
@@ -152,7 +152,7 @@
         const links = data.get('links');
 
         const body = encodeURIComponent(
-          `Topic: ${topic}\nName: ${name}\nEmail: ${email}\nLinks: ${links || '—'}\n\n${message}`
+          `Topic: ${topic}\nName: ${name}\nEmail: ${email}\nLinks: ${links || 'None provided'}\n\n${message}`
         );
 
         // Mailto fallback for this static site

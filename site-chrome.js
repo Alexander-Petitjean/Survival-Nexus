@@ -15,7 +15,7 @@
       <a href="${base}privacy.html">Privacy Policy</a>
     </p>
     <p class="text-dim small">
-      Survival Nexus participates in affiliate programs (e.g., AvantLink) and may earn commissions from qualifying purchases.
+      Survival Nexus participates in the Amazon Associates program and may earn commissions from qualifying purchases.
     </p>
   `;
 

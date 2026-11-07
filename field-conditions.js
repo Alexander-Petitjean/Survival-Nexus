@@ -275,7 +275,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = FieldCondi
     const row = document.createElement('article');
     row.className = 'hourly-row';
     addText(row, 'time', new Intl.DateTimeFormat(undefined, { weekday: 'short', hour: 'numeric' }).format(new Date(period.startTime)));
-    addText(row, 'strong', Number.isFinite(period.temperature) ? `${period.temperature}°${period.temperatureUnit || ''}` : '—');
+    addText(row, 'strong', Number.isFinite(period.temperature) ? `${period.temperature}°${period.temperatureUnit || ''}` : 'Unavailable');
     addText(row, 'span', period.shortForecast || 'Forecast unavailable');
     const precipitation = period.probabilityOfPrecipitation?.value == null ? null : Number(period.probabilityOfPrecipitation.value);
     const humidity = period.relativeHumidity?.value == null ? null : Number(period.relativeHumidity.value);
